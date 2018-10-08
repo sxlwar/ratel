@@ -1,0 +1,20 @@
+@import '../theme/_variable.theme';
+$space: 10%;
+#content {
+    padding: 0 $space;
+}
+footer {
+    margin: 1em $space 0;
+    padding: 1em;
+    background: #442d2d;
+    color: $inactive-color;
+    h4 {
+        margin: 0;
+    }
+    ol {
+        list-style: none;
+    }
+    li {
+        margin: 1em 0;
+    }
+}

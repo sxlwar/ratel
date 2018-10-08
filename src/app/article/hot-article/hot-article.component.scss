@@ -1,0 +1,19 @@
+ul {
+    padding: 1em 0;
+    cursor: pointer;
+    h3 {
+        margin-top: 0;
+    }
+
+    .author {
+        font-size: 12px;
+        span {
+            margin-right: 1em;
+        }
+    }
+    mat-icon {
+        font-size: 14px;
+        line-height: 24px;
+        margin-right: 2em;
+    }
+}

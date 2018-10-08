@@ -1,0 +1,28 @@
+<ratel-intro></ratel-intro>
+
+<div fxLayout="row" id="article-overview">
+    <div fxFlex="65%">
+        <ratel-article-overview *ngFor="let item of articles | async" [article]="item"></ratel-article-overview>
+    </div>
+    <div fxFlex="30%" fxFlexOffset="5%" class="popular-articles">
+        <h3>
+            热门文章
+            <mat-icon fontIcon="icon-flag"></mat-icon>
+        </h3>
+
+        <div *ngFor="let item of articles | async index as idx" fxLayout="row" [@inOut]="item.selected ? 'active' : 'inactive'"
+            (mouseenter)="item.selected = true" (mouseleave)="item.selected = false" class="rank">
+            <span fxFlex="10%" fxFlexAlign="center">{{idx}}</span>
+            <div fxFlex=90%>
+                <ratel-hot-article [article]="item"></ratel-hot-article>
+            </div>
+        </div>
+
+        <div class="subject">
+            <h2>Angular完全开发手册</h2>
+            <img src="../assets/images/wechat_qrcode.png">
+        </div>
+    </div>
+</div>
+
+<ratel-resource></ratel-resource>

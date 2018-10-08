@@ -1,0 +1,45 @@
+@import '../../../theme/_variable.theme';
+
+nav {
+    padding: 0 100px;
+    height: $header-height;
+    background: #000;
+
+    .header {
+        margin: 0 auto;
+        .logo {
+            width: 4rem;
+            height: 4rem;
+            margin: 0 2rem 0 0;
+        }
+    }
+
+    .action {
+        height: $header-height;
+        color: $inactive-color;
+        mat-icon {
+            margin: 0 1rem;
+            cursor: pointer;
+            &:hover {
+                color: $active-color;
+            }
+        }
+        img {
+            $length: 32px;
+            width: $length;
+            height: $length;
+            border-radius: $length / 2;
+            cursor: pointer;
+            &:hover {
+                box-shadow: 0 0 2px 2px $inactive-color;
+            }
+            & + span {
+                margin-left: 1rem;
+            }
+        }
+    }
+}
+
+::ng-deep .mat-menu-panel {
+    transform: translateY(22px);
+}

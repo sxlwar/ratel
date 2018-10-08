@@ -1,0 +1,60 @@
+@import '../../../theme/_variable.theme';
+
+#intro {
+    position: relative;
+    height: 320px;
+    li {
+        height: 300px;
+        background: rgba(0, 0, 0, 0.85);
+        margin: 10px;
+        clip-path: polygon(20% 0, 100% 0, 80% 100%, 0 100%);
+        position: absolute;
+        top: 0;
+        width: 35%;
+        color: $active-color;
+        .language-intro {
+            height: 150px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+    }
+    li:first-child {
+        left: 0;
+    }
+    li:nth-child(2) {
+        left: 31.6%;
+    }
+    li:last-child {
+        right: 0;
+    }
+    img {
+        width: 110px;
+    }
+    p {
+        width: 75%;
+        height: 80px;
+        margin: 0 auto;
+        text-indent: 2em;
+        line-height: 2;
+        transform: translateX(-0.5em);
+    }
+
+    .official {
+        color: $inactive-color;
+        display: flex;
+        justify-content: center;
+        mat-icon {
+            margin-right: 5px;
+        }
+        &:hover,
+        a:hover {
+            color: $active-color;
+        }
+        a {
+            color: $inactive-color;
+            font-size: 16px;
+            text-decoration: none;
+        }
+    }
+}
