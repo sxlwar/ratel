@@ -4,12 +4,13 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {
     MatButtonModule,
+    MatCardModule,
     MatDialogModule,
+    MatGridListModule,
     MatIconModule,
     MatInputModule,
     MatMenuModule,
-    MatCardModule,
-    MatGridListModule,
+    MatTooltipModule,
 } from '@angular/material';
 
 import { ToolModule } from '../tool/tool.module';
@@ -28,6 +29,7 @@ import { ToolModule } from '../tool/tool.module';
         MatDialogModule,
         MatCardModule,
         MatGridListModule,
+        MatTooltipModule,
     ],
 })
 export class SharedModule {}

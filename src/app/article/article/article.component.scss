@@ -1,0 +1,51 @@
+@import '../../../theme/_variable.theme';
+.article {
+    margin: 1em 0;
+    .statistics {
+        background: #fff;
+        li {
+            margin: 1em 0;
+            position: relative;
+            mat-icon {
+                font-size: 32px;
+                margin: 0 20px 0 0;
+                cursor: pointer;
+            }
+            .like {
+                color: rgba($active-primary, 0.8);
+                &:hover {
+                    color: $active-primary;
+                    text-shadow: 1px 1px 5px;
+                }
+            }
+            .view {
+                color: #697ef0;
+            }
+            .stored {
+                color: #33a74e;
+            }
+            span {
+                position: absolute;
+                right: -1em;
+            }
+        }
+    }
+    .content {
+        padding: 1em 2em;
+        background: #fff;
+        max-width: 100%;
+        h2 {
+            text-indent: 2rem;
+        }
+        h4 {
+            text-indent: 4rem;
+        }
+        ul {
+            padding: 0 1rem;
+            li {
+                margin: 0 1rem;
+                font-size: 12px;
+            }
+        }
+    }
+}

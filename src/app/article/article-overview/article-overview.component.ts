@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit, Input, Output, ChangeDetectionStrategy, EventEmitter } from '@angular/core';
 import { ArticleOverview } from '../../interface/response.interface';
 
 @Component({
@@ -10,6 +10,9 @@ import { ArticleOverview } from '../../interface/response.interface';
 export class ArticleOverviewComponent implements OnInit {
     @Input()
     article: ArticleOverview;
+
+    @Output()
+    view: EventEmitter<number> = new EventEmitter();
 
     constructor() {}
 

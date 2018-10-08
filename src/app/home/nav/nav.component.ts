@@ -8,6 +8,7 @@ import { debounceTime, filter } from 'rxjs/operators';
 
 import { LoginComponent } from '../../auth/login/login.component';
 import { NavItem } from '../../tool/interface/tool.interface';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
     selector: 'ratel-nav',
@@ -38,7 +39,7 @@ export class NavComponent implements OnInit, OnDestroy {
 
     search$$: Subscription;
 
-    constructor(private dialog: MatDialog) {}
+    constructor(private dialog: MatDialog, private router: Router) {}
 
     ngOnInit() {
         this.search$$ = this.searchCtrl.valueChanges
@@ -50,7 +51,11 @@ export class NavComponent implements OnInit, OnDestroy {
     }
 
     onTopicChange(topic: NavItem): void {
-        this.search.next(topic.label);
+        if (topic.topic === '') {
+            this.router.navigateByUrl('/home');
+        } else {
+            this.router.navigate(['/', 'topic', topic.topic]);
+        }
     }
 
     openDialog(): void {

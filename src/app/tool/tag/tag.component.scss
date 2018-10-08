@@ -1,0 +1,6 @@
+@import '../../../theme/_variable.theme';
+span {
+    border: 1px solid $inactive-color;
+    border-radius: 4px;
+    padding: 2px 5px;
+}

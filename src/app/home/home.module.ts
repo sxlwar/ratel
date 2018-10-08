@@ -8,9 +8,10 @@ import { AuthModule } from '../auth/auth.module';
 import { ArticleModule } from '../article/article.module';
 import { IntroComponent } from './intro/intro.component';
 import { ResourceComponent } from './resource/resource.component';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
-    imports: [CommonModule, SharedModule, AuthModule, ArticleModule],
+    imports: [CommonModule, SharedModule, AuthModule, ArticleModule, RouterModule],
     declarations: [HomeComponent, NavComponent, IntroComponent, ResourceComponent],
     exports: [NavComponent, HomeComponent],
 })

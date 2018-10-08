@@ -1,5 +1,6 @@
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { Component, OnInit } from '@angular/core';
+import { Router, ActivatedRoute } from '@angular/router';
 
 import { Observable } from 'rxjs';
 
@@ -34,15 +35,19 @@ import { ArticleOverview } from '../../interface/response.interface';
 export class HomeComponent implements OnInit {
     articles: Observable<ArticleOverview[]>;
 
-    constructor(private _articleService: ArticleService) {}
+    constructor(private _articleService: ArticleService, private _router: Router, private _route: ActivatedRoute) {}
 
     ngOnInit() {
         this.launch();
     }
 
     launch(): void {
-        this.articles = this._articleService.getLatestArticlesOverview();
+        this.articles = this._articleService.getArticlesOverview();
 
         this.articles.subscribe(v => console.log(v));
+    }
+
+    showArticle(id: number): void {
+        this._router.navigate([id], { relativeTo: this._route });
     }
 }

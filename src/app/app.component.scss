@@ -1,15 +1,20 @@
 @import '../theme/_variable.theme';
+
 $space: 10%;
+
 #content {
     padding: 0 $space;
+    min-height: calc(100vh - 179px);
 }
+
 footer {
     margin: 1em $space 0;
     padding: 1em;
     background: #442d2d;
     color: $inactive-color;
+    height: $footer-height;
     h4 {
-        margin: 0;
+        margin: 0 2em 0 0;
     }
     ol {
         list-style: none;

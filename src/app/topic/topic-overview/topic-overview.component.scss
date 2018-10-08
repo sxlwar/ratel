@@ -1,0 +1,17 @@
+.topic-overview {
+    margin: 1em 0;
+    padding: 1em;
+    background: #fff;
+    min-height: 200px;
+    position: relative;
+
+    li {
+        margin: 1em;
+    }
+
+    mat-icon {
+        position: absolute;
+        right: 1em;
+        top: 1em;
+    }
+}

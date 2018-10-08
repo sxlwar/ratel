@@ -18,12 +18,12 @@ import { NavItem } from '../interface/tool.interface';
 })
 export class NavMenuComponent implements OnInit {
     topics: NavItem[] = [
-        { label: '首页', selected: true },
-        { label: 'Angular', selected: false },
-        { label: 'Rxjs', selected: false },
-        { label: 'TypeScript', selected: false },
-        { label: 'JavaScript', selected: false },
-        { label: 'Other', selected: false },
+        { label: '首页', selected: false, topic: '' },
+        { label: 'Angular', selected: false, topic: 'angular' },
+        { label: 'Rxjs', selected: false, topic: 'rxjs' },
+        { label: 'TypeScript', selected: false, topic: 'ts' },
+        { label: 'JavaScript', selected: false, topic: 'js' },
+        { label: 'Other', selected: false, topic: 'other' },
     ];
 
     @Output()
@@ -31,7 +31,22 @@ export class NavMenuComponent implements OnInit {
 
     constructor() {}
 
-    ngOnInit() {}
+    ngOnInit() {
+        this.checkActivateTopic();
+    }
+
+    /**
+     * 进入或用户刷新页面时检查当前页面的所处路径
+     */
+    private checkActivateTopic(): void {
+        const paths = location.pathname.split('/').filter(item => !!item);
+
+        if (paths.includes('home')) {
+            this.topics[0].selected = true;
+        } else {
+            this.topics.forEach(item => (item.selected = paths.includes(item.topic)));
+        }
+    }
 
     onTopicSelect(target: NavItem): void {
         const old = this.topics.find(item => item.selected);

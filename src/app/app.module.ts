@@ -8,17 +8,19 @@ import { AppRoutingModule } from './app.routing.module';
 import { AuthModule } from './auth/auth.module';
 import { HomeModule } from './home/home.module';
 import { SharedModule } from './shared/shared.module';
+import { ArticleModule } from './article/article.module';
 
 @NgModule({
     declarations: [AppComponent],
     imports: [
-        BrowserModule,
-        BrowserAnimationsModule,
-        HttpClientModule,
         AppRoutingModule,
-        SharedModule,
-        HomeModule,
+        ArticleModule,
         AuthModule,
+        BrowserAnimationsModule,
+        BrowserModule,
+        HomeModule,
+        HttpClientModule,
+        SharedModule,
     ],
     bootstrap: [AppComponent],
 })

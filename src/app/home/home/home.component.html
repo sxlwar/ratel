@@ -2,7 +2,7 @@
 
 <div fxLayout="row" id="article-overview">
     <div fxFlex="65%">
-        <ratel-article-overview *ngFor="let item of articles | async" [article]="item"></ratel-article-overview>
+        <ratel-article-overview *ngFor="let item of articles | async" [article]="item" (view)="showArticle($event)"></ratel-article-overview>
     </div>
     <div fxFlex="30%" fxFlexOffset="5%" class="popular-articles">
         <h3>
@@ -14,7 +14,7 @@
             (mouseenter)="item.selected = true" (mouseleave)="item.selected = false" class="rank">
             <span fxFlex="10%" fxFlexAlign="center">{{idx}}</span>
             <div fxFlex=90%>
-                <ratel-hot-article [article]="item"></ratel-hot-article>
+                <ratel-hot-article [article]="item" (view)="showArticle($event)"></ratel-hot-article>
             </div>
         </div>
 

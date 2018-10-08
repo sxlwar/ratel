@@ -5,3 +5,11 @@ export enum CRUDVar {
     DELETE = 'delete',
     SEARCH = 'search',
 }
+
+export enum RouteToTopicVar {
+    angular = 'Angular',
+    rxjs = 'Rxjs',
+    ts = 'TypeScript',
+    js = 'JavaScript',
+    other = '其它'
+}

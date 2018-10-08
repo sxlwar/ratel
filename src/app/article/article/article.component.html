@@ -1,3 +1,38 @@
-<p>
-  article works!
-</p>
+<div fxlLayout="row" class="article">
+    <ul fxFlex="10%" fxLayout="column" fxLayoutAlign="start center" class="statistics">
+        <li>
+            <button mat-icon-button>
+                <mat-icon fontIcon="icon-like2" class="like"></mat-icon>
+            </button>
+            <span>222</span>
+        </li>
+
+        <li>
+            <mat-icon fontIcon="icon-eye" matTooltip="浏览次数" class="view"></mat-icon>
+            <span>222</span>
+        </li>
+
+        <li>
+            <mat-icon fontIcon="icon-folderopen" matTooltip="收藏次数" class="stored"></mat-icon>
+            <span>222</span>
+        </li>
+    </ul>
+
+    <div fxFlex="85%" fxFlexOffset="5%" class="content">
+        <h2>Title</h2>
+        <h4>Subtitle</h4>
+        <ul fxLayout="row" class="info">
+            <li>作者：xxx</li>
+            <li>创建时间：2018-09-29 12:33:53</li>
+            <li>更新时间：2017-10-22</li>
+            <li>
+                <ratel-tag content="原创"></ratel-tag>
+                转载请注明出处：www.hijavascript.com
+            </li>
+        </ul>
+
+        <markdown [data]="data"></markdown>
+
+    </div>
+
+</div>
