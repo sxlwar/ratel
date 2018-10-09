@@ -13,4 +13,8 @@ export class ArticleComponent implements OnInit {
     constructor() {}
 
     ngOnInit() {}
+
+    addLike(): void {
+        console.log('update enjoy');
+    }
 }

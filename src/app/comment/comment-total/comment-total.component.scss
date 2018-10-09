@@ -1,0 +1,17 @@
+@import '../../../theme/variable.theme';
+
+h3 {
+    position: relative;
+    padding: 0 0 0 1em;
+
+    &::before {
+        content: '';
+        border-left: 3px solid color(primary);
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 3px;
+        height: 100%;
+    }
+
+}

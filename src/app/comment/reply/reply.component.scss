@@ -1,0 +1,61 @@
+@import '../../../theme/variable.theme';
+
+.reply {
+    width: 50%;
+    border: 1px solid $inactive-color;
+    border-radius: 4px;
+    padding: 1em;
+    position: relative;
+    .trigger {
+        .avatar {
+            border-radius: 50%;
+            background: #3f51b599;
+            margin-right: 1em;
+            mat-icon {
+                @include icon(32px);
+            }
+        }
+        div:last-child {
+            color: $inactive-color;
+            &:focus {
+                outline: none;
+            }
+        }
+        .close-btn {
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            font-size: 16px;
+            color: $inactive-color;
+            cursor: pointer;
+            @include icon(16px);
+            &:hover {
+                color: rgba(#000, 0.7);
+            }
+        }
+    }
+
+    textarea {
+        margin: 1em 0;
+    }
+
+    .btn-group {
+        button {
+            position: relative;
+            margin-right: 2em;
+            &:last-child input {
+                position: absolute;
+                top: 0;
+                left: 0;
+                height: 100%;
+                opacity: 0;
+                width: 100%;
+                cursor: pointer;
+            }
+        }
+    }
+}
+
+:host::ng-deep .mat-input-element {
+    caret-color: #000;
+}

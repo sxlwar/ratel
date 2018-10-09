@@ -22,3 +22,30 @@ export class ArticleStatistics {
     view: number; // 被查看次数
     stored: number; // 被收藏次数
 }
+
+export interface CommentResponse {
+    comments: CommentElement[];
+    count: number;
+}
+
+export interface CommentElement {
+    articleId: number;
+    content: string;
+    createdAt: string;
+    enjoy: number;
+    id: number;
+    isDeleted: boolean;
+    replies: Reply[];
+    userId: number;
+    username: string;
+    openReply?: boolean; // frontend custom field;
+}
+
+export interface Reply {
+    content: string;
+    createdAt: string;
+    fromUser: string;
+    id: number;
+    toUser: string;
+    userId: number;
+}

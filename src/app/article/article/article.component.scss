@@ -1,32 +1,53 @@
 @import '../../../theme/_variable.theme';
+
+@keyframes shadowSpread-like {
+    0% {
+        box-shadow: 0 0 1px 1px rgba($active-primary, 0.3);
+    }
+    50% {
+        box-shadow: 0 0 10px 6px rgba($active-primary, 0.3);
+    }
+    100% {
+        box-shadow: 0 0 1px 1px rgba($active-primary, 0.3);
+    }
+}
+
+@keyframes shadowSpread-store {
+    0% {
+        box-shadow: 0 0 1px 1px rgba($active-warn, 0.3);
+    }
+    50% {
+        box-shadow: 0 0 10px 6px rgba($active-warn, 0.3);
+    }
+    100% {
+        box-shadow: 0 0 1px 1px rgba($active-warn, 0.3);
+    }
+}
 .article {
-    margin: 1em 0;
     .statistics {
-        background: #fff;
+        position: fixed;
+        top: 200px;
+        left: 5%;
+        div {
+            margin-bottom: 10px;
+            text-align: center;
+            color: $inactive-color;
+        }
         li {
-            margin: 1em 0;
-            position: relative;
+            margin-bottom: 2em;
+            @include likeBtn(50px);
             mat-icon {
-                font-size: 32px;
-                margin: 0 20px 0 0;
+                $icon-h: 32px;
+                font-size: $icon-h;
+                width: $icon-h;
+                height: $icon-h;
                 cursor: pointer;
             }
-            .like {
-                color: rgba($active-primary, 0.8);
-                &:hover {
-                    color: $active-primary;
-                    text-shadow: 1px 1px 5px;
-                }
+            &:nth-last-child(2) {
+                @include spreadAnimate($active-primary, shadowSpread-like);
             }
-            .view {
-                color: #697ef0;
-            }
-            .stored {
-                color: #33a74e;
-            }
-            span {
-                position: absolute;
-                right: -1em;
+            &:last-child {
+                @include spreadAnimate($active-warn, shadowSpread-store);
             }
         }
     }
@@ -48,4 +69,10 @@
             }
         }
     }
+}
+
+.discuss {
+    margin: 10px 0;
+    background: #fff;
+    padding: 2rem 15%;
 }

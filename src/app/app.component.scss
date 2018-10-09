@@ -4,12 +4,12 @@ $space: 10%;
 
 #content {
     padding: 0 $space;
-    min-height: calc(100vh - 179px);
+    min-height: calc(100vh - 189px);
 }
 
 footer {
-    margin: 1em $space 0;
-    padding: 1em;
+    margin-top: 10px;
+    padding: 1em $space;
     background: #442d2d;
     color: $inactive-color;
     height: $footer-height;

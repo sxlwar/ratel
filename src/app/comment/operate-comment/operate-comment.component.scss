@@ -1,0 +1,11 @@
+@import '../../../theme/_variable.theme';
+i,
+a {
+    font-size: 12px;
+    padding: 0 5px;
+}
+
+a {
+    cursor: pointer;
+    color: $active-deep-green;
+}

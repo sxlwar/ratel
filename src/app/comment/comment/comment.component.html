@@ -1,0 +1,58 @@
+<ul id="comment-area">
+    <li *ngFor="let comment of commentList" class="comment">
+        <div fxLayoutAlign="row center">
+            <h4>{{comment.username}}</h4>
+            <ratel-operate-comment [comment]="comment" (delete)="onDelete(comment)"></ratel-operate-comment>
+        </div>
+
+        <markdown [data]="comment.content" class="content"></markdown>
+
+        <ul *ngIf="!!comment.replies.length" class="reply-area">
+
+            <li *ngFor="let reply of comment.replies">
+
+                <p>
+                    <span>
+                        <a (click)="comment.openReply = !comment.openReply; setToUser(reply.fromUser)">
+                            <b>{{reply.fromUser}}</b>
+                        </a>
+                        <span>回复</span>
+                        <b>{{reply.toUser}}</b>
+                    </span>
+
+                    <ratel-operate-comment [comment]="reply" (delete)="onDelete(reply)"></ratel-operate-comment>
+
+                    <a *ngIf="canReply(reply)" (click)="reply.openReply = !reply.openReply"> </a>
+                </p>
+
+                <markdown [data]="reply.content" class="content"></markdown>
+
+                <!-- <ratel-reply *ngIf="reply.openReply && canReply(reply)" (send)="onReply($event,reply, 1)"></ratel-reply>
+
+                <ratel-reply *ngIf="reply.openReply && !canReply(reply)" [content]="reply.content" (send)="onUpdate($event, reply)"
+                    [buttonText]="'更新'"></ratel-reply> -->
+            </li>
+
+        </ul>
+
+        <div fxLayoutAlign="row center" class="interact">
+            <div fxLayoutAlign="center center" class="like">
+                <mat-icon fontIcon="icon-like2" (click)="enjoyComment()"></mat-icon>
+            </div>
+
+
+            <span>9</span>
+
+            <a *ngIf="canReply(comment)" (click)="comment.openReply = !comment.openReply; setToUser(comment.username)">
+                <mat-icon fontIcon="icon-message"></mat-icon>
+                <span>回复</span>
+            </a>
+
+        </div>
+
+        <ratel-reply *ngIf="comment.openReply && canReply(comment)" [placeholder]="toUser" (send)="onReply($event,comment, 0)"></ratel-reply>
+
+        <!-- <ratel-reply *ngIf="comment.openReply && !canReply(comment)" (send)="onUpdate($event, comment)"
+            [buttonText]="'更新'"></ratel-reply> -->
+    </li>
+</ul>

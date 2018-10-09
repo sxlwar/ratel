@@ -2,6 +2,34 @@ $header-height: 76px;
 $footer-height: 93px;
 
 $active-primary: #f44336;
+$active-warn: #efff41;
+$active-deep-green: #437780;
 
 $active-color: #fff;
 $inactive-color: #c7c2c7;
+
+@mixin spreadAnimate($color, $animate) {
+    mat-icon {
+        color: $color;
+    }
+    border-color: rgba($color, 0.7);
+    &:hover {
+        border: 2px solid $color;
+        animation: $animate 2s infinite;
+    }
+}
+
+@mixin likeBtn($size) {
+    width: $size;
+    height: $size;
+    background: #fff;
+    border-radius: 50%;
+    border: 1px solid;
+}
+
+@mixin icon($size) {
+    width: $size;
+    height: $size;
+    line-height: $size;
+    text-align: center;
+}

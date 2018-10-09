@@ -1,24 +1,5 @@
-<div fxlLayout="row" class="article">
-    <ul fxFlex="10%" fxLayout="column" fxLayoutAlign="start center" class="statistics">
-        <li>
-            <button mat-icon-button>
-                <mat-icon fontIcon="icon-like2" class="like"></mat-icon>
-            </button>
-            <span>222</span>
-        </li>
-
-        <li>
-            <mat-icon fontIcon="icon-eye" matTooltip="浏览次数" class="view"></mat-icon>
-            <span>222</span>
-        </li>
-
-        <li>
-            <mat-icon fontIcon="icon-folderopen" matTooltip="收藏次数" class="stored"></mat-icon>
-            <span>222</span>
-        </li>
-    </ul>
-
-    <div fxFlex="85%" fxFlexOffset="5%" class="content">
+<div class="article">
+    <div class="content">
         <h2>Title</h2>
         <h4>Subtitle</h4>
         <ul fxLayout="row" class="info">
@@ -32,7 +13,24 @@
         </ul>
 
         <markdown [data]="data"></markdown>
-
     </div>
 
+    <ul class="statistics">
+        <div>56</div>
+
+        <li fxLayoutAlign="center center">
+            <mat-icon fontIcon="icon-like2" (click)="addLike()"></mat-icon>
+        </li>
+
+        <!--TODO:登录后的用户可以收藏-->
+        <li fxLayout="column" fxLayoutAlign="center center">
+            <mat-icon fontIcon="icon-star" matTooltip="收藏"></mat-icon>
+        </li>
+    </ul>
+</div>
+
+<div class="discuss">
+    <ratel-reply [isComment]="true"></ratel-reply>
+
+    <ratel-comment></ratel-comment>
 </div>

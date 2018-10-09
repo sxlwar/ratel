@@ -1,4 +1,4 @@
-export class ArticleAddRequest {
+export interface ArticleAddRequest {
     author: string;
     subtitle?: string;
     content: string;
@@ -6,16 +6,16 @@ export class ArticleAddRequest {
     category: string[];
 }
 
-export class ArticleUpdateRequest {
+export interface ArticleUpdateRequest {
     id: number;
     content: string;
 }
 
-export class ArticleDeleteRequest {
+export interface ArticleDeleteRequest {
     id: number;
 }
 
-export class ArticleSearchRequest {
+export interface ArticleSearchRequest {
     author: string;
     title: string;
     category: string[];
@@ -24,8 +24,34 @@ export class ArticleSearchRequest {
     isOverview: boolean;
 }
 
-export class ArticleStatisticsUpdateRequest {
+export interface ArticleStatisticsUpdateRequest {
     id: number;
     enjoy?: number;
     stored?: number;
+}
+
+export interface GetQiniuTokenRequest {
+    name: string;
+}
+
+export interface GetQiniuTokenResponse {
+    data: any;
+}
+
+export interface CommentRequest {
+    username: string;
+    content: string;
+    articleId: number;
+    userId: number;
+}
+
+export interface EnjoyCommentRequest {
+    commentId: number;
+    enjoy: number;
+    userId: number;
+}
+
+export interface CommentDeleteRequest {
+    id: number;
+    userId: number;
 }

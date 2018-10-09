@@ -1,3 +1,4 @@
+@import '../../../theme/_variable.theme';
 .overview {
     margin: 1rem 0;
     background: #fff;
@@ -26,11 +27,13 @@
     }
     .statistics {
         margin: 1em 0 0 0;
+        color: $inactive-color;
         mat-icon {
             font-size: 1rem;
-            &:first-child {
-                margin: 0 2rem 0 0;
-            }
+            height: 1rem;
+        }
+        & > span:first-child {
+            margin-right: 2rem;
         }
     }
     div {

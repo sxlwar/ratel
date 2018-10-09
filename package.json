@@ -25,6 +25,7 @@
         "@angular/router": "^6.0.3",
         "core-js": "^2.5.4",
         "hammerjs": "^2.0.8",
+        "ng2-file-upload": "^1.3.0",
         "ngx-markdown": "^6.2.1",
         "rxjs": "^6.2.1",
         "zone.js": "^0.8.26"

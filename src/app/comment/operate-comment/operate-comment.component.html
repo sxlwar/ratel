@@ -1,0 +1,7 @@
+<span (mouseenter)="showOperateBtn()" (mouseleave)="hideOperateBtn()">
+    <i>{{comment.createdAt}}</i>
+
+    <span *ngIf="showBtn">
+        <a (click)="delete.next(true)" class="delete">删除</a>
+    </span>
+</span>
