@@ -1,4 +1,3 @@
-import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -11,13 +10,17 @@ import {
     MatInputModule,
     MatMenuModule,
     MatTooltipModule,
+    MatSelectModule,
+    MatFormFieldModule,
+    MatChipsModule,
+    MatCheckboxModule,
+    MatRadioModule,
 } from '@angular/material';
 
 import { ToolModule } from '../tool/tool.module';
 
 @NgModule({
     exports: [
-        CommonModule,
         ToolModule,
         FlexLayoutModule,
         FormsModule,
@@ -30,6 +33,11 @@ import { ToolModule } from '../tool/tool.module';
         MatCardModule,
         MatGridListModule,
         MatTooltipModule,
+        MatSelectModule,
+        MatFormFieldModule,
+        MatChipsModule,
+        MatCheckboxModule,
+        MatRadioModule,
     ],
 })
 export class SharedModule {}

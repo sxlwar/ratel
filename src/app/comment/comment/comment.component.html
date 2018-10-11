@@ -13,7 +13,7 @@
 
                 <p>
                     <span>
-                        <a (click)="comment.openReply = !comment.openReply; setToUser(reply.fromUser)">
+                        <a (click)="comment.openReply = !comment.openReply; setTarget(comment.id, reply.fromUser)">
                             <b>{{reply.fromUser}}</b>
                         </a>
                         <span>回复</span>
@@ -22,15 +22,10 @@
 
                     <ratel-operate-comment [comment]="reply" (delete)="onDelete(reply)"></ratel-operate-comment>
 
-                    <a *ngIf="canReply(reply)" (click)="reply.openReply = !reply.openReply"> </a>
+                    <a *ngIf="canReply(reply)" (click)="reply.openReply = !reply.openReply"></a>
                 </p>
 
                 <markdown [data]="reply.content" class="content"></markdown>
-
-                <!-- <ratel-reply *ngIf="reply.openReply && canReply(reply)" (send)="onReply($event,reply, 1)"></ratel-reply>
-
-                <ratel-reply *ngIf="reply.openReply && !canReply(reply)" [content]="reply.content" (send)="onUpdate($event, reply)"
-                    [buttonText]="'更新'"></ratel-reply> -->
             </li>
 
         </ul>
@@ -40,19 +35,15 @@
                 <mat-icon fontIcon="icon-like2" (click)="enjoyComment()"></mat-icon>
             </div>
 
-
             <span>9</span>
 
-            <a *ngIf="canReply(comment)" (click)="comment.openReply = !comment.openReply; setToUser(comment.username)">
+            <a *ngIf="canReply(comment)" (click)="comment.openReply = !comment.openReply; setTarget(comment.id, comment.username, comment.userId)">
                 <mat-icon fontIcon="icon-message"></mat-icon>
                 <span>回复</span>
             </a>
 
         </div>
 
-        <ratel-reply *ngIf="comment.openReply && canReply(comment)" [placeholder]="toUser" (send)="onReply($event,comment, 0)"></ratel-reply>
-
-        <!-- <ratel-reply *ngIf="comment.openReply && !canReply(comment)" (send)="onUpdate($event, comment)"
-            [buttonText]="'更新'"></ratel-reply> -->
+        <ratel-reply *ngIf="comment.openReply && canReply(comment)" [placeholder]="target?.toUser" (switchTo)="switchToImageTextModel()"></ratel-reply>
     </li>
 </ul>

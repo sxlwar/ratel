@@ -9,31 +9,19 @@ import { ReplyComponent } from './reply/reply.component';
 import { MarkdownModule } from 'ngx-markdown';
 import { RouterModule } from '@angular/router';
 import { CommentTotalComponent } from './comment-total/comment-total.component';
-import { FileUploadModule } from 'ng2-file-upload';
+import { ReplyFullComponent } from './reply-full/reply-full.component';
+import { CodemirrorModule } from '../codemirror/codemirror.module';
 
 @NgModule({
-    imports: [
-        CommonModule,
-        SharedModule,
-        MarkdownModule.forRoot(),
-        RouterModule,
-        FileUploadModule,
-    ],
+    imports: [CommonModule, SharedModule, MarkdownModule.forRoot(), RouterModule, CodemirrorModule],
     declarations: [
         CommentComponent,
         ReplyComponent,
         OperateCommentComponent,
         CommentTotalComponent,
+        ReplyFullComponent,
     ],
-    exports: [
-        CommentComponent,
-        ReplyComponent,
-        OperateCommentComponent,
-        CommentTotalComponent,
-    ],
-    providers: [
-        CommentService,
-    ],
-
+    exports: [CommentComponent, ReplyComponent, OperateCommentComponent, CommentTotalComponent, ReplyFullComponent],
+    providers: [CommentService],
 })
-export class CommentModule { }
+export class CommentModule {}

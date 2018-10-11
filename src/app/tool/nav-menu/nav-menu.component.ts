@@ -54,7 +54,10 @@ export class NavMenuComponent implements OnInit {
         if (old === target) {
             return;
         } else {
-            old.selected = false;
+            if (old) {
+                old.selected = false;
+            }
+
             target.selected = true;
 
             this.topicChange.next(target);

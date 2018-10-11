@@ -1,8 +1,8 @@
-import { Component, EventEmitter, Input, OnInit, OnDestroy, Output, ViewEncapsulation } from '@angular/core';
+import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
+import { Router, ActivatedRoute } from '@angular/router';
 
-import { from, Subject, zip } from 'rxjs';
-import { groupBy, mergeMap, partition, reduce, takeWhile } from 'rxjs/operators';
-import { CommentResponse, CommentElement, Reply } from 'src/app/interface/response.interface';
+import { omit } from 'lodash';
+import { CommentElement, CommentResponse, Reply } from 'src/app/interface/response.interface';
 
 const mock = {
     comments: [
@@ -79,6 +79,12 @@ const mock = {
     count: 4,
 };
 
+interface CommentTarget {
+    commentId: number;
+    toUser: string;
+    toUserId?: number;
+}
+
 @Component({
     selector: 'ratel-comment',
     templateUrl: './comment.component.html',
@@ -89,7 +95,6 @@ export class CommentComponent implements OnInit, OnDestroy {
     set comment(input: CommentResponse) {
         if (!!input) {
             this.commentList = input.comments;
-            this.commentCount = input.count;
         }
     }
 
@@ -102,14 +107,7 @@ export class CommentComponent implements OnInit, OnDestroy {
     @Output()
     update: EventEmitter<any> = new EventEmitter();
 
-    commentList: any[] = mock.comments;
-
-    commentCount = 0;
-
-    /**
-     * content need to edit;
-     */
-    editContent: Subject<string> = new Subject();
+    commentList: CommentElement[];
 
     /**
      * current user
@@ -121,34 +119,16 @@ export class CommentComponent implements OnInit, OnDestroy {
      */
     isAlive = true;
 
-    toUser: string;
+    target: CommentTarget;
 
-    constructor() {}
+    constructor(private _router: Router, private _route: ActivatedRoute) {}
 
     ngOnInit() {
+        this.commentList = mock.comments.map(item => omit(item, 'openReply'));
         // TODO 获取当前用户的名称；username;
     }
 
-    /**
-     * 合并comment list 和 reply list 的数据，生成完成的 comment list 列表；
-     * @param data comment list response
-     */
-    private createCommentList(data: any): void {}
-
-    /**
-     * Reply comment
-     */
-    onReply(content: string, comment: any, type: number): void {}
-
-    /**
-     * Delete comment
-     */
-    onDelete(comment: any): void {}
-
-    /**
-     * Update comment
-     */
-    onUpdate(content: string, comment: any): void {}
+    onDelete() {}
 
     /**
      * 是否可以回复此评论，只有不是本人的评论内容时才可回复
@@ -160,23 +140,22 @@ export class CommentComponent implements OnInit, OnDestroy {
     }
 
     /**
-     * @ignore
+     * 设置评论目标
+     * 1、回复评论: targetId === comment.id toUser === comment.username toUserId === comment.userId
+     * 2、回复回复: targetId === comment.id toUser === reply.fromUser
      */
-    private accumulate<T>(acc: T[], cur: T): T[] {
-        return [...acc, cur];
-    }
-
-    setToUser(user: string): void {
-        this.toUser = user;
+    setTarget(commentId: number, toUser: string, toUserId?: number): void {
+        this.target = { commentId, toUser, toUserId };
     }
 
     enjoyComment(): void {
         console.log('enjoy comment');
     }
 
-    /**
-     * @ignore
-     */
+    switchToImageTextModel(): void {
+        this._router.navigate(['reply', { ...this.target }], { relativeTo: this._route });
+    }
+
     ngOnDestroy() {
         this.isAlive = false;
     }

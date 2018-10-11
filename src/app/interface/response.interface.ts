@@ -1,4 +1,4 @@
-export class ArticleOverview {
+export interface ArticleOverview {
     id: number;
     author: string;
     title: string;
@@ -8,7 +8,7 @@ export class ArticleOverview {
     selected?: boolean; // 前端添加字段，用来实现某些效果；
 }
 
-export class Article extends ArticleOverview {
+export interface Article extends ArticleOverview {
     updatedAt: string;
     subtitle: string;
     content: string;
@@ -16,7 +16,7 @@ export class Article extends ArticleOverview {
     statistics: ArticleStatistics;
 }
 
-export class ArticleStatistics {
+export interface ArticleStatistics {
     id: number;
     enjoy: number; // star数
     view: number; // 被查看次数
@@ -48,4 +48,8 @@ export interface Reply {
     id: number;
     toUser: string;
     userId: number;
+}
+
+export interface GetQiniuTokenResponse {
+    something: any;
 }

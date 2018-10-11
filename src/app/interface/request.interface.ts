@@ -55,3 +55,10 @@ export interface CommentDeleteRequest {
     id: number;
     userId: number;
 }
+
+export interface ReplyRequest {
+    fromUser: string;
+    toUser: string;
+    content: string;
+    commentId: number;
+}

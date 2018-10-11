@@ -1,0 +1,17 @@
+<ul fxLayoutAlign="row center">
+    <li fxLayoutAlign="center center">
+        <button mat-icon-button matTooltip="插入图片" matTooltipPosition="above">
+            <mat-icon fontIcon="icon-picture"></mat-icon>
+            <input type="file" ng2FileSelect [uploader]="uploader" (onFileSelected)="fileSelected($event)">
+        </button>
+    </li>
+    <li fxLayoutAlign="center center">
+        <button mat-icon-button matTooltip="预览markdown" matTooltipPosition="above">
+            <mat-icon fontIcon="icon-preview" (click)="preview.next(null)"></mat-icon>
+        </button>
+    </li>
+    <li>支持 Markdown 语法</li>
+</ul>
+
+<ratel-codemirror [(ngModel)]="data" ng2FileDrop [uploader]="uploader" (onFileDrop)="fileSelected($event)" (fileOver)="onFileDropOver($event)"
+    [options]="codeMirrorOptions"></ratel-codemirror>

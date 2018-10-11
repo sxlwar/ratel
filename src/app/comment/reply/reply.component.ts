@@ -1,10 +1,11 @@
 import { CdkTextareaAutosize } from '@angular/cdk/text-field';
-import { Component, ElementRef, Input, NgZone, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import {
+    Component, ElementRef, EventEmitter, Input, NgZone, OnDestroy, OnInit, Output, ViewChild
+} from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { MatDialog } from '@angular/material';
 
 import { take } from 'rxjs/operators';
-import { LoginComponent } from 'src/app/auth/login/login.component';
 
 @Component({
     selector: 'ratel-reply',
@@ -47,9 +48,12 @@ export class ReplyComponent implements OnInit, OnDestroy {
         return this._placeholder;
     }
 
+    @Output()
+    switchTo: EventEmitter<boolean> = new EventEmitter();
+
     contentEditable = true;
 
-    constructor(private _zone: NgZone, private dialog: MatDialog) {}
+    constructor(private _zone: NgZone, private _dialog: MatDialog) {}
 
     ngOnInit() {}
 
@@ -80,7 +84,6 @@ export class ReplyComponent implements OnInit, OnDestroy {
     }
 
     switchToTextImageModel(): void {
-        this.dialog.open(LoginComponent, { width: '500px' });
     }
 
     ngOnDestroy() {

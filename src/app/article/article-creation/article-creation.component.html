@@ -1,0 +1,47 @@
+<form [formGroup]="form" fxLayout="column" class="ratel-form-field">
+    <mat-form-field appearance="outline">
+        <mat-label>文章标题</mat-label>
+        <input matInput placeholder="请输入标题" formControlName="title">
+        <mat-error *ngIf="titleCtrl.invalid">必须输入一个标题</mat-error>
+        <mat-hint>最多可以输入100个字符</mat-hint>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+        <mat-label>副标题</mat-label>
+        <input matInput placeholder="可以在这里输入一个副标题" formControlName="subtitle">
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+        <mat-label>作者</mat-label>
+        <input matInput formControlName="author">
+        <mat-error *ngIf="authorCtrl.invalid">请输入作者名称</mat-error>
+        <mat-hint>最多可以输入10个字符</mat-hint>
+    </mat-form-field>
+
+    <div fxLayout="row wrap" class="form-field">
+        <span>文章类型</span>
+        <mat-checkbox *ngFor="let item of categories" [(ngModel)]="item.selected" [name]="item.category"
+            [ngModelOptions]="{standalone: true}">{{item.category}}</mat-checkbox>
+    </div>
+
+    <div fxLayout="row" class="form-field">
+        <span>原创文章</span>
+        <mat-checkbox formControlName="isOriginal">是否原创</mat-checkbox>
+    </div>
+</form>
+
+<div fxLayout="row" class="full-model" [ngClass]="{'full-screen': !showPreview}">
+    <div fxFlex="48%" class="editor">
+        <ratel-editor (preview)="showPreview = !showPreview"></ratel-editor>
+
+        <div class="submit">
+            <button mat-raised-button color="primary">立即发表</button>
+            <button mat-raised-button color="accent">保存</button>
+        </div>
+    </div>
+
+
+    <div *ngIf="showPreview" fxFlex="48%" fxFlexOffset="4%" class="preview">
+        <markdown [data]="editor.data"></markdown>
+    </div>
+</div>

@@ -41,17 +41,7 @@
 
     .btn-group {
         button {
-            position: relative;
             margin-right: 2em;
-            &:last-child input {
-                position: absolute;
-                top: 0;
-                left: 0;
-                height: 100%;
-                opacity: 0;
-                width: 100%;
-                cursor: pointer;
-            }
         }
     }
 }
