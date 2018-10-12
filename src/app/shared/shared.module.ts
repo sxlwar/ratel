@@ -15,6 +15,7 @@ import {
     MatChipsModule,
     MatCheckboxModule,
     MatRadioModule,
+    MatSnackBarModule,
 } from '@angular/material';
 
 import { ToolModule } from '../tool/tool.module';
@@ -38,6 +39,7 @@ import { ToolModule } from '../tool/tool.module';
         MatChipsModule,
         MatCheckboxModule,
         MatRadioModule,
+        MatSnackBarModule,
     ],
 })
 export class SharedModule {}

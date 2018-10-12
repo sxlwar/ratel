@@ -1,3 +1,7 @@
+export interface CreateArticleResponse {
+    id: number;
+}
+
 export interface ArticleOverview {
     id: number;
     author: string;
@@ -51,5 +55,5 @@ export interface Reply {
 }
 
 export interface GetQiniuTokenResponse {
-    something: any;
+    uploadToken: string;
 }

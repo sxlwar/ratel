@@ -10,7 +10,7 @@
             <mat-icon fontIcon="icon-preview" (click)="preview.next(null)"></mat-icon>
         </button>
     </li>
-    <li>支持 Markdown 语法</li>
+    <li>支持 Markdown 语法 {{tip}}</li>
 </ul>
 
 <ratel-codemirror [(ngModel)]="data" ng2FileDrop [uploader]="uploader" (onFileDrop)="fileSelected($event)" (fileOver)="onFileDropOver($event)"

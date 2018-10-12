@@ -9,6 +9,7 @@ import { AuthModule } from './auth/auth.module';
 import { HomeModule } from './home/home.module';
 import { SharedModule } from './shared/shared.module';
 import { ArticleModule } from './article/article.module';
+import { UploadService } from './providers/upload.service';
 
 @NgModule({
     declarations: [AppComponent],
@@ -23,5 +24,6 @@ import { ArticleModule } from './article/article.module';
         SharedModule,
     ],
     bootstrap: [AppComponent],
+    providers: [UploadService],
 })
 export class AppModule {}

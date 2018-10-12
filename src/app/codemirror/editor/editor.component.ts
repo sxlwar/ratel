@@ -1,7 +1,10 @@
-import { Component, OnInit, Output, EventEmitter, ViewChild  } from '@angular/core';
-import { CodemirrorComponent } from '../codemirror/codemirror.component';
+import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 
 import { FileUploader } from 'ng2-file-upload';
+
+import { UploadService } from '../../providers/upload.service';
+import { CodemirrorComponent } from '../codemirror/codemirror.component';
+import { ALLOW_UPLOAD_FILE_TYPES } from '../../constant/constant';
 
 @Component({
     selector: 'ratel-editor',
@@ -9,6 +12,9 @@ import { FileUploader } from 'ng2-file-upload';
     styleUrls: ['./editor.component.scss'],
 })
 export class EditorComponent implements OnInit {
+    @Input()
+    tip = '';
+
     data =
         'For test ckeditor purpose\n\r ```javascript\nfunction name() {}\n```\n\r > block \r\n\r\n1. n\n\r2. 3\n\r3. b\r\n----';
 
@@ -25,7 +31,7 @@ export class EditorComponent implements OnInit {
         styleActiveLine: true,
         autoFocus: true,
         dragDrop: true,
-        allowDropFileTypes: ['image/png', 'image/jpg', 'image/jpeg'],
+        allowDropFileTypes: ALLOW_UPLOAD_FILE_TYPES,
     };
 
     @Output()
@@ -36,7 +42,7 @@ export class EditorComponent implements OnInit {
     @ViewChild(CodemirrorComponent)
     CodeMirror: CodemirrorComponent;
 
-    constructor() {}
+    constructor(private _upload: UploadService) {}
 
     ngOnInit() {}
 
@@ -48,25 +54,8 @@ export class EditorComponent implements OnInit {
     }
 
     fileSelected(list: FileList): void {
-        console.log(list);
-        const position = this.CodeMirror.codeMirror.getDoc().getCursor();
-
-        const fileReader = new FileReader();
-
-        fileReader.onloadend = () => {
-            // const imgEle = document.createElement('img');
-            // imgEle.src = <string>fileReader.result;
-            // const codeMirror = this.CodeMirror.codeMirror;
-            // codeMirror.addLineWidget(position.line + 1, imgEle, {
-            //     showIfHidden: false,
-            //     above: true,
-            //     coverGutter: false,
-            //     noHScroll: false,
-            // });
-            // codeMirror.getDoc().setCursor({ line: position.line + 1, ch: null });
-            // console.log(this.data);
-        };
-
-        fileReader.readAsDataURL(list[0]);
+        this._upload.uploadImage(list).subscribe(images => {
+            this.data = this.data + '\n\r' + images.map(image => `![${image.name}](${image.url})`).join('\n\r');
+        });
     }
 }

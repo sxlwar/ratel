@@ -41,7 +41,7 @@ export class NavMenuComponent implements OnInit {
     private checkActivateTopic(): void {
         const paths = location.pathname.split('/').filter(item => !!item);
 
-        if (paths.includes('home')) {
+        if (paths.includes('home') || paths.includes('create')) {
             this.topics[0].selected = true;
         } else {
             this.topics.forEach(item => (item.selected = paths.includes(item.topic)));
@@ -51,16 +51,12 @@ export class NavMenuComponent implements OnInit {
     onTopicSelect(target: NavItem): void {
         const old = this.topics.find(item => item.selected);
 
-        if (old === target) {
-            return;
-        } else {
-            if (old) {
-                old.selected = false;
-            }
-
-            target.selected = true;
-
-            this.topicChange.next(target);
+        if (old) {
+            old.selected = false;
         }
+
+        target.selected = true;
+
+        this.topicChange.next(target);
     }
 }

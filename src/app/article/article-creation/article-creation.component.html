@@ -2,8 +2,7 @@
     <mat-form-field appearance="outline">
         <mat-label>文章标题</mat-label>
         <input matInput placeholder="请输入标题" formControlName="title">
-        <mat-error *ngIf="titleCtrl.invalid">必须输入一个标题</mat-error>
-        <mat-hint>最多可以输入100个字符</mat-hint>
+        <mat-error *ngIf="titleCtrl.invalid">{{titleError()}}</mat-error>
     </mat-form-field>
 
     <mat-form-field appearance="outline">
@@ -14,15 +13,15 @@
     <mat-form-field appearance="outline">
         <mat-label>作者</mat-label>
         <input matInput formControlName="author">
-        <mat-error *ngIf="authorCtrl.invalid">请输入作者名称</mat-error>
-        <mat-hint>最多可以输入10个字符</mat-hint>
+        <mat-error *ngIf="authorCtrl.invalid">{{authorError()}}</mat-error>
     </mat-form-field>
 
     <div fxLayout="row wrap" class="form-field">
         <span>文章类型</span>
-        <mat-checkbox *ngFor="let item of categories" [(ngModel)]="item.selected" [name]="item.category"
-            [ngModelOptions]="{standalone: true}">{{item.category}}</mat-checkbox>
+        <mat-checkbox *ngFor="let item of categories" [(ngModel)]="item.selected" (ngModelChange)="updateCategories()"
+            [name]="item.category" [ngModelOptions]="{standalone: true}">{{item.category}}</mat-checkbox>
     </div>
+    <mat-error *ngIf="categoryCtrl.invalid && categoryTouched">请至少选择一个和此文章相关的系列</mat-error>
 
     <div fxLayout="row" class="form-field">
         <span>原创文章</span>
@@ -30,13 +29,13 @@
     </div>
 </form>
 
-<div fxLayout="row" class="full-model" [ngClass]="{'full-screen': !showPreview}">
+<div fxLayout="row" class="full-model ratel-form-field" [ngClass]="{'full-screen': !showPreview}">
     <div fxFlex="48%" class="editor">
-        <ratel-editor (preview)="showPreview = !showPreview"></ratel-editor>
+        <ratel-editor (preview)="showPreview = !showPreview" [tip]="'文章内容长度最少300个字符'"></ratel-editor>
 
         <div class="submit">
-            <button mat-raised-button color="primary">立即发表</button>
-            <button mat-raised-button color="accent">保存</button>
+            <button mat-raised-button color="primary" (click)="publish(true)" [disabled]="!allowPublish()">立即发表</button>
+            <button mat-raised-button color="accent" (click)="publish(false)" [disabled]="!allowPublish()">保存</button>
         </div>
     </div>
 

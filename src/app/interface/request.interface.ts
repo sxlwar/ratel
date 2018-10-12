@@ -1,9 +1,10 @@
-export interface ArticleAddRequest {
+export interface CreateArticleRequest {
     author: string;
     subtitle?: string;
     content: string;
     isPublished: boolean;
     category: string[];
+    isOriginal: boolean;
 }
 
 export interface ArticleUpdateRequest {
