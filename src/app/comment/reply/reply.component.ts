@@ -10,12 +10,11 @@ import {
     Output,
     ViewChild,
 } from '@angular/core';
-import { FormControl } from '@angular/forms';
 import { CommentService } from '../providers/comment.service';
 import { ActivatedRoute } from '@angular/router';
 
 import { take, throttleTime, takeWhile, timestamp, bufferCount } from 'rxjs/operators';
-import { Subject, Observable } from 'rxjs';
+import { Subject } from 'rxjs';
 import { MatSnackBar } from '@angular/material';
 import { CommentTarget } from '../interface/comment.interface';
 import { ReplyBaseComponent } from '../base/reply.base.component';
