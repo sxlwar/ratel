@@ -23,6 +23,7 @@ export interface ArticleSearchRequest {
     offset: number;
     limit: number;
     isOverview: boolean;
+    rank: 'enjoy' | 'view' | 'stored';
 }
 
 export interface ArticleStatisticsUpdateRequest {
@@ -63,4 +64,8 @@ export interface ReplyRequest {
     toUser: string;
     content: string;
     commentId: number;
+}
+
+export interface SeriesOverviewRequest {
+    series: 'angular' | 'typescript' | 'rxjs' | 'javascript' | 'other';
 }

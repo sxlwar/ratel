@@ -9,7 +9,7 @@ export interface ArticleOverview {
     createdAt: string;
     category: string[];
     statistics: ArticleStatistics;
-    digest: string;
+    summary: string;
     selected?: boolean; // 前端添加字段，用来实现某些效果；
 }
 
@@ -75,4 +75,9 @@ export interface EnjoyCommentResponse {
 
 export interface GetQiniuTokenResponse {
     uploadToken: string;
+}
+
+export interface SeriesOverviewResponse {
+    total: number;
+    original: number;
 }

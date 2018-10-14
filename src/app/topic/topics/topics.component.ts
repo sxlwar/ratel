@@ -5,8 +5,9 @@ import { Observable } from 'rxjs';
 import { map, mergeMap } from 'rxjs/operators';
 
 import { ArticleService } from '../../article/providers/article.service';
-import { ArticleOverview } from '../../interface/response.interface';
+import { ArticleOverview, SeriesOverviewResponse } from '../../interface/response.interface';
 import { RouteToTopicVar } from '../../constant/constant';
+import { SeriesOverviewRequest } from 'src/app/interface/request.interface';
 
 @Component({
     selector: 'ratel-topics',
@@ -18,6 +19,8 @@ export class TopicsComponent implements OnInit {
 
     topic: Observable<string>;
 
+    statistics: Observable<SeriesOverviewResponse>;
+
     constructor(private _route: ActivatedRoute, private _articleService: ArticleService, private _router: Router) {}
 
     ngOnInit() {
@@ -26,6 +29,10 @@ export class TopicsComponent implements OnInit {
         );
 
         this.topic = this._route.params.pipe(map(({ topic }) => RouteToTopicVar[topic]));
+
+        this.statistics = this._articleService.getSeriesOverview(
+            this.topic.pipe(map(series => ({ series: series.toLowerCase() } as SeriesOverviewRequest))),
+        );
     }
 
     showArticle(id: number) {

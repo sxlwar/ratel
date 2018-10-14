@@ -11,7 +11,7 @@ export enum RouteToTopicVar {
     rxjs = 'Rxjs',
     ts = 'TypeScript',
     js = 'JavaScript',
-    other = '其它',
+    other = 'Other',
 }
 
 export enum ArticleCategory {

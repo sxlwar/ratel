@@ -3,15 +3,22 @@ import { Injectable } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
 import { Observable, Subscription } from 'rxjs';
-import { catchError, mergeMap, take } from 'rxjs/operators';
+import { catchError, mergeMap, take, switchMap } from 'rxjs/operators';
 
 import { CRUDVar } from '../../constant/constant';
 import {
     ArticleSearchRequest,
     CreateArticleRequest,
     ArticleStatisticsUpdateRequest,
+    SeriesOverviewRequest,
 } from '../../interface/request.interface';
-import { ArticleOverview, CreateArticleResponse, Article, ArticleStatistics } from '../../interface/response.interface';
+import {
+    ArticleOverview,
+    CreateArticleResponse,
+    Article,
+    ArticleStatistics,
+    SeriesOverviewResponse,
+} from '../../interface/response.interface';
 import { BaseService } from '../../providers/base.service';
 import { ErrorService } from '../../providers/error.service';
 
@@ -20,6 +27,8 @@ export class ArticleService extends BaseService {
     private readonly articlePath = 'article';
 
     private readonly statisticsPath = 'statistics';
+
+    private readonly series = 'series';
 
     constructor(
         private readonly _http: HttpClient,
@@ -36,6 +45,16 @@ export class ArticleService extends BaseService {
         return this._http
             .post<ArticleOverview[]>(this.completeApiUrl(this.articlePath, CRUDVar.SEARCH), condition)
             .pipe(catchError(this._error.handleHttpError));
+    }
+
+    getSeriesOverview(overview: Observable<SeriesOverviewRequest>): Observable<SeriesOverviewResponse> {
+        return overview.pipe(
+            switchMap(series =>
+                this._http
+                    .post<SeriesOverviewResponse>(this.completeApiUrl(this.articlePath, this.series), series)
+                    .pipe(catchError(this._error.handleHttpError)),
+            ),
+        );
     }
 
     getArticle(idObs: Observable<string>): Observable<Article> {

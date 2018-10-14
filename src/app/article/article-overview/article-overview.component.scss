@@ -1,7 +1,7 @@
 @import '../../../theme/_variable.theme';
 .overview {
     margin: 1rem 0;
-    background: #fff;
+    background: $active-color;
     padding: 1rem 2rem;
     cursor: pointer;
     h4,
@@ -19,6 +19,11 @@
     .summary {
         text-indent: 2em;
         line-height: 2;
+        span {
+            display: inline-block;
+            margin-right: 1em;
+            color: $inactive-color;
+        }
     }
     .avatar {
         width: 50px;

@@ -1,4 +1,5 @@
 import { Component, OnInit, Input, ChangeDetectionStrategy } from '@angular/core';
+import { SeriesOverviewResponse } from 'src/app/interface/response.interface';
 
 @Component({
     selector: 'ratel-topic-overview',
@@ -9,6 +10,9 @@ import { Component, OnInit, Input, ChangeDetectionStrategy } from '@angular/core
 export class TopicOverviewComponent implements OnInit {
     @Input()
     topic: string;
+
+    @Input()
+    statistics: SeriesOverviewResponse;
 
     constructor() {}
 

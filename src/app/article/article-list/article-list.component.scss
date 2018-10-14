@@ -1,0 +1,41 @@
+@import '../../../theme/_variable.theme.scss';
+
+#drawer {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 300px;
+    height: 100vh;
+    padding-top: 76px;
+    background: rgba($active-bcg-primary, 0.3);
+    color: $active-color;
+    h2 {
+        text-align: center;
+        position: relative;
+        mat-icon {
+            position: absolute;
+            top: 50%;
+            right: 1em;
+            transform: translateY(-50%);
+            cursor: pointer;
+            @include icon(24px);
+        }
+    }
+    .tip {
+        text-align: center;
+    }
+    ul {
+        height: 80%;
+        overflow-y: scroll;
+        li {
+            margin: 10px 0;
+            background: rgba($active-accent, 0.8);
+            border-radius: 4px;
+            cursor: pointer;
+            padding: 2px 1em;
+        }
+        p {
+            font-size: 12px;
+        }
+    }
+}

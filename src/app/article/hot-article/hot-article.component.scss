@@ -11,9 +11,12 @@ ul {
             margin-right: 1em;
         }
     }
-    mat-icon {
+    .enjoy {
         font-size: 14px;
         line-height: 24px;
         margin-right: 2em;
+        mat-icon {
+            margin-right: 5px;
+        }
     }
 }

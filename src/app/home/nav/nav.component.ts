@@ -33,6 +33,9 @@ export class NavComponent implements OnInit, OnDestroy {
     @Output()
     logout: EventEmitter<boolean> = new EventEmitter();
 
+    @Output()
+    inputState: EventEmitter<boolean> = new EventEmitter();
+
     showSearchInput = false;
 
     searchCtrl: FormControl = new FormControl('');

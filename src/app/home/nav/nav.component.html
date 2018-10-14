@@ -9,10 +9,10 @@
         <div fxLayoutAlign="space-between center" class="action">
 
             <mat-form-field [@flyInOut]="showSearchInput ? 'in' : 'out'">
-                <input matInput placeholder="输入搜索内容" [formControl]="searchCtrl">
+                <input matInput placeholder="输入文章标题" [formControl]="searchCtrl">
             </mat-form-field>
 
-            <mat-icon fontIcon="icon-search" (click)="showSearchInput = !showSearchInput"></mat-icon>
+            <mat-icon fontIcon="icon-search" (click)="showSearchInput = !showSearchInput; inputState.next(showSearchInput)"></mat-icon>
 
             <button *ngIf="username; else avatarBlock" mat-raised-button (click)="openDialog()">登录</button>
 

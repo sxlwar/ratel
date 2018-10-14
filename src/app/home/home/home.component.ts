@@ -35,6 +35,8 @@ import { ArticleOverview } from '../../interface/response.interface';
 export class HomeComponent implements OnInit {
     articles: Observable<ArticleOverview[]>;
 
+    hotArticles: Observable<ArticleOverview[]>;
+
     constructor(private _articleService: ArticleService, private _router: Router, private _route: ActivatedRoute) {}
 
     ngOnInit() {
@@ -44,7 +46,7 @@ export class HomeComponent implements OnInit {
     launch(): void {
         this.articles = this._articleService.getArticlesOverview();
 
-        this.articles.subscribe(v => console.log(v));
+        this.hotArticles = this._articleService.getArticlesOverview({rank: 'enjoy'});
     }
 
     showArticle(id: number): void {

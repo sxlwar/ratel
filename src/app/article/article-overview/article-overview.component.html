@@ -11,16 +11,17 @@
             <h3>{{article.title}}</h3>
         </li>
         <li class="summary">
-            程序运行难免会出错，忘了哪会大神说的作为程序员首先要学会和错误做朋友。ts的到来让angular避免了很多错误，但仍有一些错误是会经常遇到的，ExpressionChangedAfterItHasBeenCheckedError这个错误相信大多数写angular的同学都遇到过，今天我们就来聊一下它。
+            <markdown [data]="article.summary"></markdown>
+            <span>更多内容···</span>
         </li>
         <li class="statistics">
             <span>
                 <mat-icon fontIcon="icon-eyeo"></mat-icon>
-                <span>22</span>
+                <span>{{article.statistics?.enjoy}}</span>
             </span>
             <span>
                 <mat-icon fontIcon="icon-give-five"></mat-icon>
-                <span>44</span>
+                <span>{{article.statistics?.view}}</span>
             </span>
         </li>
     </ul>

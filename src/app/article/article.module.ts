@@ -11,18 +11,18 @@ import { MarkdownModule } from 'ngx-markdown';
 import { CommentModule } from '../comment/comment.module';
 import { ArticleCreationComponent } from './article-creation/article-creation.component';
 import { CodemirrorModule } from '../codemirror/codemirror.module';
+import { ArticleListComponent } from './article-list/article-list.component';
 
 @NgModule({
     imports: [
         CommonModule,
-        // BrowserAnimationsModule,
         SharedModule,
         MarkdownModule.forRoot(),
         CommentModule,
         CodemirrorModule,
     ],
-    declarations: [ArticleComponent, ArticleOverviewComponent, HotArticleComponent, ArticleCreationComponent],
-    exports: [ArticleComponent, ArticleOverviewComponent, HotArticleComponent, ArticleCreationComponent],
+    declarations: [ArticleComponent, ArticleOverviewComponent, HotArticleComponent, ArticleCreationComponent, ArticleListComponent],
+    exports: [ArticleComponent, ArticleOverviewComponent, HotArticleComponent, ArticleCreationComponent, ArticleListComponent],
     providers: [ArticleService],
 })
 export class ArticleModule {}
