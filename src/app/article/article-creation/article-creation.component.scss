@@ -1,0 +1,41 @@
+@import '../../comment/reply-full/reply-full.component';
+
+.ratel-form-field {
+    background: #fff;
+    padding: 2em;
+    .form-field {
+        margin: 1em 0;
+        & > span {
+            margin-right: 2em;
+        }
+
+        mat-checkbox {
+            margin: 0 1em;
+        }
+    }
+}
+
+.submit {
+    button:last-child {
+        margin-left: 2em;
+    }
+}
+.full-screen {
+    justify-content: center !important;
+    .editor {
+        max-width: 80% !important;
+        animation: grow .5s linear;
+    }
+}
+
+@keyframes grow {
+    0% {
+        max-width: 50%;
+    }
+    50% {
+        max-width: 65%;
+    }
+    100% {
+        max-width: 80%;
+    }
+}

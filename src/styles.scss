@@ -1,0 +1,79 @@
+/* You can add global styles to this file, and also import other style files */
+@import '~codemirror/lib/codemirror.css';
+@import '~codemirror/theme/material.css';
+@import '../node_modules/codemirror/theme/eclipse';
+@import './theme/_variable.theme.scss';
+
+body {
+    margin: 0;
+    padding: 0;
+    font-size: 14px;
+    background: rgba(185, 185, 185, 0.3);
+    font-family: monospace, serif;
+}
+ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.global-snack {
+    background-color: $active-primary;
+    color: $active-color;
+    opacity: .8;
+}
+
+.ratel-form-field .mat-form-field-appearance-outline .mat-form-field-outline {
+    color: rgba($active-bcg-primary, 0.3);
+}
+.ratel-form-field .mat-form-field-appearance-outline .mat-form-field-outline-thick {
+    color: $active-bcg-primary;
+}
+.ratel-form-field {
+    .mat-form-field-label,
+    .mat-hint {
+        color: rgba($active-bcg-primary, 0.7);
+    }
+}
+
+.ratel-form-field .mat-form-field.mat-focused .mat-form-field-label {
+    color: #000;
+}
+
+.ratel-form-field .mat-checkbox-frame {
+    border-color: rgba($active-bcg-primary, 0.7);
+}
+
+.ratel-form-field {
+    .mat-checkbox-mixedmark {
+        background-color: $active-color;
+    }
+    .mat-checkbox-checkmark {
+        fill: $active-color;
+    }
+    .mat-checkbox-checkmark-path {
+        stroke: $active-color !important;
+    }
+}
+
+.ratel-form-field {
+    .mat-flat-button.mat-primary[disabled],
+    .mat-flat-button.mat-accent[disabled],
+    .mat-flat-button.mat-warn[disabled],
+    .mat-flat-button[disabled][disabled],
+    .mat-raised-button.mat-primary[disabled],
+    .mat-raised-button.mat-accent[disabled],
+    .mat-raised-button.mat-warn[disabled],
+    .mat-raised-button[disabled][disabled],
+    .mat-fab.mat-primary[disabled],
+    .mat-fab.mat-accent[disabled],
+    .mat-fab.mat-warn[disabled],
+    .mat-fab[disabled][disabled],
+    .mat-mini-fab.mat-primary[disabled],
+    .mat-mini-fab.mat-accent[disabled],
+    .mat-mini-fab.mat-warn[disabled],
+    .mat-mini-fab[disabled][disabled],
+    .mat-stroked-button[disabled][disabled] {
+        background-color: rgba($inactive-color, 0.8);
+    }
+}

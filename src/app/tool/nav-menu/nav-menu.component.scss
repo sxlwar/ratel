@@ -1,0 +1,28 @@
+@import '../../../theme/_variable.theme';
+
+a {
+    display: inline-block;
+    position: relative;
+    padding: 0 19px;
+    height: $header-height;
+    line-height: 6;
+    white-space: nowrap;
+    cursor: pointer;
+
+    &:hover {
+        color: $active-color !important;
+    }
+
+    &:first-child {
+        padding: 0 33px 0 19px;
+    }
+
+    .active {
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        height: 4px;
+        background: $active-primary;
+        width: 100%;
+    }
+}

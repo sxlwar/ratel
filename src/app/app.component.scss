@@ -1,0 +1,25 @@
+@import '../theme/_variable.theme';
+
+$space: 10%;
+
+#content {
+    padding: 0 $space;
+    min-height: calc(100vh - 189px);
+}
+
+footer {
+    margin-top: 10px;
+    padding: 1em $space;
+    background: #442d2d;
+    color: $inactive-color;
+    height: $footer-height;
+    h4 {
+        margin: 0 2em 0 0;
+    }
+    ol {
+        list-style: none;
+    }
+    li {
+        margin: 1em 0;
+    }
+}

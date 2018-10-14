@@ -1,0 +1,35 @@
+@import '../../../theme/_variable.theme';
+.full-model {
+    padding: 2em;
+    background: #fff;
+    height: calc(100vh - 189px);
+    .editor,
+    .preview {
+        border: 1px solid $inactive-color;
+        border-radius: 4px;
+        position: relative;
+    }
+    .preview {
+        padding: 2em;
+        overflow: scroll;
+    }
+    .submit {
+        position: absolute;
+        bottom: 1em;
+        right: 1em;
+    }
+}
+
+.file-over {
+    box-shadow: 0px 0px 5px 0px $active-deep-green;
+    position: relative;
+    &::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        background-image: url('../../../assets/images/ratel.png') no-repeat;
+    }
+}

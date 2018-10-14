@@ -1,0 +1,43 @@
+@import '../../../theme/_variable.theme';
+
+#article-overview {
+    .popular-articles {
+        background-color: #fff;
+        margin-top: 1em;
+        margin-bottom: 1em;
+        padding: 0 1em;
+        h3 {
+            text-align: center;
+            mat-icon {
+                font-size: 16px;
+                color: $active-primary;
+            }
+        }
+        .rank {
+            box-shadow: 0 1px 2px 2px $inactive-color;
+            margin: 1em 0;
+            background-color: #fff;
+            span {
+                text-align: center;
+                font-size: 32px;
+                color: $inactive-color;
+            }
+        }
+    }
+
+    .subject {
+        margin-top: 30px;
+        position: relative;
+        h2 {
+            margin: 0;
+            position: absolute;
+            top: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            white-space: nowrap;
+        }
+        img {
+            width: 100%;
+        }
+    }
+}

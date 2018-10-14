@@ -1,0 +1,30 @@
+<div fxLayout="row" (click)="view.next(article.id)" class="overview">
+    <ul fxFlex=70%>
+        <li fxLayout="row" class="create">
+            <img src="../../../assets/images/ratel.png" class="avatar">
+            <div fxLayout="column" fxLayoutAlign="center start" class="author">
+                <h4>{{article.author}}</h4>
+                <h6>{{article.createdAt}}</h6>
+            </div>
+        </li>
+        <li class="title">
+            <h3>{{article.title}}</h3>
+        </li>
+        <li class="summary">
+            程序运行难免会出错，忘了哪会大神说的作为程序员首先要学会和错误做朋友。ts的到来让angular避免了很多错误，但仍有一些错误是会经常遇到的，ExpressionChangedAfterItHasBeenCheckedError这个错误相信大多数写angular的同学都遇到过，今天我们就来聊一下它。
+        </li>
+        <li class="statistics">
+            <span>
+                <mat-icon fontIcon="icon-eyeo"></mat-icon>
+                <span>22</span>
+            </span>
+            <span>
+                <mat-icon fontIcon="icon-give-five"></mat-icon>
+                <span>44</span>
+            </span>
+        </li>
+    </ul>
+    <div fxFlex="30%" fxFlexOffset="14px" fxLayoutAlign="start center">
+        <img mat-card-image src="../../../assets/images/landscape_0.jpeg">
+    </div>
+</div>

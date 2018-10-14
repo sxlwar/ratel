@@ -1,0 +1,30 @@
+@import '../../../theme/_variable.theme';
+
+#resource {
+    background: #000;
+    padding: 1em 0;
+
+    h2 {
+        text-align: center;
+        color: #fff;
+    }
+
+    ul {
+        padding: 1em;
+        li {
+            margin: 1em;
+            color: $inactive-color;
+            a {
+                margin: 0 0 0 1em;
+                text-decoration: none;
+                color: $inactive-color;
+                &:hover {
+                    color: $active-color;
+                }
+            }
+        }
+    }
+    img {
+        width: 32px;
+    }
+}

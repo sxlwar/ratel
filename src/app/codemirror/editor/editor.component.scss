@@ -1,0 +1,29 @@
+@import '../../../theme/_variable.theme';
+ul {
+    padding: 0 1em;
+    background: rgba(#ccc, 0.3);
+    color: $active-deep-green;
+    li:first-child button {
+        position: relative;
+        input {
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            opacity: 0;
+            width: 100%;
+            cursor: pointer;
+        }
+    }
+    li:last-child {
+        color: $inactive-color;
+        font-size: 12px;
+        margin-left: 2em;
+    }
+}
+
+:host::ng-deep .CodeMirror {
+    padding: 1em;
+    height: 80%;
+}

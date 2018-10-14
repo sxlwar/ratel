@@ -1,0 +1,10 @@
+@import '~@angular/material/theming';
+
+@include mat-core();
+
+$ratel-primary: mat-palette($mat-red);
+$ratel-accent: mat-palette($mat-deep-purple, A200, A100, A400);
+$ratel-warn: mat-palette($mat-brown);
+$ratel-theme: mat-dark-theme($ratel-primary, $ratel-accent, $ratel-warn);
+
+@include angular-material-theme($ratel-theme);

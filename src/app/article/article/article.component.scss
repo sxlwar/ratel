@@ -1,0 +1,75 @@
+@import '../../../theme/_variable.theme';
+
+@keyframes shadowSpread-like {
+    0% {
+        box-shadow: 0 0 1px 1px rgba($active-primary, 0.3);
+    }
+    50% {
+        box-shadow: 0 0 10px 6px rgba($active-primary, 0.3);
+    }
+    100% {
+        box-shadow: 0 0 1px 1px rgba($active-primary, 0.3);
+    }
+}
+
+@keyframes shadowSpread-store {
+    0% {
+        box-shadow: 0 0 1px 1px rgba($active-warn, 0.3);
+    }
+    50% {
+        box-shadow: 0 0 10px 6px rgba($active-warn, 0.3);
+    }
+    100% {
+        box-shadow: 0 0 1px 1px rgba($active-warn, 0.3);
+    }
+}
+.article {
+    .statistics {
+        position: fixed;
+        top: 200px;
+        left: 15%;
+        div {
+            margin-bottom: 10px;
+            text-align: center;
+        }
+        li {
+            margin-bottom: 2em;
+            @include likeBtn(50px);
+            mat-icon {
+                $icon-h: 32px;
+                font-size: $icon-h;
+                width: $icon-h;
+                height: $icon-h;
+                cursor: pointer;
+            }
+            &:nth-last-child(2) {
+                @include spreadAnimate($active-primary, shadowSpread-like);
+            }
+            &:last-child {
+                @include spreadAnimate($active-warn, shadowSpread-store);
+            }
+        }
+    }
+    .content {
+        padding: 1em 15%;
+        background: #fff;
+        max-width: 100%;
+        h4 {
+            text-indent: 2rem;
+        }
+        ul {
+            padding: 0 1rem;
+            li {
+                margin: 0 1rem;
+                font-size: 12px;
+            }
+            margin: 0 0 2rem 0;
+        }
+    }
+}
+
+.discuss {
+    margin: 10px 0;
+    background: #fff;
+    padding: 2rem 15%;
+}

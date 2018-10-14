@@ -1,0 +1,12 @@
+<ul (click)="view.next(article.id)">
+    <li>
+        <h3>{{article.title}}</h3>
+    </li>
+    <li fxLayoutAlign="space-between center">
+        <div class="author">
+            <span>{{article.author}}</span>
+            <span>{{article.createdAt}}</span>
+        </div>
+        <mat-icon fontIcon="icon-give-five">89</mat-icon>
+    </li>
+</ul>

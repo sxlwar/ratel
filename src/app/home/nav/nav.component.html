@@ -1,0 +1,32 @@
+<nav>
+    <div fxLayoutAlign="space-between center" class="header">
+        <div fxLayoutAlign="start center">
+            <img src="../assets/images/ratel.png" class="logo">
+
+            <ratel-nav-menu (topicChange)='onTopicChange($event)'></ratel-nav-menu>
+        </div>
+
+        <div fxLayoutAlign="space-between center" class="action">
+
+            <mat-form-field [@flyInOut]="showSearchInput ? 'in' : 'out'">
+                <input matInput placeholder="输入搜索内容" [formControl]="searchCtrl">
+            </mat-form-field>
+
+            <mat-icon fontIcon="icon-search" (click)="showSearchInput = !showSearchInput"></mat-icon>
+
+            <button *ngIf="username; else avatarBlock" mat-raised-button (click)="openDialog()">登录</button>
+
+            <ng-template #avatarBlock>
+                <img [matMenuTriggerFor]="menu" src="https://avatars3.githubusercontent.com/u/20088392?v=4" class="avatar">
+
+                <span>{{username}}</span>
+
+                <mat-icon fontIcon="icon-edit" [routerLink]="['/','create']" routerLinkActive="editing" class="edit"></mat-icon>
+
+                <mat-menu #menu="matMenu" yPosition="below" overlapTrigger="false">
+                    <button mat-menu-item (click)="logout.next(true)">退出</button>
+                </mat-menu>
+            </ng-template>
+        </div>
+    </div>
+</nav>

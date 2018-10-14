@@ -1,0 +1,57 @@
+<h4 class="total">当前评论总数：{{commentTotal | async}}</h4>
+
+<ul id="comment-area">
+    <li *ngFor="let comment of commentList | async" class="comment">
+        <div fxLayoutAlign="row center">
+            <h4>{{comment.username}}</h4>
+            <ratel-operate-comment [comment]="comment" (delete)="onDelete(comment)"></ratel-operate-comment>
+        </div>
+
+        <markdown [data]="comment.content" class="content"></markdown>
+
+        <ul *ngIf="!!comment.replies.length" class="reply-area">
+            <li *ngFor="let reply of comment.replies">
+                <p>
+                    <span>
+                        <a *ngIf="canReply(reply); else replyTpl" (click)="comment.openReply = !comment.openReply; setTarget(comment.id, reply.fromUser)">
+                            <b>{{reply.fromUser}}</b>
+                        </a>
+                        <ng-template #replyTpl>
+                            <b>{{reply.fromUser}}</b>
+                        </ng-template>
+                        <span>回复</span>
+                        <b>{{reply.toUser}}</b>
+                    </span>
+                </p>
+
+                <markdown [data]="reply.content" class="content"></markdown>
+            </li>
+        </ul>
+
+        <div fxLayoutAlign="row center" *ngIf="canReply(comment); else elseBlock" class="interact">
+            <div fxLayoutAlign="center center" class="like">
+                <mat-icon fontIcon="icon-give-five" (click)="enjoy$.next(comment.id)"></mat-icon>
+            </div>
+
+            <span>{{comment.enjoy}}</span>
+
+            <a (click)="comment.openReply = !comment.openReply; setTarget(comment.id, comment.username, comment.userId)">
+                <mat-icon fontIcon="icon-paperplane"></mat-icon>
+                <span>回复</span>
+            </a>
+        </div>
+
+        <ng-template #elseBlock>
+            <div fxLayoutAlign="row center" class="interact">
+                <div fxLayoutAlign="center center" style="color: #437780">
+                    <mat-icon fontIcon="icon-give-five"></mat-icon>
+                </div>
+
+                <span>{{comment.enjoy}}</span>
+            </div>
+        </ng-template>
+
+        <ratel-reply *ngIf="comment.openReply && canReply(comment)" [placeholder]="target?.toUser" [commentTarget]="target"
+            (switchTo)="switchToImageTextModel()"></ratel-reply>
+    </li>
+</ul>

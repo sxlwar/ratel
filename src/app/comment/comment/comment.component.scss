@@ -1,0 +1,74 @@
+@import '../../../theme/_variable.theme';
+
+@keyframes shadowSpread-like-green {
+    0% {
+        box-shadow: 0 0 1px 1px rgba($active-deep-green, 0.3);
+    }
+    50% {
+        box-shadow: 0 0 10px 6px rgba($active-deep-green, 0.3);
+    }
+    100% {
+        box-shadow: 0 0 1px 1px rgba($active-deep-green, 0.3);
+    }
+}
+
+.total {
+    margin: 20px 0;
+}
+
+#comment-area {
+    padding: 0;
+    .comment {
+        padding: 20px 0;
+        border-bottom: 1px solid rgba(200, 200, 200, 0.7);
+        h4 {
+            margin: 0;
+        }
+    }
+    .reply-area {
+        background: rgba(200, 200, 200, 0.5);
+        margin: 0 1em 1em;
+        border-radius: 4px;
+        padding: 10px;
+        li {
+            margin: 1em 0;
+        }
+
+        p {
+            margin: 5px 0;
+            a {
+                color: $active-deep-green;
+                cursor: pointer;
+            }
+            span > span {
+                margin: 0 1em;
+                font-size: 12px;
+            }
+        }
+    }
+    .interact {
+        color: $active-deep-green;
+        cursor: pointer;
+        mat-icon {
+            @include icon(1em);
+            font-size: 1em;
+        }
+        .like {
+            color: $active-deep-green;
+            @include likeBtn(1.5em);
+            @include spreadAnimate($active-deep-green, shadowSpread-like-green);
+            border: none;
+        }
+        a {
+            margin-left: 2em;
+        }
+        span {
+            margin-left: 5px;
+        }
+    }
+    .content {
+        img {
+            max-width: 100%;
+        }
+    }
+}
