@@ -1,25 +1,25 @@
-<div class="article">
+<div *ngIf="article | async as data" class="article">
     <div class="content">
-        <h2>Title</h2>
-        <h4>Subtitle</h4>
+        <h2>{{data.title}}</h2>
+        <h4>{{data.subtitle}}</h4>
         <ul fxLayout="row" class="info">
-            <li>作者：xxx</li>
-            <li>创建时间：2018-09-29 12:33:53</li>
-            <li>更新时间：2017-10-22</li>
-            <li>
+            <li>作者：{{data.author}}</li>
+            <li>创建时间：{{data.createdAt}}</li>
+            <li [hidden]="!data.updatedAt">更新时间：{{data.updatedAt}}</li>
+            <li [hidden]="!data.isOriginal">
                 <ratel-tag content="原创"></ratel-tag>
                 转载请注明出处：www.hijavascript.com
             </li>
         </ul>
 
-        <markdown [data]="data"></markdown>
+        <markdown [data]="data.content"></markdown>
     </div>
 
     <ul class="statistics">
-        <div>56</div>
+        <div [@giveMeFive]="like">{{like}}</div>
 
         <li fxLayoutAlign="center center">
-            <mat-icon fontIcon="icon-like2" (click)="addLike()"></mat-icon>
+            <mat-icon fontIcon="icon-give-five" (click)="addLike(data.statistics.id)"></mat-icon>
         </li>
 
         <!--TODO:登录后的用户可以收藏-->

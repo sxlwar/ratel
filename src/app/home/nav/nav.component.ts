@@ -8,7 +8,7 @@ import { debounceTime, filter } from 'rxjs/operators';
 
 import { LoginComponent } from '../../auth/login/login.component';
 import { NavItem } from '../../tool/interface/tool.interface';
-import { Router, ActivatedRoute } from '@angular/router';
+import { Router } from '@angular/router';
 
 @Component({
     selector: 'ratel-nav',

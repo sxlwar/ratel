@@ -35,8 +35,8 @@ export interface GetQiniuTokenRequest {
     name: string;
 }
 
-export interface GetQiniuTokenResponse {
-    data: any;
+export interface GetCommentRequest {
+    id: string;
 }
 
 export interface CommentRequest {
@@ -52,7 +52,7 @@ export interface EnjoyCommentRequest {
     userId: number;
 }
 
-export interface CommentDeleteRequest {
+export interface DeleteCommentRequest {
     id: number;
     userId: number;
 }

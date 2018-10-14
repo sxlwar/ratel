@@ -1,27 +1,52 @@
+import { animate, style, transition, trigger } from '@angular/animations';
 import { Component, OnInit } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+
+import { Observable } from 'rxjs';
+import { map, take } from 'rxjs/operators';
+
+import { Article } from '../../interface/response.interface';
+import { ArticleService } from '../providers/article.service';
 
 @Component({
     selector: 'ratel-article',
     templateUrl: './article.component.html',
     styleUrls: ['./article.component.scss'],
+    animations: [
+        trigger('giveMeFive', [
+            transition(':increment', [
+                style({ color: 'red', transform: 'scale(1.5)' }),
+                animate('0.5s ease-out', style('*')),
+            ]),
+        ]),
+    ],
 })
 export class ArticleComponent implements OnInit {
-    data =
-        // tslint:disable-next-line:max-line-length
-        '# 测试文字\n\r## 测试二级标题\n\r### 测试三级标题\n\r#### 测试四级标题\n\r >块引用\n\r**斜体内容**\n\r```javascript\n\rfunction() { console.log(name)}\n\r```\n\r ![alt text](https://github.com/adam-p/markdown-here/raw/master/src/common/images/icon48.png "Logo Title Text 1") \n\r';
+    article: Observable<Article>;
 
-    constructor(private _router: Router, private _route: ActivatedRoute) {}
+    like = 0;
 
-    ngOnInit() {}
+    constructor(private _router: Router, private _route: ActivatedRoute, private _articleService: ArticleService) {}
 
-    addLike(): void {
-        console.log('update enjoy');
+    ngOnInit() {
+        this.article = this._articleService.getArticle(this._route.paramMap.pipe(map(param => param.get('id'))));
+
+        this.article
+            .pipe(
+                map(article => article.statistics.enjoy),
+                take(1),
+            )
+            .subscribe(like => (this.like = like));
+    }
+
+    addLike(id: number): void {
+        this._articleService
+            .addLike({ enjoy: 1, id })
+            .pipe(map(res => res.enjoy))
+            .subscribe(like => (this.like = like));
     }
 
     switchToImageTextModel(): void {
-        const articleId = this._route.snapshot.paramMap.get('id');
-
         this._router.navigate(['reply'], { relativeTo: this._route });
     }
 }

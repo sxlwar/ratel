@@ -1,7 +1,7 @@
 <div fxLayout="column" fxLayoutAlign="center start" class="reply">
     <div fxLayoutAlign="row center" class='trigger'>
         <div class="avatar">
-            <mat-icon fontIcon="icon-user"></mat-icon>
+            <mat-icon fontIcon="icon-user-circle-o"></mat-icon>
         </div>
         <div [attr.contenteditable]="contentEditable" (focus)="onFocus($event)">{{placeholder}}</div>
         <mat-icon *ngIf="isComment && !contentEditable" fontIcon="icon-closecircle" (click)="closeReply()" class="close-btn"></mat-icon>
@@ -11,8 +11,8 @@
         <textarea #area matInput cdkTextareaAutosize #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="5"
             cdkAutosizeMaxRows="20" [(ngModel)]="content"></textarea>
 
-        <div class="btn-group">
-            <button mat-stroked-button (click)="submitComment()">提交</button>
+        <div class="btn-group ratel-form-field">
+            <button mat-stroked-button [disabled]="!content || content.length < 5" (click)="submit$.next(true)">提交</button>
             <button mat-stroked-button (click)="switchTo.next(true)">图文模式</button>
         </div>
     </ng-container>

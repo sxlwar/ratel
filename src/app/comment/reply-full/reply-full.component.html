@@ -1,7 +1,7 @@
 <div fxLayout="row" class="full-model">
-    <div fxFlex="48%" class="editor" [ngClass]="{'file-over': fileDropOver}">
+    <div fxFlex="48%" class="editor ratel-form-field" [ngClass]="{'file-over': fileDropOver}">
         <ratel-editor (preview)="showPreview = !showPreview"></ratel-editor>
-        <button mat-stroked-button class="submit">提交</button>
+        <button mat-stroked-button (click)="submit()" [disabled]="!editor.data || editor.data.length < 5" class="submit">提交</button>
     </div>
 
     <div *ngIf="showPreview" fxFlex="48%" fxFlexOffset="4%" class="preview">

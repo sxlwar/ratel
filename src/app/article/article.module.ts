@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { ArticleComponent } from './article/article.component';
 import { ArticleOverviewComponent } from './article-overview/article-overview.component';
@@ -12,7 +13,14 @@ import { ArticleCreationComponent } from './article-creation/article-creation.co
 import { CodemirrorModule } from '../codemirror/codemirror.module';
 
 @NgModule({
-    imports: [CommonModule, SharedModule, MarkdownModule.forRoot(), CommentModule, CodemirrorModule],
+    imports: [
+        CommonModule,
+        // BrowserAnimationsModule,
+        SharedModule,
+        MarkdownModule.forRoot(),
+        CommentModule,
+        CodemirrorModule,
+    ],
     declarations: [ArticleComponent, ArticleOverviewComponent, HotArticleComponent, ArticleCreationComponent],
     exports: [ArticleComponent, ArticleOverviewComponent, HotArticleComponent, ArticleCreationComponent],
     providers: [ArticleService],

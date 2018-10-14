@@ -1,5 +1,5 @@
 <ul id="comment-area">
-    <li *ngFor="let comment of commentList" class="comment">
+    <li *ngFor="let comment of commentList | async" class="comment">
         <div fxLayoutAlign="row center">
             <h4>{{comment.username}}</h4>
             <ratel-operate-comment [comment]="comment" (delete)="onDelete(comment)"></ratel-operate-comment>
@@ -32,13 +32,13 @@
 
         <div fxLayoutAlign="row center" class="interact">
             <div fxLayoutAlign="center center" class="like">
-                <mat-icon fontIcon="icon-like2" (click)="enjoyComment()"></mat-icon>
+                <mat-icon fontIcon="icon-give-five" (click)="enjoyComment()"></mat-icon>
             </div>
 
             <span>9</span>
 
             <a *ngIf="canReply(comment)" (click)="comment.openReply = !comment.openReply; setTarget(comment.id, comment.username, comment.userId)">
-                <mat-icon fontIcon="icon-message"></mat-icon>
+                <mat-icon fontIcon="icon-paperplane"></mat-icon>
                 <span>回复</span>
             </a>
 

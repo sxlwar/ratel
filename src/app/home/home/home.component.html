@@ -7,7 +7,7 @@
     <div fxFlex="30%" fxFlexOffset="5%" class="popular-articles">
         <h3>
             热门文章
-            <mat-icon fontIcon="icon-flag"></mat-icon>
+            <mat-icon fontIcon="icon-fire"></mat-icon>
         </h3>
 
         <div *ngFor="let item of articles | async index as idx" fxLayout="row" [@inOut]="item.selected ? 'active' : 'inactive'"

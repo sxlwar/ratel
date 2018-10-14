@@ -29,7 +29,7 @@ export class UploadService extends BaseService {
 
     result$: Subject<UploadResult[]> = new Subject();
 
-    constructor(private _http: HttpClient, private _snake: MatSnackBar) {
+    constructor(private _http: HttpClient, private _snack: MatSnackBar) {
         super();
     }
 
@@ -87,7 +87,7 @@ export class UploadService extends BaseService {
     private tokenError(err: any): void {
         this.reset();
 
-        this._snake.open(`上传失败或请求超时！错误原因：${err.message}`, '', this.snakeBarConfig);
+        this._snack.open(`上传失败或请求超时！错误原因：${err.message}`, '', this.snakeBarConfig);
     }
 
     /**
@@ -104,7 +104,7 @@ export class UploadService extends BaseService {
         return {
             next: _ => {},
             error: ({ code }: Qiniu.Error) => {
-                this._snake.open(
+                this._snack.open(
                     `第${index + 1}张图片上传失败，失败原因：` + QiniuErrorCode[code],
                     '',
                     this.snakeBarConfig,
@@ -119,7 +119,7 @@ export class UploadService extends BaseService {
                 if (this.uploadedCount === this.uploadTotal) {
                     this.result$.next([...results]);
                     clear();
-                    this._snake.open('图片上传成功', '', this.snakeBarConfig);
+                    this._snack.open('图片上传成功', '', this.snakeBarConfig);
                 }
             },
         };

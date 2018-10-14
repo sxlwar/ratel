@@ -2,6 +2,7 @@
 @import '~codemirror/lib/codemirror.css';
 @import '~codemirror/theme/material.css';
 @import '../node_modules/codemirror/theme/eclipse';
+@import './theme/_variable.theme.scss';
 
 body {
     margin: 0;
@@ -16,16 +17,22 @@ ul {
     margin: 0;
 }
 
+.global-snack {
+    background-color: $active-primary;
+    color: $active-color;
+    opacity: .8;
+}
+
 .ratel-form-field .mat-form-field-appearance-outline .mat-form-field-outline {
-    color: rgba(#000000, 0.3);
+    color: rgba($active-bcg-primary, 0.3);
 }
 .ratel-form-field .mat-form-field-appearance-outline .mat-form-field-outline-thick {
-    color: #000;
+    color: $active-bcg-primary;
 }
 .ratel-form-field {
     .mat-form-field-label,
     .mat-hint {
-        color: rgba(#000000, 0.7);
+        color: rgba($active-bcg-primary, 0.7);
     }
 }
 
@@ -34,18 +41,18 @@ ul {
 }
 
 .ratel-form-field .mat-checkbox-frame {
-    border-color: rgba(#000000, 0.7);
+    border-color: rgba($active-bcg-primary, 0.7);
 }
 
 .ratel-form-field {
     .mat-checkbox-mixedmark {
-        background-color: #fff;
+        background-color: $active-color;
     }
     .mat-checkbox-checkmark {
-        fill: #fff;
+        fill: $active-color;
     }
     .mat-checkbox-checkmark-path {
-        stroke: #fff !important;
+        stroke: $active-color !important;
     }
 }
 
@@ -65,7 +72,8 @@ ul {
     .mat-mini-fab.mat-primary[disabled],
     .mat-mini-fab.mat-accent[disabled],
     .mat-mini-fab.mat-warn[disabled],
-    .mat-mini-fab[disabled][disabled] {
-        background-color: rgba(#ccc, 0.8);
+    .mat-mini-fab[disabled][disabled],
+    .mat-stroked-button[disabled][disabled] {
+        background-color: rgba($inactive-color, 0.8);
     }
 }

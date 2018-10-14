@@ -1,11 +1,22 @@
 import { CdkTextareaAutosize } from '@angular/cdk/text-field';
 import {
-    Component, ElementRef, EventEmitter, Input, NgZone, OnDestroy, OnInit, Output, ViewChild
+    Component,
+    ElementRef,
+    EventEmitter,
+    Input,
+    NgZone,
+    OnDestroy,
+    OnInit,
+    Output,
+    ViewChild,
 } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { MatDialog } from '@angular/material';
+import { CommentService } from '../providers/comment.service';
+import { ActivatedRoute } from '@angular/router';
 
-import { take } from 'rxjs/operators';
+import { take, throttleTime, takeWhile, timestamp, bufferCount } from 'rxjs/operators';
+import { Subject } from 'rxjs';
+import { MatSnackBar } from '@angular/material';
 
 @Component({
     selector: 'ratel-reply',
@@ -53,9 +64,38 @@ export class ReplyComponent implements OnInit, OnDestroy {
 
     contentEditable = true;
 
-    constructor(private _zone: NgZone, private _dialog: MatDialog) {}
+    submit$: Subject<boolean> = new Subject();
 
-    ngOnInit() {}
+    constructor(
+        private _zone: NgZone,
+        private _commentService: CommentService,
+        private _route: ActivatedRoute,
+        private _snack: MatSnackBar,
+    ) {}
+
+    ngOnInit() {
+        // 限制评论发表的频率
+        this.submit$
+            .asObservable()
+            .pipe(
+                throttleTime(2 * 60 * 1000),
+                takeWhile(() => this.isAlive),
+            )
+            .subscribe(_ => this.submitComment());
+
+        this.submit$
+            .asObservable()
+            .pipe(
+                timestamp(),
+                bufferCount(2, 0),
+            )
+            .subscribe(([pre, cur]) => {
+                const duration = cur.timestamp - pre.timestamp;
+                if (duration < 2 * 60 * 100) {
+                    this._snack.open('提交频率太高了，请稍候再试!', '', this._commentService.snakeBarConfig);
+                }
+            });
+    }
 
     onFocus() {
         // todo 检查用户是否已经登录 登录-->显示用户名 未登录-->显示登录弹窗
@@ -79,11 +119,16 @@ export class ReplyComponent implements OnInit, OnDestroy {
         console.log(event);
     }
 
-    submitComment(): void {
-        console.log('submit comment');
-    }
+    private submitComment(): void {
+        const articleId = +this._route.snapshot.paramMap.get('id');
+        const createObs = this._commentService.createComment({
+            articleId,
+            username: 'sxlwar',
+            userId: 20088392,
+            content: this.content,
+        });
 
-    switchToTextImageModel(): void {
+        this._commentService.handleOperateCommentResult(createObs, '评论成功', this._commentService.refreshComment);
     }
 
     ngOnDestroy() {

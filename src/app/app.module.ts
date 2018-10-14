@@ -10,6 +10,8 @@ import { HomeModule } from './home/home.module';
 import { SharedModule } from './shared/shared.module';
 import { ArticleModule } from './article/article.module';
 import { UploadService } from './providers/upload.service';
+import { ErrorService } from './providers/error.service';
+import { ArticleCreateGuard } from './providers/guard.service';
 
 @NgModule({
     declarations: [AppComponent],
@@ -24,6 +26,6 @@ import { UploadService } from './providers/upload.service';
         SharedModule,
     ],
     bootstrap: [AppComponent],
-    providers: [UploadService],
+    providers: [UploadService, ErrorService, ArticleCreateGuard],
 })
 export class AppModule {}

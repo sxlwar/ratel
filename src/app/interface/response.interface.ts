@@ -9,6 +9,7 @@ export interface ArticleOverview {
     createdAt: string;
     category: string[];
     statistics: ArticleStatistics;
+    digest: string;
     selected?: boolean; // 前端添加字段，用来实现某些效果；
 }
 
@@ -17,6 +18,7 @@ export interface Article extends ArticleOverview {
     subtitle: string;
     content: string;
     isPublished?: boolean;
+    isOriginal: boolean;
     statistics: ArticleStatistics;
 }
 
@@ -27,7 +29,7 @@ export interface ArticleStatistics {
     stored: number; // 被收藏次数
 }
 
-export interface CommentResponse {
+export interface GetCommentResponse {
     comments: CommentElement[];
     count: number;
 }
@@ -52,6 +54,23 @@ export interface Reply {
     id: number;
     toUser: string;
     userId: number;
+}
+
+export interface AddCommentResponse {
+    id: number;
+    createdAt: string;
+}
+
+export interface DeleteCommentResponse {
+    isDeleted: boolean;
+}
+
+export interface UpdateCommentResponse {
+    updated: true;
+}
+
+export interface EnjoyCommentResponse {
+    updated: true;
 }
 
 export interface GetQiniuTokenResponse {

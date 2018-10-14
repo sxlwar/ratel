@@ -4,6 +4,8 @@ import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/fo
 import { EditorComponent } from '../../codemirror/editor/editor.component';
 import { ArticleCategory } from '../../constant/constant';
 import { ArticleService } from '../providers/article.service';
+import { DeactivateGuard } from '../../interface/app.interface';
+import { of } from 'rxjs';
 
 @Component({
     selector: 'ratel-article-creation',
@@ -118,5 +120,9 @@ export class ArticleCreationComponent implements OnInit {
 
     allowPublish(): boolean {
         return this.form.valid && this.editor.data.length > 300;
+    }
+
+    canDeactivate(): DeactivateGuard[] {
+        return [{ canDeactivate: of(false), message: '确定离开此页面吗？', title: '放弃编辑' }];
     }
 }

@@ -2,11 +2,14 @@ $header-height: 76px;
 $footer-height: 93px;
 
 $active-primary: #f44336;
+$active-accent: #7c4dff;
 $active-warn: #efff41;
 $active-deep-green: #437780;
 
 $active-color: #fff;
 $inactive-color: #c7c2c7;
+
+$active-bcg-primary: #000;
 
 @mixin spreadAnimate($color, $animate) {
     mat-icon {

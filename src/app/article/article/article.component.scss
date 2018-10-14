@@ -27,11 +27,10 @@
     .statistics {
         position: fixed;
         top: 200px;
-        left: 5%;
+        left: 15%;
         div {
             margin-bottom: 10px;
             text-align: center;
-            color: $inactive-color;
         }
         li {
             margin-bottom: 2em;
@@ -52,14 +51,11 @@
         }
     }
     .content {
-        padding: 1em 2em;
+        padding: 1em 15%;
         background: #fff;
         max-width: 100%;
-        h2 {
-            text-indent: 2rem;
-        }
         h4 {
-            text-indent: 4rem;
+            text-indent: 2rem;
         }
         ul {
             padding: 0 1rem;
@@ -67,6 +63,7 @@
                 margin: 0 1rem;
                 font-size: 12px;
             }
+            margin: 0 0 2rem 0;
         }
     }
 }
