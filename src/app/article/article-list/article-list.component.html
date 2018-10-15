@@ -1,11 +1,11 @@
-<div *ngIf="display" id="drawer" [@flyInOut]="'in'">
+<div *ngIf="show | async" id="drawer" [@flyInOut]="'in'">
     <h2>
         搜索结果
-        <mat-icon fontIcon="icon-closecircleo" (click)="display = false"></mat-icon>
+        <mat-icon fontIcon="icon-closecircleo" (click)="close$.next(false)"></mat-icon>
     </h2>
     <h3 *ngIf="!(list | async)?.length" class="tip">没有找到符合条件的文章</h3>
     <ul>
-        <li *ngFor="let item of list | async; index as idx">
+        <li *ngFor="let item of list | async; index as idx" (click)="display = false;" (click)="goTo.next(item)">
             <h3>{{item.title}}</h3>
             <p>作者：{{item.author}}</p>
             <p>创建时间： {{item.createdAt}}</p>

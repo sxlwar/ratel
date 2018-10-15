@@ -1,10 +1,10 @@
-<ratel-nav (search)="search$.next($event)" (inputState)="onSearchState($event)"></ratel-nav>
+<ratel-nav (search)="search$.next($event)" (inputState)="showDrawer$.next($event)"></ratel-nav>
 
 <div id=content>
     <router-outlet></router-outlet>
 </div>
 
-<ratel-article-list [search]="searchObs" [display]="showDrawer"></ratel-article-list>
+<ratel-article-list [search]="searchObs" [display]="showDrawer" (goTo)="navigate($event)"></ratel-article-list>
 
 <footer fxLayoutAlign="start center">
     <h4>联系我们</h4>

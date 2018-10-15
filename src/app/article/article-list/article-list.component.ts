@@ -1,7 +1,7 @@
 import { animate, state, style, transition, trigger } from '@angular/animations';
-import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, OnInit, EventEmitter, Output } from '@angular/core';
 
-import { Observable } from 'rxjs';
+import { Observable, Subject, merge } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 import { ArticleOverview } from 'src/app/interface/response.interface';
 
@@ -25,13 +25,22 @@ export class ArticleListComponent implements OnInit {
     search: Observable<string>;
 
     @Input()
-    display = false;
+    display: Observable<boolean>;
+
+    @Output()
+    goTo: EventEmitter<ArticleOverview> = new EventEmitter();
 
     list: Observable<ArticleOverview[]>;
+
+    close$: Subject<boolean> = new Subject();
+
+    show: Observable<boolean>;
 
     constructor(private _articleService: ArticleService) {}
 
     ngOnInit() {
         this.list = this.search.pipe(switchMap(value => this._articleService.getArticlesOverview({ title: value })));
+
+        this.show = merge(this.display, this.close$.asObservable());
     }
 }

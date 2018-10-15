@@ -1,12 +1,12 @@
-import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
 
-import { omit } from 'lodash';
-import { CommentElement, GetCommentResponse, Reply } from 'src/app/interface/response.interface';
-import { CommentService } from '../providers/comment.service';
-import { Observable, Subject, combineLatest } from 'rxjs';
-import { map, takeWhile, startWith, pluck, bufferTime, filter, windowTime } from 'rxjs/operators';
+import { combineLatest, Observable, Subject, merge } from 'rxjs';
+import { bufferTime, filter, map, pluck, startWith, takeWhile } from 'rxjs/operators';
+import { CommentElement, Reply } from 'src/app/interface/response.interface';
+
 import { CommentTarget, EnjoyUpdateInfo } from '../interface/comment.interface';
+import { CommentService } from '../providers/comment.service';
 
 @Component({
     selector: 'ratel-comment',
@@ -33,11 +33,11 @@ export class CommentComponent implements OnInit, OnDestroy {
     constructor(private _router: Router, private _route: ActivatedRoute, private _commentService: CommentService) {}
 
     ngOnInit() {
-        this._commentService.refresh$
-            .pipe(
-                takeWhile(() => this.isAlive),
-                startWith(true),
-            )
+        const refreshWhenRouterParamChanged = this._router.events.pipe(filter(event => event instanceof NavigationEnd));
+        const refreshWhenServiceNotified = this._commentService.refresh$.pipe(startWith(true));
+
+        merge(refreshWhenRouterParamChanged, refreshWhenServiceNotified)
+            .pipe(takeWhile(() => this.isAlive))
             .subscribe(_ => this.initialModel());
 
         this.launch();

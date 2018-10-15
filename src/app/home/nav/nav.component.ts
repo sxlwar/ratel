@@ -4,7 +4,7 @@ import { FormControl } from '@angular/forms';
 import { MatDialog } from '@angular/material';
 
 import { Subscription } from 'rxjs';
-import { debounceTime, filter } from 'rxjs/operators';
+import { debounceTime, filter, takeWhile } from 'rxjs/operators';
 
 import { LoginComponent } from '../../auth/login/login.component';
 import { NavItem } from '../../tool/interface/tool.interface';
@@ -40,17 +40,20 @@ export class NavComponent implements OnInit, OnDestroy {
 
     searchCtrl: FormControl = new FormControl('');
 
-    search$$: Subscription;
+    isAlive = true;
 
     constructor(private dialog: MatDialog, private router: Router) {}
 
     ngOnInit() {
-        this.search$$ = this.searchCtrl.valueChanges
+        this.searchCtrl.valueChanges
             .pipe(
                 debounceTime(500),
                 filter(value => value !== ''),
+                takeWhile(() => this.isAlive),
             )
             .subscribe(this.search);
+
+        this.searchCtrl.valueChanges.pipe(takeWhile(() => this.isAlive)).subscribe(_ => this.inputState.next(true));
     }
 
     onTopicChange(topic: NavItem): void {
@@ -66,6 +69,6 @@ export class NavComponent implements OnInit, OnDestroy {
     }
 
     ngOnDestroy() {
-        this.search$$.unsubscribe();
+        this.isAlive = false;
     }
 }
