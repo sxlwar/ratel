@@ -1,4 +1,3 @@
-
 interface Qiniu {
     upload: (file: any, key: string, token: string, putExtra: Qiniu.PutExtra, config: Qiniu.Config) => Qiniu.Observable;
 }
@@ -43,7 +42,7 @@ declare namespace Qiniu {
     interface Config {
         useCdnDomain?: boolean; // default: false;
         disableStatisticsReport?: boolean; // default: false;
-        uphost?: string;  // host region;
+        uphost?: string; // host region;
         retryCount?: number; // default: 3;
         concurrentRequestLimit?: number; // default: 3;
         checkByMD5?: boolean; // default: false;

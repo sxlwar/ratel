@@ -11,9 +11,10 @@ import { RouterModule } from '@angular/router';
 import { CommentTotalComponent } from './comment-total/comment-total.component';
 import { ReplyFullComponent } from './reply-full/reply-full.component';
 import { CodemirrorModule } from '../codemirror/codemirror.module';
+import { AuthModule } from '../auth/auth.module';
 
 @NgModule({
-    imports: [CommonModule, SharedModule, MarkdownModule.forRoot(), RouterModule, CodemirrorModule],
+    imports: [CommonModule, SharedModule, MarkdownModule.forRoot(), RouterModule, CodemirrorModule, AuthModule],
     declarations: [
         CommentComponent,
         ReplyComponent,

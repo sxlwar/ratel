@@ -1,10 +1,12 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
+import { User } from '../../auth/interface/auth.interface';
+import { AuthService } from '../../providers/auth.service';
 import { EditorComponent } from '../../codemirror/editor/editor.component';
-import { CommentService } from '../providers/comment.service';
+import { CommentRequest, ReplyRequest } from '../../interface/request.interface';
 import { ReplyBaseComponent } from '../base/reply.base.component';
-import { ReplyRequest, CommentRequest } from 'src/app/interface/request.interface';
+import { CommentService } from '../providers/comment.service';
 
 interface RouterParams {
     id: string;
@@ -28,7 +30,13 @@ export class ReplyFullComponent extends ReplyBaseComponent implements OnInit {
 
     isComment: boolean;
 
-    constructor(private _route: ActivatedRoute, public commentService: CommentService) {
+    user: User;
+
+    constructor(
+        private _route: ActivatedRoute,
+        public commentService: CommentService,
+        private _authService: AuthService,
+    ) {
         super(commentService);
     }
 
@@ -36,28 +44,32 @@ export class ReplyFullComponent extends ReplyBaseComponent implements OnInit {
         this.params = this._route.snapshot.params as RouterParams;
 
         this.isComment = !this.params.commentId; // 发表评论时没有 commentId
+
+        this._authService.userObs.subscribe(user => (this.user = user));
     }
 
     protected getReplyCommentParams(): ReplyRequest {
         const { commentId, toUser } = this.params;
+        const { name, account, id } = this.user;
 
         return {
             commentId: +commentId,
             toUser,
-            fromUser: 'sxlwar',
-            userId: 20088392,
+            fromUser: name || account,
+            userId: id,
             content: this.editor.data,
         };
     }
 
     protected getCreateCommentParams(): CommentRequest {
         const { id } = this.params;
+        const { name, account } = this.user;
 
         return {
             articleId: +id,
             content: this.editor.data,
-            userId: 20088392,
-            username: 'sxlwar',
+            userId: this.user.id,
+            username: name || account,
         };
     }
 }

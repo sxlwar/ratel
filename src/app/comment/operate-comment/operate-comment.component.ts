@@ -1,11 +1,13 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, ChangeDetectionStrategy } from '@angular/core';
 
-import { CommentElement, Reply } from 'src/app/interface/response.interface';
+import { CommentElement, Reply } from '../../interface/response.interface';
+import { User } from '../../auth/interface/auth.interface';
 
 @Component({
     selector: 'ratel-operate-comment',
     templateUrl: './operate-comment.component.html',
     styleUrls: ['./operate-comment.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class OperateCommentComponent implements OnInit {
     @Input()
@@ -14,22 +16,21 @@ export class OperateCommentComponent implements OnInit {
     @Output()
     delete: EventEmitter<any> = new EventEmitter();
 
-    userId = 20088392;
+    @Input()
+    user: User;
 
     showBtn = false;
 
     constructor() {}
 
-    ngOnInit() {
-        // TODO 获取当前用户;
-    }
+    ngOnInit() {}
 
     showOperateBtn(): void {
-        if (!this.userId) {
+        if (!this.user.id) {
             return;
         }
 
-        if (this.comment.userId === this.userId ) {
+        if (this.comment.userId === this.user.id) {
             this.showBtn = true;
         }
     }

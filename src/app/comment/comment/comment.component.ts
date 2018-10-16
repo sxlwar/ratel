@@ -1,10 +1,11 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
+import { Component, OnDestroy, OnInit, Input } from '@angular/core';
+import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 
-import { combineLatest, Observable, Subject, merge } from 'rxjs';
-import { bufferTime, filter, map, pluck, startWith, takeWhile } from 'rxjs/operators';
-import { CommentElement, Reply } from 'src/app/interface/response.interface';
+import { combineLatest, merge, Observable, Subject } from 'rxjs';
+import { bufferTime, filter, map, pluck, startWith, takeWhile, tap } from 'rxjs/operators';
 
+import { User } from '../../auth/interface/auth.interface';
+import { CommentElement, Reply } from '../../interface/response.interface';
 import { CommentTarget, EnjoyUpdateInfo } from '../interface/comment.interface';
 import { CommentService } from '../providers/comment.service';
 
@@ -18,7 +19,8 @@ export class CommentComponent implements OnInit, OnDestroy {
 
     commentTotal: Observable<number>;
 
-    userId = 20088392;
+    @Input()
+    user: User;
 
     isAlive = true;
 
@@ -41,7 +43,6 @@ export class CommentComponent implements OnInit, OnDestroy {
             .subscribe(_ => this.initialModel());
 
         this.launch();
-        // TODO 获取当前用户的名称；username;
     }
 
     private launch(): void {
@@ -86,7 +87,7 @@ export class CommentComponent implements OnInit, OnDestroy {
     }
 
     onDelete(target: CommentElement & Reply) {
-        const delete$ = this._commentService.deleteComment({ id: target.id, userId: 20088392 });
+        const delete$ = this._commentService.deleteComment({ id: target.id, userId: this.user.id });
 
         this._commentService.handleOperateCommentResult(delete$, '删除成功', this.removeComment(target.id));
     }
@@ -95,7 +96,7 @@ export class CommentComponent implements OnInit, OnDestroy {
      * 是否可以回复此评论，只有不是本人的评论内容时才可回复
      */
     canReply(comment: CommentElement & Reply) {
-        return comment.userId !== this.userId;
+        return !!this.user && comment.userId === this.user.id;
     }
 
     /**
@@ -109,7 +110,7 @@ export class CommentComponent implements OnInit, OnDestroy {
 
     private enjoyComment(commentId: number, enjoy: number): void {
         this._commentService.handleOperateCommentResult(
-            this._commentService.enjoyComment({ commentId, userId: 20088392, enjoy }),
+            this._commentService.enjoyComment({ commentId, userId: this.user.id, enjoy }),
             '',
             this.updateEnjoy(commentId, enjoy),
         );

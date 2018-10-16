@@ -36,3 +36,10 @@ $active-bcg-primary: #000;
     line-height: $size;
     text-align: center;
 }
+
+@mixin avatar {
+    $length: 32px;
+    width: $length;
+    height: $length;
+    border-radius: $length / 2;
+}

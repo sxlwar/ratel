@@ -69,3 +69,17 @@ export interface ReplyRequest {
 export interface SeriesOverviewRequest {
     series: 'angular' | 'typescript' | 'rxjs' | 'javascript' | 'other';
 }
+
+export interface LogoutRequest {
+    id: number;
+}
+
+export interface StoreRequest {
+    id: number; // userId;
+    articleId: number;
+    operate: 'add' | 'remove' | 'clear';
+}
+
+export interface BookmarkRequest {
+    id: number;
+}

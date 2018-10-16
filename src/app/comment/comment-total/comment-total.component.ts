@@ -7,12 +7,10 @@ import { Component, OnInit, Input, ChangeDetectionStrategy } from '@angular/core
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CommentTotalComponent implements OnInit {
+    @Input()
+    total: string;
 
-    @Input() total: string;
+    constructor() {}
 
-    constructor() { }
-
-    ngOnInit() {
-    }
-
+    ngOnInit() {}
 }

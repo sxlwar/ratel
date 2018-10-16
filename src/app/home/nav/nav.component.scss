@@ -26,10 +26,7 @@ nav {
             }
         }
         img {
-            $length: 32px;
-            width: $length;
-            height: $length;
-            border-radius: $length / 2;
+            @include avatar();
             cursor: pointer;
             &:hover {
                 box-shadow: 0 0 2px 2px $inactive-color;

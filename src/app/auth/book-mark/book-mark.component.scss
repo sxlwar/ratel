@@ -1,0 +1,36 @@
+table {
+    width: 100%;
+}
+
+.mat-form-field {
+    font-size: 14px;
+    width: 100%;
+}
+
+td,
+th {
+    width: 15%;
+    &:first-child {
+        width: 50%;
+    }
+    &:last-child {
+        width: 10%;
+    }
+}
+
+tr {
+    cursor: pointer;
+    &:hover {
+        background: #fff;
+        td {
+            color: #000;
+        }
+    }
+}
+
+mat-icon {
+    cursor: pointer;
+    &:hover {
+        transform: scale(1.2);
+    }
+}

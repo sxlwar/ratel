@@ -9,6 +9,8 @@ export class BaseService {
 
     protected readonly isProd: boolean = environment.production;
 
+    private readonly apiPrefix = 'api';
+
     readonly snakeBarConfig: MatSnackBarConfig = {
         horizontalPosition: 'center',
         verticalPosition: 'top',
@@ -17,6 +19,6 @@ export class BaseService {
     };
 
     protected completeApiUrl(...paths: string[]): string {
-        return this.apiUrl + '/' + paths.join('/');
+        return this.apiUrl + '/' + this.apiPrefix + '/' + paths.join('/');
     }
 }

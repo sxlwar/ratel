@@ -1,15 +1,15 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 
-import { AuthService } from './providers/auth.service';
 import { LoginComponent } from './login/login.component';
 import { SharedModule } from '../shared/shared.module';
+import { BookMarkComponent } from './book-mark/book-mark.component';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
-    imports: [CommonModule, SharedModule],
-    declarations: [LoginComponent],
+    imports: [CommonModule, SharedModule, RouterModule],
+    declarations: [LoginComponent, BookMarkComponent],
     entryComponents: [LoginComponent],
-    providers: [AuthService],
     exports: [LoginComponent],
 })
 export class AuthModule {}

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialogRef } from '@angular/material';
-import { AuthService } from '../providers/auth.service';
+import { AuthService } from '../../providers/auth.service';
 
 @Component({
     selector: 'ratel-login',
@@ -12,10 +12,9 @@ export class LoginComponent implements OnInit {
 
     ngOnInit() {}
 
-    close(method?: string): void {
-        if (method) {
-            this._authService.launchLogin(method);
-        }
-        this._dialogRef.close(method);
+    login(method?: string): void {
+        this._authService.getGithubAddress().subscribe(domain => {
+            location.href = domain;
+        });
     }
 }

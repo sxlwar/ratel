@@ -5,20 +5,19 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app.routing.module';
-import { AuthModule } from './auth/auth.module';
-import { HomeModule } from './home/home.module';
-import { SharedModule } from './shared/shared.module';
 import { ArticleModule } from './article/article.module';
-import { UploadService } from './providers/upload.service';
+import { HomeModule } from './home/home.module';
+import { AuthService } from './providers/auth.service';
 import { ErrorService } from './providers/error.service';
 import { ArticleCreateGuard } from './providers/guard.service';
+import { UploadService } from './providers/upload.service';
+import { SharedModule } from './shared/shared.module';
 
 @NgModule({
     declarations: [AppComponent],
     imports: [
         AppRoutingModule,
         ArticleModule,
-        AuthModule,
         BrowserAnimationsModule,
         BrowserModule,
         HomeModule,
@@ -26,6 +25,6 @@ import { ArticleCreateGuard } from './providers/guard.service';
         SharedModule,
     ],
     bootstrap: [AppComponent],
-    providers: [UploadService, ErrorService, ArticleCreateGuard],
+    providers: [UploadService, ErrorService, ArticleCreateGuard, AuthService],
 })
 export class AppModule {}

@@ -18,19 +18,18 @@
     <ul class="statistics">
         <div [@giveMeFive]="like">{{like}}</div>
 
-        <li fxLayoutAlign="center center">
+        <li fxLayoutAlign="center center" id="give-me-five">
             <mat-icon fontIcon="icon-give-five" (click)="addLike(data.statistics.id)"></mat-icon>
         </li>
 
-        <!--TODO:登录后的用户可以收藏-->
-        <li fxLayout="column" fxLayoutAlign="center center">
-            <mat-icon fontIcon="icon-star" matTooltip="收藏"></mat-icon>
+        <li *ngIf="!!(user | async)" fxLayout="column" fxLayoutAlign="center center" id="store">
+            <mat-icon [fontIcon]="storeIcon | async" [matTooltip]="tooltip | async" (click)="storeArticle()"></mat-icon>
         </li>
     </ul>
 </div>
 
 <div class="discuss">
-    <ratel-reply [isComment]="true" (switchTo)="switchToImageTextModel()"></ratel-reply>
+    <ratel-reply [isComment]="true" (switchTo)="switchToImageTextModel()" [user]="user | async"></ratel-reply>
 
-    <ratel-comment></ratel-comment>
+    <ratel-comment [user]="user | async"></ratel-comment>
 </div>

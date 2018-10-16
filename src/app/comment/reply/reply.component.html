@@ -1,9 +1,12 @@
 <div fxLayout="column" fxLayoutAlign="center start" class="reply">
     <div fxLayoutAlign="row center" class='trigger'>
         <div class="avatar">
-            <mat-icon fontIcon="icon-user-circle-o"></mat-icon>
+            <mat-icon *ngIf="!user else avatarImage" fontIcon="icon-user-circle-o"></mat-icon>
+            <ng-template #avatarImage>
+                <img [src]="user.avatar">
+            </ng-template>
         </div>
-        <div [attr.contenteditable]="contentEditable" (focus)="onFocus($event)">{{placeholder}}</div>
+        <div [attr.contenteditable]="contentEditable" #trigger (focus)="onFocus($event)">{{placeholder}}</div>
         <mat-icon *ngIf="isComment && !contentEditable" fontIcon="icon-closecircle" (click)="closeReply()" class="close-btn"></mat-icon>
     </div>
 

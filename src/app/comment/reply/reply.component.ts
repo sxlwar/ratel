@@ -15,10 +15,12 @@ import { ActivatedRoute } from '@angular/router';
 
 import { take, throttleTime, takeWhile, timestamp, bufferCount } from 'rxjs/operators';
 import { Subject } from 'rxjs';
-import { MatSnackBar } from '@angular/material';
+import { MatSnackBar, MatDialog } from '@angular/material';
 import { CommentTarget } from '../interface/comment.interface';
 import { ReplyBaseComponent } from '../base/reply.base.component';
 import { CommentRequest, ReplyRequest } from 'src/app/interface/request.interface';
+import { User } from '../../auth/interface/auth.interface';
+import { LoginComponent } from '../../auth/login/login.component';
 
 @Component({
     selector: 'ratel-reply',
@@ -26,18 +28,6 @@ import { CommentRequest, ReplyRequest } from 'src/app/interface/request.interfac
     styleUrls: ['./reply.component.scss'],
 })
 export class ReplyComponent extends ReplyBaseComponent implements OnInit, OnDestroy {
-    @ViewChild('autosize')
-    autosize: CdkTextareaAutosize;
-
-    @ViewChild('area')
-    textarea: ElementRef;
-
-    content: string;
-
-    allowComment = false;
-
-    isAlive = true;
-
     @Input()
     isComment = false;
 
@@ -59,8 +49,26 @@ export class ReplyComponent extends ReplyBaseComponent implements OnInit, OnDest
     @Input()
     commentTarget: CommentTarget;
 
+    @Input()
+    user: User;
+
     @Output()
     switchTo: EventEmitter<boolean> = new EventEmitter();
+
+    @ViewChild('autosize')
+    autosize: CdkTextareaAutosize;
+
+    @ViewChild('area')
+    textarea: ElementRef;
+
+    @ViewChild('trigger')
+    trigger: ElementRef;
+
+    content: string;
+
+    allowComment = false;
+
+    isAlive = true;
 
     contentEditable = true;
 
@@ -71,6 +79,7 @@ export class ReplyComponent extends ReplyBaseComponent implements OnInit, OnDest
         public commentService: CommentService,
         private _route: ActivatedRoute,
         private _snack: MatSnackBar,
+        private dialog: MatDialog,
     ) {
         super(commentService);
     }
@@ -85,6 +94,7 @@ export class ReplyComponent extends ReplyBaseComponent implements OnInit, OnDest
             )
             .subscribe(_ => this.submit());
 
+        // 提示用户评论发表频率过高
         this.submit$
             .asObservable()
             .pipe(
@@ -100,12 +110,17 @@ export class ReplyComponent extends ReplyBaseComponent implements OnInit, OnDest
     }
 
     onFocus() {
-        // todo 检查用户是否已经登录 登录-->显示用户名 未登录-->显示登录弹窗
-        // TODO 修改placeholder 为用户名
+        if (!this.user) {
+            this.dialog.open(LoginComponent, { width: '500px' });
+            this.trigger.nativeElement.blur();
+            this.contentEditable = false;
+            return;
+        }
 
-        this.placeholder = 'sxlwar';
+        this.placeholder = this.user.name || this.user.account;
 
         this.allowComment = true;
+
         setTimeout(() => {
             this.textarea.nativeElement.focus();
             this._zone.onStable.pipe(take(1)).subscribe(() => this.autosize.resizeToFitContent());
@@ -123,21 +138,23 @@ export class ReplyComponent extends ReplyBaseComponent implements OnInit, OnDest
 
     protected getCreateCommentParams(): CommentRequest {
         const articleId = +this._route.snapshot.paramMap.get('id');
+        const { name, account, id } = this.user;
 
         return {
             articleId,
-            username: 'sxlwar',
-            userId: 20088392,
+            username: name || account,
+            userId: id,
             content: this.content,
         };
     }
 
     protected getReplyCommentParams(): ReplyRequest {
         const { toUser, commentId } = this.commentTarget;
+        const { name, account, id } = this.user;
 
         return {
-            fromUser: 'sxlwar',
-            userId: 20088392,
+            fromUser: name || account,
+            userId: id,
             content: this.content,
             toUser,
             commentId,

@@ -21,5 +21,5 @@ export class ErrorService extends BaseService {
         }
 
         return throwError('Something bad happened. Pleas try again later.');
-    }
+    };
 }

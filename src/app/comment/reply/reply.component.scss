@@ -14,6 +14,9 @@
                 color: $active-accent;
                 @include icon(32px);
             }
+            img {
+                @include avatar();
+            }
         }
         div:last-child {
             color: $inactive-color;

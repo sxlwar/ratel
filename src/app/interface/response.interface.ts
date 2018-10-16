@@ -81,3 +81,23 @@ export interface SeriesOverviewResponse {
     total: number;
     original: number;
 }
+
+export interface LogoutResponse {
+    isLogout: boolean;
+}
+
+export interface StoreResponse {
+    isSuccess: boolean;
+}
+
+export interface Bookmark {
+    id: number;
+    author: string;
+    title: string;
+    createdAt: string;
+}
+
+export interface BookmarkResponse {
+    articles: Bookmark[];
+    count: number;
+}

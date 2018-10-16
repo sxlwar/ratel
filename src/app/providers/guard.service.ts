@@ -22,7 +22,9 @@ export class BaseGuard extends BaseService implements CanDeactivate<CanDeactivat
         const guards = component.canDeactivate();
 
         return from(guards).pipe(
-            mergeMap(guard => guard.canDeactivate.pipe(map(can => ({ can, message: guard.message, title: guard.title })))),
+            mergeMap(guard =>
+                guard.canDeactivate.pipe(map(can => ({ can, message: guard.message, title: guard.title }))),
+            ),
             find(guard => !guard.can),
             mergeMap(
                 item =>

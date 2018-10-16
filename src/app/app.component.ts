@@ -5,6 +5,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Observable, Subject } from 'rxjs';
 
 import { ArticleOverview } from './interface/response.interface';
+import { AuthService } from './providers/auth.service';
 
 @Component({
     selector: 'ratel-root',
@@ -20,11 +21,26 @@ export class AppComponent implements OnInit {
 
     showDrawer: Observable<boolean>;
 
-    constructor(private _register: MatIconRegistry, private _router: Router, private _route: ActivatedRoute) {
+    constructor(
+        private _register: MatIconRegistry,
+        private _router: Router,
+        private _route: ActivatedRoute,
+        private _authService: AuthService,
+    ) {
         this._register.registerFontClassAlias('icomoon');
     }
 
     ngOnInit(): void {
+        this.initialModel();
+
+        this.checkLoginState();
+    }
+
+    private checkLoginState(): void {
+        this._authService.checkLoginState();
+    }
+
+    private initialModel() {
         this.searchObs = this.search$.asObservable();
 
         this.showDrawer = this.showDrawer$.asObservable();

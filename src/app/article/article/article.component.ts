@@ -2,10 +2,12 @@ import { animate, style, transition, trigger } from '@angular/animations';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 
-import { Observable } from 'rxjs';
-import { map, take, takeWhile } from 'rxjs/operators';
+import { combineLatest, Observable, zip } from 'rxjs';
+import { filter, map, startWith, take, takeWhile } from 'rxjs/operators';
 
+import { StoreOperate, User } from '../../auth/interface/auth.interface';
 import { Article } from '../../interface/response.interface';
+import { AuthService, StoreAction } from '../../providers/auth.service';
 import { ArticleService } from '../providers/article.service';
 
 @Component({
@@ -28,7 +30,20 @@ export class ArticleComponent implements OnInit, OnDestroy {
 
     isAlive = true;
 
-    constructor(private _router: Router, private _route: ActivatedRoute, private _articleService: ArticleService) {}
+    user: Observable<User>;
+
+    isStored: Observable<boolean>;
+
+    storeIcon: Observable<string>;
+
+    tooltip: Observable<string>;
+
+    constructor(
+        private _router: Router,
+        private _route: ActivatedRoute,
+        private _articleService: ArticleService,
+        private _authService: AuthService,
+    ) {}
 
     ngOnInit() {
         this.initialModel();
@@ -41,7 +56,9 @@ export class ArticleComponent implements OnInit, OnDestroy {
     }
 
     initialModel() {
-        this.article = this._articleService.getArticle(this._route.paramMap.pipe(map(param => param.get('id'))));
+        const articleId = this._route.paramMap.pipe(map(param => param.get('id')));
+
+        this.article = this._articleService.getArticle(articleId);
 
         this.article
             .pipe(
@@ -49,6 +66,16 @@ export class ArticleComponent implements OnInit, OnDestroy {
                 take(1),
             )
             .subscribe(like => (this.like = like));
+
+        this.user = this._authService.userObs;
+
+        this.isStored = combineLatest(this.user.pipe(filter(item => !!item)), articleId.pipe(map(id => +id))).pipe(
+            map(([user, id]) => user.storedArticles.includes(id)),
+        );
+
+        this.storeIcon = this.isStored.pipe(map(is => (is ? 'icon-delete' : 'icon-star')));
+
+        this.tooltip = this.isStored.pipe(map(is => (is ? '取消收藏' : '收藏')));
     }
 
     addLike(id: number): void {
@@ -56,6 +83,16 @@ export class ArticleComponent implements OnInit, OnDestroy {
             .addLike({ enjoy: 1, id })
             .pipe(map(res => res.enjoy))
             .subscribe(like => (this.like = like));
+    }
+
+    storeArticle(): void {
+        const request = zip(
+            this._route.paramMap.pipe(map(param => +param.get('id'))),
+            this.user.pipe(map(user => user.id)),
+            this.isStored.pipe(map(stored => (stored ? StoreAction.REMOVE : StoreAction.ADD))),
+        ).pipe(map(([articleId, id, operate]) => ({ id, articleId, operate })));
+
+        this._authService.storeArticle(request);
     }
 
     switchToImageTextModel(): void {

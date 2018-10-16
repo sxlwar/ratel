@@ -1,14 +1,15 @@
 import { animate, state, style, transition, trigger } from '@angular/animations';
-import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, OnDestroy, OnInit, Output } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { MatDialog } from '@angular/material';
+import { Router } from '@angular/router';
 
-import { Subscription } from 'rxjs';
 import { debounceTime, filter, takeWhile } from 'rxjs/operators';
 
+import { User } from '../../auth/interface/auth.interface';
 import { LoginComponent } from '../../auth/login/login.component';
+import { AuthService } from '../../providers/auth.service';
 import { NavItem } from '../../tool/interface/tool.interface';
-import { Router } from '@angular/router';
 
 @Component({
     selector: 'ratel-nav',
@@ -24,14 +25,8 @@ import { Router } from '@angular/router';
     ],
 })
 export class NavComponent implements OnInit, OnDestroy {
-    @Input()
-    username: string;
-
     @Output()
     search: EventEmitter<string> = new EventEmitter();
-
-    @Output()
-    logout: EventEmitter<boolean> = new EventEmitter();
 
     @Output()
     inputState: EventEmitter<boolean> = new EventEmitter();
@@ -40,11 +35,18 @@ export class NavComponent implements OnInit, OnDestroy {
 
     searchCtrl: FormControl = new FormControl('');
 
+    user: User;
+
     isAlive = true;
 
-    constructor(private dialog: MatDialog, private router: Router) {}
+    constructor(private dialog: MatDialog, private router: Router, private _authService: AuthService) {}
 
     ngOnInit() {
+        this.launch();
+        this.initialModel();
+    }
+
+    private launch(): void {
         this.searchCtrl.valueChanges
             .pipe(
                 debounceTime(500),
@@ -54,6 +56,10 @@ export class NavComponent implements OnInit, OnDestroy {
             .subscribe(this.search);
 
         this.searchCtrl.valueChanges.pipe(takeWhile(() => this.isAlive)).subscribe(_ => this.inputState.next(true));
+    }
+
+    private initialModel(): void {
+        this._authService.userObs.subscribe(user => (this.user = user));
     }
 
     onTopicChange(topic: NavItem): void {
@@ -66,6 +72,10 @@ export class NavComponent implements OnInit, OnDestroy {
 
     openDialog(): void {
         this.dialog.open(LoginComponent, { width: '500px' });
+    }
+
+    logout(): void {
+        this._authService.logout();
     }
 
     ngOnDestroy() {

@@ -1,19 +1,19 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { CodemirrorComponent } from './codemirror.component';
+import { BookMarkComponent } from './book-mark.component';
 
-describe('CodemirrorComponent', () => {
-    let component: CodemirrorComponent;
-    let fixture: ComponentFixture<CodemirrorComponent>;
+describe('BookMarkComponent', () => {
+    let component: BookMarkComponent;
+    let fixture: ComponentFixture<BookMarkComponent>;
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
-            declarations: [CodemirrorComponent],
+            declarations: [BookMarkComponent],
         }).compileComponents();
     }));
 
     beforeEach(() => {
-        fixture = TestBed.createComponent(CodemirrorComponent);
+        fixture = TestBed.createComponent(BookMarkComponent);
         component = fixture.componentInstance;
         fixture.detectChanges();
     });
