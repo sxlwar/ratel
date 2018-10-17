@@ -54,9 +54,7 @@ export class UploadService extends BaseService {
         return from(files).pipe(
             delay(100),
             mergeMap((file, index) => {
-                const timestamp = new Date().getTime();
-                const ary = file.name.split('.');
-                const name = ary.slice(0, -1).join('_') + timestamp + '.' + ary[ary.length - 1];
+                const name = this.getOptimizeFileName(file.name);
 
                 return this.getUploadToken(name).pipe(
                     map(token => ({
@@ -86,6 +84,17 @@ export class UploadService extends BaseService {
                 return of(null);
             }),
         );
+    }
+
+    private getOptimizeFileName(name: string): string {
+        const timestamp = new Date().getTime();
+        const ary = name.split('.');
+        const originName = ary
+            .slice(0, -1)
+            .map(item => item.replace(/\s/g, ''))
+            .join('_');
+
+        return originName + timestamp + '.' + ary[ary.length - 1];
     }
 
     private tokenError(err: any): void {

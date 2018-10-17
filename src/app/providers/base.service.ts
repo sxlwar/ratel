@@ -19,6 +19,7 @@ export class BaseService {
     };
 
     protected completeApiUrl(...paths: string[]): string {
-        return this.apiUrl + '/' + this.apiPrefix + '/' + paths.join('/');
+        // return this.apiUrl + '/' + this.apiPrefix + '/' + paths.join('/');
+        return  'http://' + location.hostname + ':3000/' + this.apiPrefix + '/' + paths.join('/');
     }
 }

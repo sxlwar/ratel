@@ -126,7 +126,7 @@ export class AuthService extends BaseService {
             map(
                 config =>
                     `${this.githubAuthURI}?client_id=${config.clientId}&redirect_uri=${
-                        location.href
+                        location.href.split('?')[0]
                     }&scope=user&state=${config.state}`,
             ),
             catchError(this._error.handleHttpError),
