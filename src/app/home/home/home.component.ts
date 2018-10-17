@@ -44,9 +44,9 @@ export class HomeComponent implements OnInit {
     }
 
     initialModel(): void {
-        this.articles = this._articleService.getArticlesOverview();
+        this.articles = this._articleService.getArticlesOverview({ limit: 10 });
 
-        this.hotArticles = this._articleService.getArticlesOverview({ rank: 'enjoy' });
+        this.hotArticles = this._articleService.getArticlesOverview({ rank: 'enjoy', limit: 10 });
     }
 
     showArticle(id: number): void {

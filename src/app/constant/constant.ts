@@ -6,20 +6,12 @@ export enum CRUDVar {
     SEARCH = 'search',
 }
 
-export enum RouteToTopicVar {
-    angular = 'Angular',
-    rxjs = 'Rxjs',
-    ts = 'TypeScript',
-    js = 'JavaScript',
-    other = 'Other',
-}
-
 export enum ArticleCategory {
-    angular = 'Angular',
-    rxjs = 'Rxjs',
-    typescript = 'TypeScript',
-    javascript = 'JavaScript',
-    other = 'Other',
+    angular = 'angular',
+    rxjs = 'rxjs',
+    typescript = 'typescript',
+    javascript = 'javascript',
+    other = 'other',
 }
 
 export const QiniuErrorCode = {

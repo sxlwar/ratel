@@ -2,6 +2,7 @@ import { animate, state, style, transition, trigger } from '@angular/animations'
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 
 import { NavItem } from '../interface/tool.interface';
+import { ArticleCategory } from '../../constant/constant';
 
 @Component({
     selector: 'ratel-nav-menu',
@@ -19,11 +20,11 @@ import { NavItem } from '../interface/tool.interface';
 export class NavMenuComponent implements OnInit {
     topics: NavItem[] = [
         { label: '首页', selected: false, topic: '' },
-        { label: 'Angular', selected: false, topic: 'angular' },
-        { label: 'Rxjs', selected: false, topic: 'rxjs' },
-        { label: 'TypeScript', selected: false, topic: 'ts' },
-        { label: 'JavaScript', selected: false, topic: 'js' },
-        { label: 'Other', selected: false, topic: 'other' },
+        { label: 'Angular', selected: false, topic: ArticleCategory.angular },
+        { label: 'Rxjs', selected: false, topic: ArticleCategory.rxjs },
+        { label: 'TypeScript', selected: false, topic: ArticleCategory.typescript },
+        { label: 'JavaScript', selected: false, topic: ArticleCategory.javascript },
+        { label: 'Other', selected: false, topic: ArticleCategory.other },
     ];
 
     @Output()

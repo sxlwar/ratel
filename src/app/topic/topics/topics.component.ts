@@ -6,7 +6,6 @@ import { map, mergeMap } from 'rxjs/operators';
 
 import { ArticleService } from '../../article/providers/article.service';
 import { ArticleOverview, SeriesOverviewResponse } from '../../interface/response.interface';
-import { RouteToTopicVar } from '../../constant/constant';
 import { SeriesOverviewRequest } from 'src/app/interface/request.interface';
 
 @Component({
@@ -25,10 +24,10 @@ export class TopicsComponent implements OnInit {
 
     ngOnInit() {
         this.articles = this._route.params.pipe(
-            mergeMap(({ topic }) => this._articleService.getArticlesOverview({ category: [topic], limit: 30 })),
+            mergeMap(({ topic }) => this._articleService.getArticlesOverview({ category: [topic], limit: 300 })),
         );
 
-        this.topic = this._route.params.pipe(map(({ topic }) => RouteToTopicVar[topic]));
+        this.topic = this._route.params.pipe(map(({ topic }) => topic));
 
         this.statistics = this._articleService.getSeriesOverview(
             this.topic.pipe(map(series => ({ series: series.toLowerCase() } as SeriesOverviewRequest))),

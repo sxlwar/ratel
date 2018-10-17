@@ -43,7 +43,7 @@ export class ArticleService extends BaseService {
     }
 
     getArticlesOverview(conditions: Partial<ArticleSearchRequest> = {}): Observable<ArticleOverview[]> {
-        const defaultCondition: Partial<ArticleSearchRequest> = { limit: 10 };
+        const defaultCondition: Partial<ArticleSearchRequest> = { limit: 500 };
         const condition = { ...defaultCondition, ...conditions, isOverview: true };
 
         return this._http

@@ -42,6 +42,6 @@ export class ArticleOverviewComponent implements OnInit {
             other: 'landscape_4.jpeg',
         };
 
-        this.image = imageMap[category[0].toLowerCase()] || 'landscape_5.jpeg';
+        this.image = imageMap[category[category.length - 1].toLowerCase()] || 'landscape_5.jpeg';
     }
 }
