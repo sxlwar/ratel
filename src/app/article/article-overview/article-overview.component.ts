@@ -9,7 +9,21 @@ import { ArticleOverview } from '../../interface/response.interface';
 })
 export class ArticleOverviewComponent implements OnInit {
     @Input()
-    article: ArticleOverview;
+    set article(input: ArticleOverview) {
+        if (!!input) {
+            this._article = input;
+
+            this.setCoverImage();
+        }
+    }
+
+    private _article: ArticleOverview;
+
+    image = 'landscape_0.jpeg';
+
+    get article(): ArticleOverview {
+        return this._article;
+    }
 
     @Output()
     view: EventEmitter<number> = new EventEmitter();
@@ -17,4 +31,17 @@ export class ArticleOverviewComponent implements OnInit {
     constructor() {}
 
     ngOnInit() {}
+
+    setCoverImage() {
+        const { category } = this.article;
+        const imageMap = {
+            angular: 'landscape_0.jpeg',
+            typescript: 'landscape_1.jpeg',
+            rxjs: 'landscape_2.jpeg',
+            javascript: 'landscape_3.jpeg',
+            other: 'landscape_4.jpeg',
+        };
+
+        this.image = imageMap[category[0].toLowerCase()] || 'landscape_5.jpeg';
+    }
 }

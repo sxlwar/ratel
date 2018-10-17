@@ -2,7 +2,7 @@
     <div class="content">
         <h2>{{data.title}}</h2>
         <h4>{{data.subtitle}}</h4>
-        <ul fxLayout="row" class="info">
+        <ul fxLayoutAlign="row center" class="info">
             <li>作者：{{data.author}}</li>
             <li>创建时间：{{data.createdAt}}</li>
             <li [hidden]="!data.updatedAt">更新时间：{{data.updatedAt}}</li>
@@ -10,9 +10,14 @@
                 <ratel-tag content="原创"></ratel-tag>
                 转载请注明出处：www.hijavascript.com
             </li>
+            <li *ngIf="(user | async)?.id === data.userId">
+                <button mat-raised-button [routerLink]="['/create', {id: data.id}]" color="primary">更新</button>
+            </li>
         </ul>
 
-        <markdown [data]="data.content"></markdown>
+        <article>
+            <markdown [data]="data.content"></markdown>
+        </article>
     </div>
 
     <ul class="statistics">

@@ -53,20 +53,24 @@ export class UploadService extends BaseService {
 
         return from(files).pipe(
             delay(100),
-            mergeMap((file, index) =>
-                this.getUploadToken(file.name).pipe(
+            mergeMap((file, index) => {
+                const timestamp = new Date().getTime();
+                const ary = file.name.split('.');
+                const name = ary.slice(0, -1).join('_') + timestamp + '.' + ary[ary.length - 1];
+
+                return this.getUploadToken(name).pipe(
                     map(token => ({
                         index,
                         obs: qiniu.upload(
                             file,
-                            file.name,
+                            name,
                             token,
                             { useCdnDomain: true },
                             { mimeType: ALLOW_UPLOAD_FILE_TYPES },
                         ),
                     })),
-                ),
-            ),
+                );
+            }),
             timeout(1000),
             map(engine => engine.obs.subscribe(this.createUploadObserver(engine.index))),
             mergeMapTo(this.result$.asObservable()),

@@ -40,10 +40,10 @@ export class HomeComponent implements OnInit {
     constructor(private _articleService: ArticleService, private _router: Router, private _route: ActivatedRoute) {}
 
     ngOnInit() {
-        this.launch();
+        this.initialModel();
     }
 
-    launch(): void {
+    initialModel(): void {
         this.articles = this._articleService.getArticlesOverview();
 
         this.hotArticles = this._articleService.getArticlesOverview({ rank: 'enjoy' });

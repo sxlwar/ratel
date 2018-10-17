@@ -11,6 +11,7 @@ export interface ArticleOverview {
     statistics: ArticleStatistics;
     summary: string;
     selected?: boolean; // 前端添加字段，用来实现某些效果；
+    avatar: string;
 }
 
 export interface Article extends ArticleOverview {
@@ -20,6 +21,15 @@ export interface Article extends ArticleOverview {
     isPublished?: boolean;
     isOriginal: boolean;
     statistics: ArticleStatistics;
+    userId: number;
+}
+
+export interface ArticleUpdateResponse {
+    isUpdated: boolean;
+}
+
+export interface ArticleDeleteResponse {
+    isDeleted: boolean;
 }
 
 export interface ArticleStatistics {

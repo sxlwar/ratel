@@ -39,3 +39,7 @@
         max-width: 80%;
     }
 }
+
+:host::ng-deep markdown img {
+    max-width: 100%;
+}

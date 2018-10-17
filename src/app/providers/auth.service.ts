@@ -37,7 +37,7 @@ export class AuthService extends BaseService {
 
     private readonly githubAuthURI = 'https://github.com/login/oauth/authorize';
 
-    private readonly storedUserId = 'userId';
+    private readonly storedUserId = 'githubId';
 
     private user$: BehaviorSubject<User> = new BehaviorSubject(null);
 
@@ -70,7 +70,7 @@ export class AuthService extends BaseService {
             .subscribe(user => {
                 this.user$.next(user);
 
-                this.storeUserId(user.id);
+                this.storeUserId(user.githubId);
             });
     }
 

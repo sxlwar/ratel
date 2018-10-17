@@ -19,7 +19,7 @@
     <div fxLayout="row wrap" class="form-field">
         <span>文章类型</span>
         <mat-checkbox *ngFor="let item of categories" [(ngModel)]="item.selected" (ngModelChange)="updateCategories()"
-            [name]="item.category" [ngModelOptions]="{standalone: true}">{{item.category}}</mat-checkbox>
+            [name]="item.category" [ngModelOptions]="{standalone: true}" [disabled]="isUpdate">{{item.category}}</mat-checkbox>
     </div>
     <mat-error *ngIf="categoryCtrl.invalid && categoryTouched">请至少选择一个和此文章相关的系列</mat-error>
 
@@ -34,8 +34,14 @@
         <ratel-editor (preview)="showPreview = !showPreview" [tip]="'文章内容长度最少300个字符'"></ratel-editor>
 
         <div class="submit">
-            <button mat-raised-button color="primary" (click)="publish(true)" [disabled]="!allowPublish()">立即发表</button>
-            <button mat-raised-button color="accent" (click)="publish(false)" [disabled]="!allowPublish()">保存</button>
+            <ng-container *ngIf="!isUpdate else updateBtnTpl">
+                <button mat-raised-button color="primary" (click)="publish(true)" [disabled]="!allowPublish()">立即发表</button>
+                <button mat-raised-button color="accent" (click)="publish(false)" [disabled]="!allowPublish()">保存</button>
+            </ng-container>
+
+            <ng-template #updateBtnTpl>
+                <button mat-raised-button color="primary" (click)="update()">更新</button>
+            </ng-template>
         </div>
     </div>
 

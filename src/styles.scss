@@ -20,7 +20,7 @@ ul {
 .global-snack {
     background-color: $active-primary;
     color: $active-color;
-    opacity: .8;
+    opacity: 0.8;
 }
 
 .ratel-form-field .mat-form-field-appearance-outline .mat-form-field-outline {
@@ -76,4 +76,9 @@ ul {
     .mat-stroked-button[disabled][disabled] {
         background-color: rgba($inactive-color, 0.8);
     }
+}
+
+.ratel-form-field .mat-input-element:disabled,
+.mat-form-field-appearance-outline.mat-form-field-disabled .mat-form-field-label {
+    color: rgba($active-bcg-primary, 0.5);
 }

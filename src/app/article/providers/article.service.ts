@@ -11,6 +11,7 @@ import {
     CreateArticleRequest,
     ArticleStatisticsUpdateRequest,
     SeriesOverviewRequest,
+    ArticleUpdateRequest,
 } from '../../interface/request.interface';
 import {
     ArticleOverview,
@@ -18,6 +19,7 @@ import {
     Article,
     ArticleStatistics,
     SeriesOverviewResponse,
+    ArticleUpdateResponse,
 } from '../../interface/response.interface';
 import { BaseService } from '../../providers/base.service';
 import { ErrorService } from '../../providers/error.service';
@@ -27,6 +29,8 @@ export class ArticleService extends BaseService {
     private readonly articlePath = 'article';
 
     private readonly statisticsPath = 'statistics';
+
+    private readonly updatePath = 'update';
 
     private readonly series = 'series';
 
@@ -78,9 +82,15 @@ export class ArticleService extends BaseService {
             .pipe(catchError(this._error.handleHttpError));
     }
 
-    handleCreateArticleResponse(response: Observable<CreateArticleResponse>): Subscription {
+    updateArticle(data: ArticleUpdateRequest): Observable<ArticleUpdateResponse> {
+        return this._http
+            .put<ArticleUpdateResponse>(this.completeApiUrl(this.articlePath, this.updatePath), data)
+            .pipe(catchError(this._error.handleHttpError));
+    }
+
+    handleCreateArticleResponse<T>(response: Observable<T>, message = '创建成功'): Subscription {
         return response.subscribe(_res => {
-            this._snake.open('创建成功', '', this.snakeBarConfig);
+            this._snake.open(message, '', this.snakeBarConfig);
         });
     }
 }

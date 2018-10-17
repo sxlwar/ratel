@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, OnDestroy } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import { EditorComponent } from '../../codemirror/editor/editor.component';
@@ -6,13 +6,18 @@ import { ArticleCategory } from '../../constant/constant';
 import { ArticleService } from '../providers/article.service';
 import { DeactivateGuard } from '../../interface/app.interface';
 import { of } from 'rxjs';
+import { User } from '../../auth/interface/auth.interface';
+import { AuthService } from '../../providers/auth.service';
+import { filter, takeWhile } from 'rxjs/operators';
+import { ActivatedRoute } from '@angular/router';
+import { Article } from 'src/app/interface/response.interface';
 
 @Component({
     selector: 'ratel-article-creation',
     templateUrl: './article-creation.component.html',
     styleUrls: ['./article-creation.component.scss'],
 })
-export class ArticleCreationComponent implements OnInit {
+export class ArticleCreationComponent implements OnInit, OnDestroy {
     form: FormGroup;
 
     categories: { category: string; selected: boolean }[] = [
@@ -30,20 +35,79 @@ export class ArticleCreationComponent implements OnInit {
 
     categoryTouched = false;
 
-    constructor(private _fb: FormBuilder, private _articleService: ArticleService) {
+    user: User;
+
+    isAlive = true;
+
+    isUpdate = false;
+
+    article: Article;
+
+    constructor(
+        private _fb: FormBuilder,
+        private _articleService: ArticleService,
+        private _authService: AuthService,
+        private _route: ActivatedRoute,
+    ) {
         this.initForm();
     }
 
-    ngOnInit() {}
+    ngOnInit() {
+        this._authService.userObs
+            .pipe(
+                filter(item => !!item),
+                takeWhile(() => this.isAlive),
+            )
+            .subscribe(user => (this.user = user));
+
+        this.checkUpdate();
+    }
+
+    private checkUpdate(): void {
+        const params = this._route.snapshot.params;
+
+        if (params.id) {
+            this.isUpdate = true;
+
+            this._articleService.getArticle(of(params.id)).subscribe(article => {
+                const { author, title, subtitle, category, isOriginal, content, userId } = article;
+
+                this.article = article;
+
+                this.titleCtrl.patchValue(title);
+                this.subtitleCtrl.patchValue(subtitle);
+                this.authorCtrl.patchValue(author);
+                this.isOriginalCtrl.patchValue(isOriginal);
+                this.form.disable();
+                this.categories.forEach(item => (item.selected = category.includes(item.category)));
+                this.updateCategories();
+                this.editor.data = content;
+            });
+        }
+    }
 
     publish(isPublished: boolean): void {
         const response = this._articleService.createArticle({
             ...this.form.value,
             isPublished,
-            content: this.editor.data,
+            content: this.getContent(),
+            userId: this.user.id,
         });
 
         this._articleService.handleCreateArticleResponse(response);
+    }
+
+    private getContent(): string {
+        return !!this.isOriginalCtrl.value
+            ? this.editor.data + '\n\r' + '转载请注明出处：www.hijavascript.com'
+            : this.editor.data;
+    }
+
+    update(): void {
+        this._articleService.handleCreateArticleResponse(
+            this._articleService.updateArticle({ id: this.article.id, content: this.editor.data }),
+            '更新成功',
+        );
     }
 
     private initForm(): void {
@@ -92,10 +156,6 @@ export class ArticleCreationComponent implements OnInit {
         return this.form.get('subtitle');
     }
 
-    get contentCtrl(): AbstractControl {
-        return this.form.get('content');
-    }
-
     get isPublishedCtrl(): AbstractControl {
         return this.form.get('isPublished');
     }
@@ -124,5 +184,9 @@ export class ArticleCreationComponent implements OnInit {
 
     canDeactivate(): DeactivateGuard[] {
         return [{ canDeactivate: of(false), message: '确定离开此页面吗？', title: '放弃编辑' }];
+    }
+
+    ngOnDestroy() {
+        this.isAlive = false;
     }
 }

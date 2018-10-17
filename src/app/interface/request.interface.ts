@@ -5,6 +5,7 @@ export interface CreateArticleRequest {
     isPublished: boolean;
     category: string[];
     isOriginal: boolean;
+    userId: number;
 }
 
 export interface ArticleUpdateRequest {

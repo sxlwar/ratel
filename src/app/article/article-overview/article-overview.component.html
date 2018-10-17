@@ -1,7 +1,7 @@
 <div fxLayout="row" (click)="view.next(article.id)" class="overview">
     <ul fxFlex=70%>
         <li fxLayout="row" class="create">
-            <img src="../../../assets/images/ratel.png" class="avatar">
+            <img [src]="article.avatar" class="avatar">
             <div fxLayout="column" fxLayoutAlign="center start" class="author">
                 <h4>{{article.author}}</h4>
                 <h6>{{article.createdAt}}</h6>
@@ -17,15 +17,15 @@
         <li class="statistics">
             <span>
                 <mat-icon fontIcon="icon-eyeo"></mat-icon>
-                <span>{{article.statistics?.enjoy}}</span>
+                <span>{{article.statistics?.view}}</span>
             </span>
             <span>
                 <mat-icon fontIcon="icon-give-five"></mat-icon>
-                <span>{{article.statistics?.view}}</span>
+                <span>{{article.statistics?.enjoy}}</span>
             </span>
         </li>
     </ul>
     <div fxFlex="30%" fxFlexOffset="14px" fxLayoutAlign="start center">
-        <img mat-card-image src="../../../assets/images/landscape_0.jpeg">
+        <img mat-card-image [src]="'../../../assets/images/' + image">
     </div>
 </div>

@@ -53,7 +53,16 @@ export class EditorComponent implements OnInit {
 
     fileSelected(list: FileList): void {
         this._upload.uploadImage(list).subscribe(images => {
-            this.data = this.data + '\n\r' + images.map(image => `![${image.name}](${image.url})`).join('\n\r');
+            const url = images.map(image => `![${image.name}](${image.url})`).join('\n\r');
+            const doc = this.CodeMirror.codeMirror.getDoc();
+            const cursor = doc.getCursor();
+            const line = doc.getLine(cursor.line);
+            const pos = {
+                line: cursor.line,
+                ch: line.length + 1,
+            };
+
+            doc.replaceRange('\n' + url + '\n', pos);
         });
     }
 }

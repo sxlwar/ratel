@@ -6,6 +6,7 @@ export interface User {
     avatar: string; // avatar url;
     isAdmin: boolean;
     storedArticles: number[];
+    githubId: number;
 }
 
 export interface GithubAuthConfig {
