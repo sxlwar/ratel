@@ -42,7 +42,7 @@ export class NavMenuComponent implements OnInit {
     private checkActivateTopic(): void {
         const paths = location.pathname.split('/').filter(item => !!item);
 
-        if (paths.includes('home') || paths.includes('create')) {
+        if (paths.length === 0 || paths.includes('home') || paths.includes('create')) {
             this.topics[0].selected = true;
         } else {
             this.topics.forEach(item => (item.selected = paths.includes(item.topic)));
