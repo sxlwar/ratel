@@ -20,7 +20,7 @@
             "repo": "git@gitee.com:sxlwar/ratel.git",
             "path": "/www/web/production",
             "ssh_options": "StrictHostKeyChecking=no",
-            "post-deploy": "npm install --production && pm2 reload ecosystem.json --env production && npm run build",
+            "post-deploy": "npm install --production && pm2 reload ecosystem.json --env production && npm run build --aot=false --build-optimizer=false",
             "env": {
                 "NODE_ENV": "production"
             }
