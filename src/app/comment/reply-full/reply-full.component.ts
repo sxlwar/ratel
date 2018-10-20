@@ -32,6 +32,8 @@ export class ReplyFullComponent extends ReplyBaseComponent implements OnInit {
 
     user: User;
 
+    fileDropOver = false; // TODO drop to upload;
+
     constructor(
         private _route: ActivatedRoute,
         public commentService: CommentService,

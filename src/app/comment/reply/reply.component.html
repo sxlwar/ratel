@@ -6,7 +6,7 @@
                 <img [src]="user.avatar">
             </ng-template>
         </div>
-        <div [attr.contenteditable]="contentEditable" #trigger (focus)="onFocus($event)">{{placeholder}}</div>
+        <div [attr.contenteditable]="contentEditable" #trigger (focus)="onFocus()">{{placeholder}}</div>
         <mat-icon *ngIf="isComment && !contentEditable" fontIcon="icon-closecircle" (click)="closeReply()" class="close-btn"></mat-icon>
     </div>
 

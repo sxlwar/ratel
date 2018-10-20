@@ -1,5 +1,5 @@
 export const environment = {
     production: true,
-    url: 'http://www.hijavascript.com',
+    api: 'http://www.hijavascript.com/api/',
     name: 'prod',
 };

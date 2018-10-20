@@ -1,0 +1,29 @@
+{
+    "apps": [
+        {
+            "name": "ratel",
+            "script": "",
+            "env": {
+                "COMMON_VARIABLE": "true"
+            },
+            "env_production": {
+                "NODE_ENV": "production"
+            }
+        }
+    ],
+    "deploy": {
+        "production": {
+            "user": "yang",
+            "host": ["hijavascript.com"],
+            "port": "22",
+            "ref": "origin/master",
+            "repo": "git@gitee.com:sxlwar/ratel.git",
+            "path": "/www/web/production",
+            "ssh_options": "StrictHostKeyChecking=no",
+            "post-deploy": "npm install && pm2 reload ecosystem.json --env production && npm run build",
+            "env": {
+                "NODE_ENV": "production"
+            }
+        }
+    }
+}

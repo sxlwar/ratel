@@ -78,6 +78,11 @@ article {
     padding: 2rem 15%;
 }
 
-:host::ng-deep markdown img {
-    max-width: 100%;
+:host::ng-deep markdown {
+    img {
+        max-width: 100%;
+    }
+    * {
+        white-space: normal;
+    }
 }
