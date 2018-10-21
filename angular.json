@@ -25,7 +25,17 @@
                             "src/styles.scss",
                             "src/icon.scss"
                         ],
-                        "scripts": ["node_modules/marked/lib/marked.js", "node_modules/prismjs/prism.js"]
+                        "scripts": [
+                            "node_modules/marked/lib/marked.js",
+                            "node_modules/prismjs/prism.js",
+                            "node_modules/prismjs/components/prism-css.min.js",
+                            "node_modules/prismjs/components/prism-typescript.min.js",
+                            "node_modules/prismjs/components/prism-javascript.min.js",
+                            "node_modules/prismjs/components/prism-bash.min.js",
+                            "node_modules/prismjs/components/prism-less.min.js",
+                            "node_modules/prismjs/components/prism-scss.min.js",
+                            "node_modules/prismjs/components/prism-json.min.js"
+                        ]
                     },
                     "configurations": {
                         "production": {
@@ -35,15 +45,15 @@
                                     "with": "src/environments/environment.prod.ts"
                                 }
                             ],
-                            "optimization": false,
+                            "optimization": true,
                             "outputHashing": "all",
                             "sourceMap": false,
-                            "extractCss": false,
+                            "extractCss": true,
                             "namedChunks": false,
                             "aot": true,
                             "extractLicenses": true,
                             "vendorChunk": false,
-                            "buildOptimizer": false
+                            "buildOptimizer": true
                         },
                         "test": {
                             "fileReplacements": [

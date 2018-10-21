@@ -20,6 +20,6 @@ export class ErrorService extends BaseService {
             this._snack.open(exception.message, '', this.snakeBarConfig);
         }
 
-        return throwError('Something bad happened. Pleas try again later.');
+        return throwError('Something bad happened. Please try again later.');
     };
 }
