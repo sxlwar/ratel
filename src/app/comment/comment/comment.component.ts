@@ -2,7 +2,7 @@ import { Component, OnDestroy, OnInit, Input } from '@angular/core';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 
 import { combineLatest, merge, Observable, Subject } from 'rxjs';
-import { bufferTime, filter, map, pluck, startWith, takeWhile, tap } from 'rxjs/operators';
+import { bufferTime, filter, map, pluck, startWith, takeWhile, share } from 'rxjs/operators';
 
 import { User } from '../../auth/interface/auth.interface';
 import { CommentElement, Reply } from '../../interface/response.interface';
@@ -75,6 +75,7 @@ export class CommentComponent implements OnInit, OnDestroy {
                 return data;
             }),
             takeWhile(() => this.isAlive),
+            share(),
         );
 
         this.commentList = comment.pipe(pluck('comments'));

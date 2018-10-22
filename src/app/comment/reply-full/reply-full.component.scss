@@ -20,16 +20,15 @@
     }
 }
 
-.file-over {
-    box-shadow: 0px 0px 5px 0px $active-deep-green;
-    position: relative;
-    &::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        right: 0;
-        bottom: 0;
-        left: 0;
-        background-image: url('../../../assets/images/ratel.png') no-repeat;
-    }
-}
+// .file-over {
+//     box-shadow: 0px 0px 5px 0px $active-deep-green;
+//     position: relative;
+//     &::before {
+//         content: '';
+//         position: absolute;
+//         top: 0;
+//         right: 0;
+//         bottom: 0;
+//         left: 0;
+//     }
+// }

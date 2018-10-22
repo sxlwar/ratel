@@ -3,9 +3,9 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 
 import { combineLatest, Observable, zip } from 'rxjs';
-import { filter, map, startWith, take, takeWhile } from 'rxjs/operators';
+import { filter, map, share, take, takeWhile, tap } from 'rxjs/operators';
 
-import { StoreOperate, User } from '../../auth/interface/auth.interface';
+import { User } from '../../auth/interface/auth.interface';
 import { Article } from '../../interface/response.interface';
 import { AuthService, StoreAction } from '../../providers/auth.service';
 import { ArticleService } from '../providers/article.service';
@@ -32,7 +32,7 @@ export class ArticleComponent implements OnInit, OnDestroy {
 
     user: Observable<User>;
 
-    isStored: Observable<boolean>;
+    private isStored: Observable<boolean>;
 
     storeIcon: Observable<string>;
 
@@ -58,7 +58,7 @@ export class ArticleComponent implements OnInit, OnDestroy {
     initialModel() {
         const articleId = this._route.paramMap.pipe(map(param => param.get('id')));
 
-        this.article = this._articleService.getArticle(articleId);
+        this.article = this._articleService.getArticle(articleId).pipe(share());
 
         this.article
             .pipe(
