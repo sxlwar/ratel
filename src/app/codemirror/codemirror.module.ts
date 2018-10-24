@@ -19,6 +19,6 @@ import { FlexLayoutModule } from '@angular/flex-layout';
         FlexLayoutModule,
     ],
     declarations: [CodemirrorComponent, EditorComponent],
-    exports: [CodemirrorComponent, EditorComponent],
+    exports: [EditorComponent],
 })
 export class CodemirrorModule {}

@@ -1,5 +1,7 @@
+import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { MatDialogRef } from '@angular/material';
+import { Router } from '@angular/router';
+
 import { AuthService } from '../../providers/auth.service';
 
 @Component({
@@ -8,13 +10,20 @@ import { AuthService } from '../../providers/auth.service';
     styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent implements OnInit {
-    constructor(private _dialogRef: MatDialogRef<LoginComponent>, private _authService: AuthService) {}
+    constructor(
+        private _authService: AuthService,
+        private location: Location,
+        private _router: Router,
+    ) {}
 
     ngOnInit() {}
 
     login(method?: string): void {
-        this._authService.getGithubAddress().subscribe(domain => {
-            location.href = domain;
+        const redirectUrl = this._router.url;
+
+        this._authService.getGithubAddress(redirectUrl).subscribe(domain => {
+            // location.href = domain;
+            this.location.go(domain);
         });
     }
 }

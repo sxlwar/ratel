@@ -1,4 +1,5 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, PLATFORM_ID, Inject } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
 
 import { User } from '../../auth/interface/auth.interface';
@@ -34,12 +35,17 @@ export class ReplyFullComponent extends ReplyBaseComponent implements OnInit {
 
     fileDropOver = false; // TODO drop to upload;
 
+    isBrowser = false;
+
     constructor(
         private _route: ActivatedRoute,
         public commentService: CommentService,
         private _authService: AuthService,
+        @Inject(PLATFORM_ID) private _platformId: Object,
     ) {
         super(commentService);
+
+        this.isBrowser = isPlatformBrowser(this._platformId);
     }
 
     ngOnInit() {

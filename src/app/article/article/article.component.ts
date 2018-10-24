@@ -1,9 +1,10 @@
 import { animate, style, transition, trigger } from '@angular/animations';
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit, PLATFORM_ID, Inject } from '@angular/core';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
+import { isPlatformBrowser } from '@angular/common';
 
 import { combineLatest, Observable, zip } from 'rxjs';
-import { filter, map, share, take, takeWhile, tap } from 'rxjs/operators';
+import { filter, map, share, take, takeWhile } from 'rxjs/operators';
 
 import { User } from '../../auth/interface/auth.interface';
 import { Article } from '../../interface/response.interface';
@@ -38,12 +39,17 @@ export class ArticleComponent implements OnInit, OnDestroy {
 
     tooltip: Observable<string>;
 
+    isBrowser = false;
+
     constructor(
         private _router: Router,
         private _route: ActivatedRoute,
         private _articleService: ArticleService,
         private _authService: AuthService,
-    ) {}
+        @Inject(PLATFORM_ID) private _platformId: Object,
+    ) {
+        this.isBrowser = isPlatformBrowser(this._platformId);
+    }
 
     ngOnInit() {
         this.initialModel();

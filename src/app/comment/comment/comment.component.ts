@@ -1,5 +1,6 @@
-import { Component, OnDestroy, OnInit, Input } from '@angular/core';
+import { Component, OnDestroy, OnInit, Input, Inject, PLATFORM_ID } from '@angular/core';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
+import { isPlatformBrowser } from '@angular/common';
 
 import { combineLatest, merge, Observable, Subject } from 'rxjs';
 import { bufferTime, filter, map, pluck, startWith, takeWhile, share } from 'rxjs/operators';
@@ -32,7 +33,14 @@ export class CommentComponent implements OnInit, OnDestroy {
 
     private updateEnjoy$: Subject<EnjoyUpdateInfo> = new Subject();
 
-    constructor(private _router: Router, private _route: ActivatedRoute, private _commentService: CommentService) {}
+    private isBrowser = isPlatformBrowser(this._platformId);
+
+    constructor(
+        private _router: Router,
+        private _route: ActivatedRoute,
+        private _commentService: CommentService,
+        @Inject(PLATFORM_ID) private _platformId: Object,
+    ) {}
 
     ngOnInit() {
         const refreshWhenRouterParamChanged = this._router.events.pipe(filter(event => event instanceof NavigationEnd));

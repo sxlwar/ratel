@@ -1,6 +1,6 @@
 import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
+import { BrowserModule, BrowserTransferStateModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AppComponent } from './app.component';
@@ -12,14 +12,16 @@ import { ErrorService } from './providers/error.service';
 import { ArticleCreateGuard } from './providers/guard.service';
 import { UploadService } from './providers/upload.service';
 import { SharedModule } from './shared/shared.module';
+import { TransferComponent } from './transfer/transfer.component';
 
 @NgModule({
-    declarations: [AppComponent],
+    declarations: [AppComponent, TransferComponent],
     imports: [
         AppRoutingModule,
         ArticleModule,
         BrowserAnimationsModule,
-        BrowserModule,
+        BrowserModule.withServerTransition({ appId: 'static-app'}),
+        BrowserTransferStateModule,
         HomeModule,
         HttpClientModule,
         SharedModule,

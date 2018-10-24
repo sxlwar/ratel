@@ -1,5 +1,6 @@
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Location } from '@angular/common';
 
 import { NavItem } from '../interface/tool.interface';
 import { ArticleCategory } from '../../constant/constant';
@@ -30,7 +31,7 @@ export class NavMenuComponent implements OnInit {
     @Output()
     topicChange: EventEmitter<NavItem> = new EventEmitter();
 
-    constructor() {}
+    constructor(private location: Location) {}
 
     ngOnInit() {
         this.checkActivateTopic();
@@ -40,7 +41,7 @@ export class NavMenuComponent implements OnInit {
      * 进入或用户刷新页面时检查当前页面的所处路径
      */
     private checkActivateTopic(): void {
-        const paths = location.pathname.split('/').filter(item => !!item);
+        const paths = this.location.path().split('/').filter(item => !!item);
 
         if (paths.length === 0 || paths.includes('home') || paths.includes('create')) {
             this.topics[0].selected = true;

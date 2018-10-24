@@ -13,7 +13,7 @@
                 "build": {
                     "builder": "@angular-devkit/build-angular:browser",
                     "options": {
-                        "outputPath": "dist",
+                        "outputPath": "dist/browser",
                         "index": "src/index.html",
                         "main": "src/main.ts",
                         "polyfills": "src/polyfills.ts",
@@ -77,6 +77,14 @@
                         "test": {
                             "browserTarget": "ratel:build:test"
                         }
+                    }
+                },
+                "server": {
+                    "builder": "@angular-devkit/build-angular:server",
+                    "options": {
+                        "outputPath": "dist/server",
+                        "main": "src/main.server.ts",
+                        "tsConfig": "src/tsconfig.server.json"
                     }
                 },
                 "extract-i18n": {
