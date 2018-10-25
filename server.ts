@@ -17,7 +17,7 @@ enableProdMode();
 // Express server
 const app = express();
 
-const PORT = process.env.PORT || 4000;
+const PORT = process.env.PORT || 4200;
 const DIST_FOLDER = join(process.cwd(), 'dist');
 
 // patch window env
@@ -25,6 +25,10 @@ const tpl = join(DIST_FOLDER, 'browser', 'index.html');
 const win = domino.createWindow(tpl);
 
 global['navigator'] = win.navigator;
+global['document'] = win.document;
+global['window'] = win.window;
+global['location'] = win.location;
+global['localStorage'] = win.localStorage;
 
 // Our index.html we'll use as our template
 const template = readFileSync(join(DIST_FOLDER, 'browser', 'index.html'), 'utf-8').toString();

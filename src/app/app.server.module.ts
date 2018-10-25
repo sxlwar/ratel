@@ -4,14 +4,15 @@ import { ModuleMapLoaderModule } from '@nguniversal/module-map-ngfactory-loader'
 
 import { AppModule } from './app.module';
 import { AppComponent } from './app.component';
-import { HTTP_INTERCEPTORS } from '@angular/common/http';
-import { UniversalInterceptorService } from './providers/universal-interceptor.service';
+import { FlexLayoutServerModule } from '@angular/flex-layout/server';
+// import { HTTP_INTERCEPTORS } from '@angular/common/http';
+// import { UniversalInterceptorService } from './providers/universal-interceptor.service';
 
 @NgModule({
-    imports: [AppModule, ServerModule, ModuleMapLoaderModule, ServerTransferStateModule],
+    imports: [AppModule, ServerModule, ModuleMapLoaderModule, ServerTransferStateModule, FlexLayoutServerModule],
     bootstrap: [AppComponent],
-    providers: [
-        {provide: HTTP_INTERCEPTORS, useClass: UniversalInterceptorService, multi: true}
-    ]
+    // providers: [
+    //     {provide: HTTP_INTERCEPTORS, useClass: UniversalInterceptorService, multi: true}
+    // ]
 })
 export class AppServerModule {}

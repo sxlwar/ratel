@@ -12,6 +12,7 @@ import { ErrorService } from './providers/error.service';
 import { ArticleCreateGuard } from './providers/guard.service';
 import { UploadService } from './providers/upload.service';
 import { SharedModule } from './shared/shared.module';
+
 import { TransferComponent } from './transfer/transfer.component';
 
 @NgModule({
@@ -20,7 +21,7 @@ import { TransferComponent } from './transfer/transfer.component';
         AppRoutingModule,
         ArticleModule,
         BrowserAnimationsModule,
-        BrowserModule.withServerTransition({ appId: 'static-app'}),
+        BrowserModule.withServerTransition({ appId: 'static-app' }),
         BrowserTransferStateModule,
         HomeModule,
         HttpClientModule,

@@ -84,7 +84,15 @@
                     "options": {
                         "outputPath": "dist/server",
                         "main": "src/main.server.ts",
-                        "tsConfig": "src/tsconfig.server.json"
+                        "tsConfig": "src/tsconfig.server.json",
+                        "fileReplacements": [
+                            {
+                                "replace": "src/environments/environment.ts",
+                                "with": "src/environments/environment.prod.ts"
+                            }
+                        ],
+                        "optimization": true,
+                        "sourceMap": false
                     }
                 },
                 "extract-i18n": {

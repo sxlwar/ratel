@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { Injectable, Inject, PLATFORM_ID } from '@angular/core';
 import { MatSnackBar } from '@angular/material';
 import { ActivatedRoute } from '@angular/router';
 
@@ -12,6 +12,8 @@ import { StoreRequest } from '../interface/request.interface';
 import { BookmarkResponse, LogoutResponse, StoreResponse } from '../interface/response.interface';
 import { BaseService } from './base.service';
 import { ErrorService } from './error.service';
+import { isPlatformBrowser } from '@angular/common';
+import { environment } from '../../environments/environment';
 
 export enum StoreAction {
     ADD = 'add',
@@ -43,11 +45,14 @@ export class AuthService extends BaseService {
 
     userObs: Observable<User>;
 
+    isBrowser = isPlatformBrowser(this._platformId);
+
     constructor(
         private _http: HttpClient,
         private _route: ActivatedRoute,
         private _error: ErrorService,
         private _snake: MatSnackBar,
+        @Inject(PLATFORM_ID) private _platformId: Object,
     ) {
         super();
 
@@ -83,7 +88,7 @@ export class AuthService extends BaseService {
     }
 
     private getUserId(): number | undefined {
-        return +localStorage.getItem(this.storedUserId);
+        return this.isBrowser ? +localStorage.getItem(this.storedUserId) : null;
     }
 
     /**
@@ -122,12 +127,13 @@ export class AuthService extends BaseService {
      * 重定向地址使用 location.href， 这样用户登录后还会访问到原来的页面。
      */
     getGithubAddress(redirect: string): Observable<string> {
+        const host = environment.production ? 'http://www.hijavascript.com' : 'http://localhost:4200';
+
         return this._http.get<GithubAuthConfig>(this.completeApiUrl(this.path, this.githubConfigPath)).pipe(
             map(
                 config =>
-                    `${this.githubAuthURI}?client_id=${config.clientId}&redirect_uri=${redirect}&scope=user&state=${
-                        config.state
-                    }`,
+                    `${this.githubAuthURI}?client_id=${config.clientId}&redirect_uri=${host +
+                        redirect}&scope=user&state=${config.state}`,
             ),
             catchError(this._error.handleHttpError),
         );
