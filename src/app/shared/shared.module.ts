@@ -17,6 +17,7 @@ import {
     MatSelectModule,
     MatSnackBarModule,
     MatSortModule,
+    MatProgressSpinnerModule,
     MatTableModule,
     MatTooltipModule,
 } from '@angular/material';
@@ -42,6 +43,7 @@ import { ToolModule } from '../tool/tool.module';
         MatSelectModule,
         MatSnackBarModule,
         MatSortModule,
+        MatProgressSpinnerModule,
         MatTableModule,
         MatTooltipModule,
         ReactiveFormsModule,

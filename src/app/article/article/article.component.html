@@ -1,43 +1,40 @@
-<ng-container *ngIf="isBrowser">
-    <div *ngIf="article | async as data" class="article">
-        <div class="content">
-            <h2>{{data.title}}</h2>
-            <h4>{{data.subtitle}}</h4>
-            <ul fxLayoutAlign="row center" class="info">
-                <li>作者：{{data.author}}</li>
-                <li>创建时间：{{data.createdAt}}</li>
-                <li [hidden]="!data.updatedAt">更新时间：{{data.updatedAt}}</li>
-                <li [hidden]="!data.isOriginal">
-                    <ratel-tag content="原创"></ratel-tag>
-                    转载请注明出处：www.hijavascript.com
-                </li>
-                <li *ngIf="(user | async)?.id === data.userId">
-                    <button mat-raised-button [routerLink]="['/create', {id: data.id}]" color="primary">更新</button>
-                </li>
-            </ul>
-
-            <article>
-                <markdown [data]="data.content"></markdown>
-            </article>
-        </div>
-
-        <ul class="statistics">
-            <div [@giveMeFive]="like">{{like}}</div>
-
-            <li fxLayoutAlign="center center" id="give-me-five">
-                <mat-icon fontIcon="icon-give-five" (click)="addLike(data.statistics.id)"></mat-icon>
+<div *ngIf="article | async as data" class="article">
+    <div class="content">
+        <h2>{{data.title}}</h2>
+        <h4>{{data.subtitle}}</h4>
+        <ul fxLayoutAlign="row center" class="info">
+            <li>作者：{{data.author}}</li>
+            <li>创建时间：{{data.createdAt}}</li>
+            <li [hidden]="!data.updatedAt">更新时间：{{data.updatedAt}}</li>
+            <li [hidden]="!data.isOriginal">
+                <ratel-tag content="原创"></ratel-tag>
+                转载请注明出处：www.hijavascript.com
             </li>
-
-            <li *ngIf="!!(user | async)" fxLayout="column" fxLayoutAlign="center center" id="store">
-                <mat-icon [fontIcon]="storeIcon | async" [matTooltip]="tooltip | async" (click)="storeArticle()"></mat-icon>
+            <li *ngIf="(user | async)?.id === data.userId">
+                <button mat-raised-button [routerLink]="['/create', {id: data.id}]" color="primary">更新</button>
             </li>
         </ul>
+
+        <article >
+            <markdown [data]="data.content" *ratelShellNoRender></markdown>
+        </article>
     </div>
 
-    <div class="discuss">
-        <ratel-reply [isComment]="true" (switchTo)="switchToImageTextModel()" [user]="user | async"></ratel-reply>
+    <ul class="statistics">
+        <div [@giveMeFive]="like">{{like}}</div>
 
-        <ratel-comment [user]="user | async"></ratel-comment>
-    </div>
+        <li fxLayoutAlign="center center" id="give-me-five">
+            <mat-icon fontIcon="icon-give-five" (click)="addLike(data.statistics.id)"></mat-icon>
+        </li>
 
-</ng-container>
+        <li *ngIf="!!(user | async)" fxLayout="column" fxLayoutAlign="center center" id="store">
+            <mat-icon [fontIcon]="storeIcon | async" [matTooltip]="tooltip | async" (click)="storeArticle()"></mat-icon>
+        </li>
+    </ul>
+</div>
+
+<div class="discuss">
+    <ratel-reply [isComment]="true" (switchTo)="switchToImageTextModel()" [user]="user | async"></ratel-reply>
+
+    <ratel-comment [user]="user | async"></ratel-comment>
+</div>

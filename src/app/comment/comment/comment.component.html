@@ -7,7 +7,7 @@
             <ratel-operate-comment [comment]="comment" (delete)="onDelete(comment)" [user]="user"></ratel-operate-comment>
         </div>
 
-        <markdown [data]="comment.content" class="content"></markdown>
+        <markdown [data]="comment.content" class="content" *ratelShellNoRender></markdown>
 
         <ul *ngIf="!!comment.replies.length" class="reply-area">
             <li *ngFor="let reply of comment.replies">
@@ -24,7 +24,7 @@
                     </span>
                 </p>
 
-                <markdown [data]="reply.content" class="content"></markdown>
+                <markdown [data]="reply.content" class="content" *ratelShellNoRender></markdown>
             </li>
         </ul>
 

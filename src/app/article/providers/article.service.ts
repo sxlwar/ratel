@@ -45,6 +45,7 @@ export class ArticleService extends BaseService {
     getArticlesOverview(conditions: Partial<ArticleSearchRequest> = {}): Observable<ArticleOverview[]> {
         const defaultCondition: Partial<ArticleSearchRequest> = { limit: 500 };
         const condition = { ...defaultCondition, ...conditions, isOverview: true };
+        console.log(this.completeApiUrl(this.articlePath, CRUDVar.SEARCH));
 
         return this._http
             .post<ArticleOverview[]>(this.completeApiUrl(this.articlePath, CRUDVar.SEARCH), condition)

@@ -11,7 +11,7 @@
             <h3>{{article.title}}</h3>
         </li>
         <li class="summary">
-            <markdown [data]="article.summary"></markdown>
+            <markdown [data]="article.summary" *ratelShellNoRender></markdown>
             <span>更多内容···</span>
         </li>
         <li class="statistics">

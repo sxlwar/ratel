@@ -47,6 +47,6 @@
 
 
     <div *ngIf="showPreview" fxFlex="48%" fxFlexOffset="4%" class="preview">
-        <markdown [data]="editor.data"></markdown>
+        <markdown [data]="editor.data" *ratelShellNoRender></markdown>
     </div>
 </div>
