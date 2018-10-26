@@ -15,9 +15,11 @@
             </li>
         </ul>
 
-        <article >
-            <markdown [data]="data.content" *ratelShellNoRender></markdown>
+        <article *ratelShellNoRender>
+            <markdown [data]="data.content"></markdown>
         </article>
+
+        <article *ratelShellRender>{{data.content}}</article>
     </div>
 
     <ul class="statistics">
@@ -33,7 +35,7 @@
     </ul>
 </div>
 
-<div class="discuss">
+<div class="discuss" *ratelShellNoRender>
     <ratel-reply [isComment]="true" (switchTo)="switchToImageTextModel()" [user]="user | async"></ratel-reply>
 
     <ratel-comment [user]="user | async"></ratel-comment>
