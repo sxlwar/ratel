@@ -25,6 +25,6 @@ export class ErrorService extends BaseService {
             }
         }
 
-        return throwError(exception.message);
+        return throwError(error); // 这个错误不要随便抛，否则会导致服务端渲染时后台代码报错： can't read ngOriginError of undefined;
     };
 }

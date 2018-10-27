@@ -56,6 +56,7 @@ export class ArticleService extends BaseService {
                 .pipe(catchError(this._error.handleHttpError)),
             this.articlePath,
             CRUDVar.SEARCH,
+            JSON.stringify(condition),
         );
     }
 
