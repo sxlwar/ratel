@@ -41,3 +41,11 @@
         }
     }
 }
+@media (max-width: 768px) {
+    .main-content {
+        max-width: 100% !important;
+    }
+    .popular-articles {
+        display: none;
+    }
+}

@@ -1,7 +1,7 @@
 <ratel-intro></ratel-intro>
 
 <div fxLayout="row" id="article-overview">
-    <div fxFlex="65%">
+    <div fxFlex="65%" class="main-content">
         <ratel-article-overview *ngFor="let item of articles | async" [article]="item" (view)="showArticle($event)"></ratel-article-overview>
     </div>
     <div fxFlex="30%" fxFlexOffset="5%" class="popular-articles">

@@ -1,9 +1,9 @@
 <div fxLayout="row">
-    <div fxFlex="25%">
+    <div fxFlex="25%" class="statistics">
         <ratel-topic-overview [topic]="topic | async" [statistics]="statistics | async"></ratel-topic-overview>
     </div>
 
-    <div fxFlex="70%" fxFlexOffset="5%">
+    <div fxFlex="70%" fxFlexOffset="5%" class="main-content">
         <ratel-article-overview *ngFor="let item of articles | async" [article]="item" (view)="showArticle($event)"></ratel-article-overview>
     </div>
 </div>

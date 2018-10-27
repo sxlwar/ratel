@@ -26,3 +26,22 @@ a {
         width: 100%;
     }
 }
+
+.menu {
+    display: none;
+    color: $inactive-color;
+    font-size: 32px;
+    &:hover {
+        color: $active-color;
+    }
+}
+
+@media (max-width: 1200px) {
+    .bar {
+        display: none;
+    }
+
+    .menu {
+        display: block;
+    }
+}
