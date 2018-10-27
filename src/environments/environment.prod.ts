@@ -1,5 +1,5 @@
 export const environment = {
     production: true,
-    api: 'http://www.hijavascript.com/api/',
+    domain: 'http://www.hijavascript.com',
     name: 'prod',
 };

@@ -3,7 +3,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 
 import { combineLatest, Observable, zip } from 'rxjs';
-import { filter, map, share, take, takeWhile } from 'rxjs/operators';
+import { filter, map, takeWhile, tap } from 'rxjs/operators';
 
 import { User } from '../../auth/interface/auth.interface';
 import { Article } from '../../interface/response.interface';
@@ -43,8 +43,7 @@ export class ArticleComponent implements OnInit, OnDestroy {
         private _route: ActivatedRoute,
         private _articleService: ArticleService,
         private _authService: AuthService,
-    ) {
-    }
+    ) {}
 
     ngOnInit() {
         this.initialModel();
@@ -59,14 +58,9 @@ export class ArticleComponent implements OnInit, OnDestroy {
     initialModel() {
         const articleId = this._route.paramMap.pipe(map(param => param.get('id')));
 
-        this.article = this._articleService.getArticle(articleId).pipe(share());
-
-        this.article
-            .pipe(
-                map(article => article.statistics.enjoy),
-                take(1),
-            )
-            .subscribe(like => (this.like = like));
+        this.article = this._articleService
+            .getArticle(articleId)
+            .pipe(tap(article => (this.like = article.statistics.enjoy)));
 
         this.user = this._authService.userObs;
 

@@ -11,6 +11,6 @@ export class BaseService {
     };
 
     protected completeApiUrl(...paths: string[]): string {
-        return environment.api + paths.join('/');
+        return environment.domain + '/api/' + paths.join('/');
     }
 }

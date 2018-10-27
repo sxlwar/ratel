@@ -127,12 +127,10 @@ export class AuthService extends BaseService {
      * 重定向地址使用 location.href， 这样用户登录后还会访问到原来的页面。
      */
     getGithubAddress(redirect: string): Observable<string> {
-        const host = environment.production ? 'http://www.hijavascript.com' : 'http://localhost:4200';
-
         return this._http.get<GithubAuthConfig>(this.completeApiUrl(this.path, this.githubConfigPath)).pipe(
             map(
                 config =>
-                    `${this.githubAuthURI}?client_id=${config.clientId}&redirect_uri=${host +
+                    `${this.githubAuthURI}?client_id=${config.clientId}&redirect_uri=${environment.domain +
                         redirect}&scope=user&state=${config.state}`,
             ),
             catchError(this._error.handleHttpError),
