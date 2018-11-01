@@ -14,7 +14,7 @@ export class LoginComponent implements OnInit {
     ngOnInit() {}
 
     login(method?: string): void {
-        const path = this._router.url;
+        const path = this._router.url.split('?')[0];
 
         this._authService.getGithubAddress(path).subscribe(domain => {
             location.href = domain;

@@ -5,7 +5,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { TransferState, makeStateKey } from '@angular/platform-browser';
 
 import { Observable, Subscription, of } from 'rxjs';
-import { catchError, mergeMap, switchMap, tap } from 'rxjs/operators';
+import { catchError, mergeMap, switchMap, tap, filter } from 'rxjs/operators';
 
 import { CRUDVar } from '../../constant/constant';
 import {
@@ -76,6 +76,7 @@ export class ArticleService extends BaseService {
 
     getArticle(idObs: Observable<string>): Observable<Article> {
         return idObs.pipe(
+            filter(id => id != null),
             mergeMap(id =>
                 this.universalRequest(
                     this._http

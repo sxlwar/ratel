@@ -56,7 +56,9 @@ export class AuthService extends BaseService {
     ) {
         super();
 
-        this.monitorGithubUserInfo();
+        if (this.isBrowser) {
+            this.monitorGithubUserInfo();
+        }
 
         this.userObs = this.user$.asObservable();
     }

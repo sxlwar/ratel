@@ -1,5 +1,6 @@
 import { animate, state, style, transition, trigger } from '@angular/animations';
-import { Component, EventEmitter, OnDestroy, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, OnDestroy, OnInit, Output, PLATFORM_ID, Inject } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
 import { FormControl } from '@angular/forms';
 import { MatDialog } from '@angular/material';
 import { Router } from '@angular/router';
@@ -39,7 +40,14 @@ export class NavComponent implements OnInit, OnDestroy {
 
     isAlive = true;
 
-    constructor(private dialog: MatDialog, private router: Router, private _authService: AuthService) {}
+    isBrowser = isPlatformBrowser(this._platformId);
+
+    constructor(
+        private dialog: MatDialog,
+        private router: Router,
+        private _authService: AuthService,
+        @Inject(PLATFORM_ID) private _platformId: object,
+    ) {}
 
     ngOnInit() {
         this.launch();

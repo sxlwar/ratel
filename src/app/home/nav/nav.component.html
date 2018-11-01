@@ -14,20 +14,22 @@
 
             <mat-icon fontIcon="icon-search" (click)="showSearchInput = !showSearchInput; inputState.next(showSearchInput)"></mat-icon>
 
-            <button *ngIf="!user; else avatarBlock" mat-raised-button (click)="openDialog()">登录</button>
+            <ng-container *ngIf="isBrowser">
+                <button *ngIf="!user; else avatarBlock" mat-raised-button (click)="openDialog()">登录</button>
 
-            <ng-template #avatarBlock>
-                <img [matMenuTriggerFor]="menu" [src]="user.avatar">
+                <ng-template #avatarBlock>
+                    <img [matMenuTriggerFor]="menu" [src]="user.avatar">
 
-                <span>{{user.name || user.account}}</span>
+                    <span>{{user.name || user.account}}</span>
 
-                <mat-icon fontIcon="icon-edit" [routerLink]="['/','create']" routerLinkActive="editing" class="edit"></mat-icon>
+                    <mat-icon fontIcon="icon-edit" [routerLink]="['/','create']" routerLinkActive="editing" class="edit"></mat-icon>
 
-                <mat-menu #menu="matMenu" yPosition="below" overlapTrigger="false">
-                    <button mat-menu-item routerLink="bookmark">收藏夹</button>
-                    <button mat-menu-item (click)="logout()">退出</button>
-                </mat-menu>
-            </ng-template>
+                    <mat-menu #menu="matMenu" yPosition="below" overlapTrigger="false">
+                        <button mat-menu-item routerLink="bookmark">收藏夹</button>
+                        <button mat-menu-item (click)="logout()">退出</button>
+                    </mat-menu>
+                </ng-template>
+            </ng-container>
         </div>
     </div>
 </nav>
