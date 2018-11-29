@@ -21,7 +21,8 @@ th {
 tr {
     cursor: pointer;
     &:hover {
-        background: #fff;
+        // background: #fff;
+        // CANCEL SET HOVER STYLE
         td {
             color: #000;
         }
