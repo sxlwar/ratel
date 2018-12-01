@@ -14,15 +14,12 @@
         li {
             margin: 1em;
             a {
+                color: $active-bcg-primary;
                 margin: 0 0 0 1em;
                 text-decoration: none;
-                color: $active-bcg-primary;
                 &:hover, &:active {
-                    color: $link-hover;
+                    color: $active-primary;
                     text-decoration: underline;
-                }
-                &:visited, &:link {
-                    color: $active-bcg-primary;
                 }
             }
         }

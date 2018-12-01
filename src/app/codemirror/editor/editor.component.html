@@ -10,6 +10,11 @@
             <mat-icon fontIcon="icon-previewcode" (click)="preview.next(null)"></mat-icon>
         </button>
     </li>
+    <li fxLayoutAlign="center center">
+        <button mat-icon-button matTooltip="返回普通编辑器" matTooltipPosition="above">
+            <mat-icon fontIcon="icon-back" (click)="back()"></mat-icon>
+        </button>
+    </li>
     <li>支持 Markdown 语法 {{tip}}</li>
 </ul>
 

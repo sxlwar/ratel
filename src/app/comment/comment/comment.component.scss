@@ -19,6 +19,7 @@
 #comment-area {
     padding: 0;
     .comment {
+        word-break: break-all;
         padding: 20px 0;
         border-bottom: 1px solid rgba(200, 200, 200, 0.7);
         h4 {
