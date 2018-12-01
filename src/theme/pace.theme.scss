@@ -3,11 +3,11 @@
 
     // 备选项 #00f9a6
    .pace .pace-progress {
-     background: #007acc;
+     background: $active-primary;
    }
 
    .pace .pace-progress-inner {
-     box-shadow: 0 0 10px #007acc, 0 0 5px #007acc;
+     box-shadow: 0 0 10px $active-primary, 0 0 5px $active-primary;
    }
 
    .pace .pace-activity {

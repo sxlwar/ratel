@@ -1,7 +1,8 @@
 @import '../../../theme/variable.theme';
 
 .reply {
-    width: 50%;
+    // width: 50%;
+    // I think not need set 50% width
     border: 1px solid $inactive-color;
     border-radius: 4px;
     padding: 1em;

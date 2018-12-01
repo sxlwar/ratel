@@ -5,6 +5,7 @@ import { FileUploader } from 'ng2-file-upload';
 import { UploadService } from '../../providers/upload.service';
 import { CodemirrorComponent } from '../codemirror/codemirror.component';
 import { ALLOW_UPLOAD_FILE_TYPES } from '../../constant/constant';
+import { Location } from '@angular/common';
 
 @Component({
     selector: 'ratel-editor',
@@ -13,16 +14,16 @@ import { ALLOW_UPLOAD_FILE_TYPES } from '../../constant/constant';
 })
 export class EditorComponent implements OnInit {
     @Input()
-    tip = '';
+    public tip = '';
 
-    data = '';
+    public data = '';
 
-    uploader = new FileUploader({ url: 'localhost:3000' });
+    public uploader = new FileUploader({ url: 'localhost:3000' });
 
     @Output()
-    change: EventEmitter<string> = new EventEmitter();
+    public change: EventEmitter<string> = new EventEmitter();
 
-    codeMirrorOptions = {
+    public codeMirrorOptions = {
         theme: 'eclipse',
         mode: 'markdown',
         indentUnit: 4,
@@ -34,24 +35,34 @@ export class EditorComponent implements OnInit {
     };
 
     @Output()
-    preview: EventEmitter<boolean> = new EventEmitter();
+    public preview: EventEmitter<boolean> = new EventEmitter();
 
-    fileDropOver = false;
+    public fileDropOver = false;
 
     @ViewChild(CodemirrorComponent)
-    CodeMirror: CodemirrorComponent;
+    private CodeMirror: CodemirrorComponent;
 
-    constructor(private _upload: UploadService) {}
+    public constructor(
+        private _upload: UploadService,
+        private locationServ: Location,
+    ) { }
 
-    ngOnInit() {}
+    /**
+     *@function back to prev route
+     *
+     */
+    public back(): void {
+        this.locationServ.back();
+    }
 
-    onFileDropOver(isOver: boolean): void {
+
+    public onFileDropOver(isOver: boolean): void {
         if (this.fileDropOver !== isOver) {
             this.fileDropOver = isOver;
         }
     }
 
-    fileSelected(list: FileList): void {
+    public fileSelected(list: FileList): void {
         this._upload.uploadImage(list).subscribe(images => {
             const url = images.map(image => `![${image.name}](${image.url})`).join('\n\r');
             const doc = this.CodeMirror.codeMirror.getDoc();
@@ -65,4 +76,5 @@ export class EditorComponent implements OnInit {
             doc.replaceRange('\n' + url + '\n', pos);
         });
     }
+    ngOnInit() { }
 }
