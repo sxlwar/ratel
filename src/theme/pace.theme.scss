@@ -1,0 +1,16 @@
+@import './variable.theme';
+@mixin pace-theme() {
+
+    // 备选项 #00f9a6
+   .pace .pace-progress {
+     background: #007acc;
+   }
+
+   .pace .pace-progress-inner {
+     box-shadow: 0 0 10px #007acc, 0 0 5px #007acc;
+   }
+
+   .pace .pace-activity {
+     display: none;
+   }
+ }

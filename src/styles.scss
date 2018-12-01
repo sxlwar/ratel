@@ -3,7 +3,8 @@
 @import '~codemirror/theme/material.css';
 @import '../node_modules/codemirror/theme/eclipse';
 @import './theme/_variable.theme.scss';
-
+@import './theme/pace.theme.scss';
+@include pace-theme();
 body {
     margin: 0;
     padding: 0;
