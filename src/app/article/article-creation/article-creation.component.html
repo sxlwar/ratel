@@ -33,20 +33,21 @@
     <div fxFlex="48%" class="editor">
         <ratel-editor (preview)="showPreview = !showPreview" [tip]="'文章内容长度最少300个字符'"></ratel-editor>
 
-        <div class="submit">
-            <ng-container *ngIf="!isUpdate else updateBtnTpl">
-                <button mat-raised-button color="primary" (click)="publish(true)" [disabled]="!allowPublish()">立即发表</button>
-                <button mat-raised-button color="accent" (click)="publish(false)" [disabled]="!allowPublish()">保存</button>
-            </ng-container>
-
-            <ng-template #updateBtnTpl>
-                <button mat-raised-button color="primary" (click)="update()">更新</button>
-            </ng-template>
-        </div>
     </div>
 
 
     <div *ngIf="showPreview" fxFlex="48%" fxFlexOffset="4%" class="preview">
         <markdown [data]="editor.data"></markdown>
     </div>
+</div>
+
+<div class="submit">
+    <ng-container *ngIf="!isUpdate else updateBtnTpl">
+        <button mat-raised-button color="primary" (click)="publish(true)" [disabled]="!allowPublish()">立即发表</button>
+        <button mat-raised-button color="accent" (click)="publish(false)" [disabled]="!allowPublish()">保存</button>
+    </ng-container>
+
+    <ng-template #updateBtnTpl>
+        <button mat-raised-button color="primary" (click)="update()">更新</button>
+    </ng-template>
 </div>
