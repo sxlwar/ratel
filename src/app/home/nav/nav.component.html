@@ -4,6 +4,13 @@
             <img src="../assets/images/logo.png" class="logo">
 
             <ratel-nav-menu fxFlex="1 0 auto" (topicChange)='onTopicChange($event)'></ratel-nav-menu>
+
+            <span [matMenuTriggerFor]="videoMenu" class="video">videos</span>
+
+            <mat-menu #videoMenu="matMenu" yPosition="below">
+                <a mat-menu-item href="http://m.study.163.com/provider/400000000664045/index.htm?share=2&shareId=400000000664045" target="__blank">移动端</a>
+                <a mat-menu-item href="https://study.163.com/provider/400000000664045/index.htm?share=2&shareId=400000000664045" target="__blank">网页端</a>
+            </mat-menu>
         </div>
 
         <div fxLayoutAlign="space-between center" class="action">
