@@ -6,6 +6,7 @@ import { UploadService } from '../../providers/upload.service';
 import { CodemirrorComponent } from '../codemirror/codemirror.component';
 import { ALLOW_UPLOAD_FILE_TYPES } from '../../constant/constant';
 import { Location } from '@angular/common';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
     selector: 'ratel-editor',
@@ -13,16 +14,14 @@ import { Location } from '@angular/common';
     styleUrls: ['./editor.component.scss'],
 })
 export class EditorComponent implements OnInit {
-    @Input()
-    public tip = '';
-
+    @Input() public tip = '';
+    @ViewChild(CodemirrorComponent) private CodeMirror: CodemirrorComponent;
+    @Output() public change: EventEmitter<string> = new EventEmitter();
+    @Output() public preview: EventEmitter<boolean> = new EventEmitter();
+    /** 是否显示 `返回普通编辑器` icon */
+    public needShow: boolean;
     public data = '';
-
     public uploader = new FileUploader({ url: 'localhost:3000' });
-
-    @Output()
-    public change: EventEmitter<string> = new EventEmitter();
-
     public codeMirrorOptions = {
         theme: 'eclipse',
         mode: 'markdown',
@@ -33,18 +32,13 @@ export class EditorComponent implements OnInit {
         dragDrop: true,
         allowDropFileTypes: ALLOW_UPLOAD_FILE_TYPES,
     };
-
-    @Output()
-    public preview: EventEmitter<boolean> = new EventEmitter();
-
     public fileDropOver = false;
 
-    @ViewChild(CodemirrorComponent)
-    private CodeMirror: CodemirrorComponent;
 
     public constructor(
         private _upload: UploadService,
         private locationServ: Location,
+        public router: ActivatedRoute,
     ) { }
 
     /**
@@ -76,5 +70,7 @@ export class EditorComponent implements OnInit {
             doc.replaceRange('\n' + url + '\n', pos);
         });
     }
-    ngOnInit() { }
+    public ngOnInit() {
+        this.router.params.subscribe(para => this.needShow = !!para.id);
+    }
 }
