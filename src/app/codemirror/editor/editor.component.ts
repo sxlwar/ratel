@@ -14,10 +14,14 @@ import { ActivatedRoute } from '@angular/router';
     styleUrls: ['./editor.component.scss'],
 })
 export class EditorComponent implements OnInit {
-    @Input() public tip = '';
-    @ViewChild(CodemirrorComponent) private CodeMirror: CodemirrorComponent;
-    @Output() public change: EventEmitter<string> = new EventEmitter();
-    @Output() public preview: EventEmitter<boolean> = new EventEmitter();
+    @Input()
+    public tip = '';
+    @ViewChild(CodemirrorComponent)
+    private CodeMirror: CodemirrorComponent;
+    @Output()
+    public change: EventEmitter<string> = new EventEmitter();
+    @Output()
+    public preview: EventEmitter<boolean> = new EventEmitter();
     /** 是否显示 `返回普通编辑器` icon */
     public needShow: boolean;
     public data = '';
@@ -34,12 +38,7 @@ export class EditorComponent implements OnInit {
     };
     public fileDropOver = false;
 
-
-    public constructor(
-        private _upload: UploadService,
-        private locationServ: Location,
-        public router: ActivatedRoute,
-    ) { }
+    public constructor(private _upload: UploadService, private locationServ: Location, public router: ActivatedRoute) {}
 
     /**
      *@function back to prev route
@@ -48,7 +47,6 @@ export class EditorComponent implements OnInit {
     public back(): void {
         this.locationServ.back();
     }
-
 
     public onFileDropOver(isOver: boolean): void {
         if (this.fileDropOver !== isOver) {
@@ -71,6 +69,6 @@ export class EditorComponent implements OnInit {
         });
     }
     public ngOnInit() {
-        this.router.params.subscribe(para => this.needShow = !!para.id);
+        this.router.params.subscribe(para => (this.needShow = !!para.id));
     }
 }

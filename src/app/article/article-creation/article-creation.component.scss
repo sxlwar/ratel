@@ -1,8 +1,10 @@
 @import '../../comment/reply-full/reply-full.component';
 
+$white-space: 2em;
+
 .ratel-form-field {
     background: #fff;
-    padding: 2em;
+    padding: $white-space;
     .form-field {
         margin: 1em 0;
         & > span {
@@ -16,6 +18,8 @@
 }
 
 .submit {
+    padding: 0 $white-space 1em;
+    background: #fff;
     button:last-child {
         margin-left: 2em;
     }
@@ -24,7 +28,7 @@
     justify-content: center !important;
     .editor {
         max-width: 80% !important;
-        animation: grow .5s linear;
+        animation: grow 0.5s linear;
     }
 }
 

@@ -28,7 +28,7 @@ export class ArticleListComponent implements OnInit {
 
     show: Observable<boolean>;
 
-    constructor(private _articleService: ArticleService) { }
+    constructor(private _articleService: ArticleService) {}
 
     ngOnInit() {
         this.list = this.search.pipe(switchMap(value => this._articleService.getArticlesOverview({ title: value })));
