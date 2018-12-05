@@ -8,10 +8,13 @@
 
 ## Build
 
-运行 `npm run build:ssh` 会启动项目的构建过程，运行完成为将会在 dist 目录下生成以下结构：
+运行 `npm run build:ssr` 会启动项目的构建过程，运行完成将会在 dist 目录下生成以下结构：
 
+```js
 ----|
-----browser|
-----server|
+    ----browser|
+    ----server|
+```
+
 
 browser文件夹下为打包后的源代码。server文件夹下为服务端渲染所需要的代码。
