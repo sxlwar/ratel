@@ -14,6 +14,7 @@ import { ArticleOverviewComponent } from './article-overview/article-overview.co
 import { ArticleComponent } from './article/article.component';
 import { HotArticleComponent } from './hot-article/hot-article.component';
 import { ArticleService } from './providers/article.service';
+import { ImageAddressPipe } from './pipes/article.pipe';
 
 @NgModule({
     imports: [
@@ -36,6 +37,7 @@ import { ArticleService } from './providers/article.service';
         HotArticleComponent,
         ArticleCreationComponent,
         ArticleListComponent,
+        ImageAddressPipe,
     ],
     exports: [
         ArticleComponent,

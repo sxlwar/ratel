@@ -16,10 +16,10 @@
         </ul>
 
         <article *ratelShellNoRender>
-            <markdown [data]="data.content"></markdown>
+            <markdown [data]="data.content | imageAddress"></markdown>
         </article>
 
-        <article *ratelShellRender>{{data.content}}</article>
+        <article *ratelShellRender>{{data.content | imageAddress}}</article>
     </div>
 
     <ul class="statistics">

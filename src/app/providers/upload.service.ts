@@ -25,7 +25,7 @@ export class UploadService extends BaseService {
 
     uploadTotal = 0;
 
-    private readonly urlPrefix = 'http://pghicsch6.bkt.clouddn.com/';
+    readonly urlPrefix = 'http://assets.hijavascript.com/';
 
     result$: Subject<UploadResult[]> = new Subject();
 
