@@ -5,7 +5,8 @@
 export const environment = {
     production: false,
     name: 'dev',
-    domain: 'http://localhost:3000',
+    apiAddress: 'http://localhost:3000',
+    githubAuthRedirectAddress: 'http://localhost:4200',
 };
 
 /*

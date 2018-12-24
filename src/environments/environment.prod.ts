@@ -1,5 +1,6 @@
 export const environment = {
     production: true,
-    domain: 'http://www.hijavascript.com',
     name: 'prod',
+    apiAddress: 'http://www.hijavascript.com',
+    githubAuthRedirectAddress: 'http://www.hijavascript.com',
 };

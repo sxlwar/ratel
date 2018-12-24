@@ -16,16 +16,23 @@ import { ActivatedRoute } from '@angular/router';
 export class EditorComponent implements OnInit {
     @Input()
     public tip = '';
+
     @ViewChild(CodemirrorComponent)
     private CodeMirror: CodemirrorComponent;
+
     @Output()
     public change: EventEmitter<string> = new EventEmitter();
+
     @Output()
     public preview: EventEmitter<boolean> = new EventEmitter();
+
     /** 是否显示 `返回普通编辑器` icon */
     public needShow: boolean;
+
     public data = '';
+
     public uploader = new FileUploader({ url: 'localhost:3000' });
+
     public codeMirrorOptions = {
         theme: 'eclipse',
         mode: 'markdown',

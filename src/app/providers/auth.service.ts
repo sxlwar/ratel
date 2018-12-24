@@ -132,7 +132,7 @@ export class AuthService extends BaseService {
         return this._http.get<GithubAuthConfig>(this.completeApiUrl(this.path, this.githubConfigPath)).pipe(
             map(
                 config =>
-                    `${this.githubAuthURI}?client_id=${config.clientId}&redirect_uri=${environment.domain +
+                    `${this.githubAuthURI}?client_id=${config.clientId}&redirect_uri=${environment.githubAuthRedirectAddress +
                         redirect}&scope=user&state=${config.state}`,
             ),
             catchError(this._error.handleHttpError),
