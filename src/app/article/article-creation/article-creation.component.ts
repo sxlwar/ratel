@@ -94,7 +94,7 @@ export class ArticleCreationComponent implements OnInit, OnDestroy {
             userId: this.user.id,
         });
 
-        this._articleService.handleCreateArticleResponse(response);
+        this._articleService.handleOperateArticleResponse(response);
     }
 
     private getContent(): string {
@@ -104,7 +104,7 @@ export class ArticleCreationComponent implements OnInit, OnDestroy {
     }
 
     update(): void {
-        this._articleService.handleCreateArticleResponse(
+        this._articleService.handleOperateArticleResponse(
             this._articleService.updateArticle({ id: this.article.id, content: this.editor.data }),
             '更新成功',
         );

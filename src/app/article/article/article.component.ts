@@ -7,8 +7,9 @@ import { filter, map, takeWhile, tap } from 'rxjs/operators';
 
 import { User } from '../../auth/interface/auth.interface';
 import { Article } from '../../interface/response.interface';
-import { AuthService, StoreAction } from '../../providers/auth.service';
+import { AuthService } from '../../providers/auth.service';
 import { ArticleService } from '../providers/article.service';
+import { PersonalService, StoreAction } from '../../personal/providers/personal.service';
 
 @Component({
     selector: 'ratel-article',
@@ -43,6 +44,7 @@ export class ArticleComponent implements OnInit, OnDestroy {
         private _route: ActivatedRoute,
         private _articleService: ArticleService,
         private _authService: AuthService,
+        private _personalService: PersonalService,
     ) {}
 
     ngOnInit() {
@@ -87,7 +89,7 @@ export class ArticleComponent implements OnInit, OnDestroy {
             this.isStored.pipe(map(stored => (stored ? StoreAction.REMOVE : StoreAction.ADD))),
         ).pipe(map(([articleId, id, operate]) => ({ id, articleId, operate })));
 
-        this._authService.storeArticle(request);
+        this._personalService.storeArticle(request);
     }
 
     switchToImageTextModel(): void {

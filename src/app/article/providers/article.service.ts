@@ -22,6 +22,7 @@ import {
     ArticleStatistics,
     SeriesOverviewResponse,
     ArticleUpdateResponse,
+    ArticleDeleteResponse,
 } from '../../interface/response.interface';
 import { BaseService } from '../../providers/base.service';
 import { ErrorService } from '../../providers/error.service';
@@ -116,7 +117,7 @@ export class ArticleService extends BaseService {
             .pipe(catchError(this._error.handleHttpError));
     }
 
-    handleCreateArticleResponse<T>(response: Observable<T>, message = '创建成功'): Subscription {
+    handleOperateArticleResponse<T>(response: Observable<T>, message = '创建成功'): Subscription {
         return response.subscribe(_res => {
             this._snake.open(message, '', this.snakeBarConfig);
         });
@@ -139,5 +140,11 @@ export class ArticleService extends BaseService {
 
             return result;
         }
+    }
+
+    deleteArticle(id: number): Observable<ArticleDeleteResponse> {
+        return this._http
+            .request('DELETE', this.completeApiUrl(this.articlePath, CRUDVar.DELETE), { body: { id } })
+            .pipe(catchError(this._error.handleHttpError));
     }
 }

@@ -10,7 +10,8 @@ export interface CreateArticleRequest {
 
 export interface ArticleUpdateRequest {
     id: number;
-    content: string;
+    content?: string;
+    isPublish?: boolean;
 }
 
 export interface ArticleDeleteRequest {
@@ -25,6 +26,8 @@ export interface ArticleSearchRequest {
     limit: number;
     isOverview: boolean;
     rank: 'enjoy' | 'view' | 'stored';
+    allState: boolean;
+    userId: number;
 }
 
 export interface ArticleStatisticsUpdateRequest {

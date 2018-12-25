@@ -16,15 +16,14 @@ th {
     &:last-child {
         width: 10%;
     }
+    color: rgba($color: #fff, $alpha: 0.8);
 }
 
 tr {
     cursor: pointer;
     &:hover {
-        // background: #fff;
-        // CANCEL SET HOVER STYLE
         td {
-            color: #000;
+            color: #fff;
         }
     }
 }

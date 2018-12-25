@@ -1,0 +1,18 @@
+@import '../book-mark/book-mark.component.scss';
+mat-icon {
+    margin: 0 5px;
+}
+
+td,
+th {
+    &:last-child {
+        width: 15%;
+    }
+}
+
+.accent {
+    cursor: inherit;
+    &:hover {
+        transform: inherit;
+    }
+}

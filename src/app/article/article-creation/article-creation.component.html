@@ -47,6 +47,7 @@
     </ng-container>
 
     <ng-template #updateBtnTpl>
-        <button mat-raised-button color="primary" (click)="update()">更新</button>
+        <button *ngIf="!article?.isPublished" mat-raised-button color="primary" (click)="publish(true)">立即发表</button>
+        <button mat-raised-button color="accent" (click)="update()">更新</button>
     </ng-template>
 </div>

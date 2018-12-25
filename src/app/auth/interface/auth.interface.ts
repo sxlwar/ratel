@@ -14,5 +14,3 @@ export interface GithubAuthConfig {
     redirect: string;
     state: string;
 }
-
-export type StoreOperate = 'add' | 'remove' | 'clear';
