@@ -37,7 +37,7 @@ export class EditorComponent implements OnInit {
         theme: 'eclipse',
         mode: 'markdown',
         indentUnit: 4,
-        lineNumber: true,
+        lineWrapping: true,
         styleActiveLine: true,
         autoFocus: true,
         dragDrop: true,

@@ -2,7 +2,7 @@
     <li fxLayoutAlign="center center">
         <button mat-icon-button matTooltip="插入图片" matTooltipPosition="above">
             <mat-icon fontIcon="icon-picture"></mat-icon>
-            <input type="file" ng2FileSelect [uploader]="uploader" (onFileSelected)="fileSelected($event)">
+            <input type="file" ng2FileSelect [uploader]="uploader" (onFileSelected)="fileSelected($event)" />
         </button>
     </li>
     <li fxLayoutAlign="center center">
@@ -15,8 +15,14 @@
             <mat-icon fontIcon="icon-back" (click)="back()"></mat-icon>
         </button>
     </li>
-    <li>支持 Markdown 语法 {{tip}}</li>
+    <li>支持 Markdown 语法 {{ tip }}</li>
 </ul>
 
-<ratel-codemirror [(ngModel)]="data" ng2FileDrop [uploader]="uploader" (onFileDrop)="fileSelected($event)" (fileOver)="onFileDropOver($event)"
-    [options]="codeMirrorOptions"></ratel-codemirror>
+<ratel-codemirror
+    [(ngModel)]="data"
+    ng2FileDrop
+    [uploader]="uploader"
+    (onFileDrop)="fileSelected($event)"
+    (fileOver)="onFileDropOver($event)"
+    [options]="codeMirrorOptions"
+></ratel-codemirror>

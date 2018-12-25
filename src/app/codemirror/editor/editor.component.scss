@@ -25,5 +25,10 @@ ul {
 
 :host::ng-deep .CodeMirror {
     padding: 1em;
-    height: 80%;
+    height: 95%;
+}
+
+:host {
+    display: block;
+    height: 100%;
 }
