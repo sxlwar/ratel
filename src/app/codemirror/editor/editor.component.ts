@@ -20,8 +20,11 @@ export class EditorComponent implements OnInit {
     @ViewChild(CodemirrorComponent)
     private CodeMirror: CodemirrorComponent;
 
+    /**
+     * 标记数据是否发生了改变，用户提交表单后，父组件可调用此组件的的markAsPristine方法将其重置成 pristine 状态，同时还会保持数据状态
+     */
     @Output()
-    public change: EventEmitter<string> = new EventEmitter();
+    public isPristine: EventEmitter<boolean> = new EventEmitter();
 
     @Output()
     public preview: EventEmitter<boolean> = new EventEmitter();
@@ -75,7 +78,12 @@ export class EditorComponent implements OnInit {
             doc.replaceRange('\n' + url + '\n', pos);
         });
     }
+
     public ngOnInit() {
         this.router.params.subscribe(para => (this.needShow = !!para.id));
+    }
+
+    public markAsPristine(isPristine: boolean) {
+        this.isPristine.next(isPristine);
     }
 }

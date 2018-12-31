@@ -25,4 +25,5 @@
     (onFileDrop)="fileSelected($event)"
     (fileOver)="onFileDropOver($event)"
     [options]="codeMirrorOptions"
+    (ngModelChange)="isPristine.next(false)"
 ></ratel-codemirror>

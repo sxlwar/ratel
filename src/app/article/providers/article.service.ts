@@ -105,9 +105,12 @@ export class ArticleService extends BaseService {
         return this._http.put(this.completeApiUrl(this.statisticsPath, CRUDVar.UPDATE), data);
     }
 
-    createArticle(data: CreateArticleRequest): Observable<CreateArticleResponse> {
+    /**
+     * TODO: 后台响应返回错了，暂时就用number，就是文章的id; 实际返回的响应应该是 CreateArticleResponse;
+     */
+    createArticle(data: CreateArticleRequest): Observable<number> {
         return this._http
-            .post<CreateArticleResponse>(this.completeApiUrl(this.articlePath, CRUDVar.CREATE), data)
+            .post<number>(this.completeApiUrl(this.articlePath, CRUDVar.CREATE), data)
             .pipe(catchError(this._error.handleHttpError));
     }
 

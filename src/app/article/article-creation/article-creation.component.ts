@@ -1,16 +1,17 @@
-import { Component, OnInit, ViewChild, OnDestroy } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
 
+import { BehaviorSubject, of } from 'rxjs';
+import { filter, takeWhile, tap, take, share } from 'rxjs/operators';
+import { Article } from 'src/app/interface/response.interface';
+
+import { User } from '../../auth/interface/auth.interface';
 import { EditorComponent } from '../../codemirror/editor/editor.component';
 import { ArticleCategory } from '../../constant/constant';
-import { ArticleService } from '../providers/article.service';
 import { DeactivateGuard } from '../../interface/app.interface';
-import { of } from 'rxjs';
-import { User } from '../../auth/interface/auth.interface';
 import { AuthService } from '../../providers/auth.service';
-import { filter, takeWhile } from 'rxjs/operators';
-import { ActivatedRoute } from '@angular/router';
-import { Article } from 'src/app/interface/response.interface';
+import { ArticleService } from '../providers/article.service';
 
 @Component({
     selector: 'ratel-article-creation',
@@ -43,6 +44,11 @@ export class ArticleCreationComponent implements OnInit, OnDestroy {
 
     article: Article;
 
+    /**
+     * 给路由守卫提供跳转的依据
+     */
+    isPristine: BehaviorSubject<boolean> = new BehaviorSubject(true);
+
     constructor(
         private _fb: FormBuilder,
         private _articleService: ArticleService,
@@ -61,6 +67,8 @@ export class ArticleCreationComponent implements OnInit, OnDestroy {
             .subscribe(user => (this.user = user));
 
         this.checkUpdate();
+
+        this.form.valueChanges.subscribe(_ => this.isPristine.next(false));
     }
 
     private checkUpdate(): void {
@@ -82,19 +90,43 @@ export class ArticleCreationComponent implements OnInit, OnDestroy {
                 this.categories.forEach(item => (item.selected = category.includes(item.category)));
                 this.updateCategories();
                 this.editor.data = content;
+                this.editor.markAsPristine(true);
             });
         }
     }
 
     publish(isPublished: boolean): void {
-        const response = this._articleService.createArticle({
-            ...this.form.value,
-            isPublished,
-            content: this.getContent(),
-            userId: this.user.id,
-        });
+        const response = this._articleService
+            .createArticle({
+                ...this.form.value,
+                isPublished,
+                content: this.getContent(),
+                userId: this.user.id,
+            })
+            .pipe(share());
 
         this._articleService.handleOperateArticleResponse(response);
+
+        /**
+         * 切换到更新状态
+         */
+        response.subscribe(id => {
+            this.modifyPristineState(!!id);
+
+            if (!!id) {
+                this.isUpdate = true;
+                this.article = { ...this.form.value, id } as Article;
+                this.form.disable();
+            }
+        });
+    }
+
+    update(): void {
+        const response = this._articleService
+            .updateArticle({ id: this.article.id, content: this.editor.data })
+            .pipe(tap(({ isUpdated }) => this.modifyPristineState(isUpdated)));
+
+        this._articleService.handleOperateArticleResponse(response, '更新成功');
     }
 
     private getContent(): string {
@@ -103,11 +135,12 @@ export class ArticleCreationComponent implements OnInit, OnDestroy {
             : this.editor.data;
     }
 
-    update(): void {
-        this._articleService.handleOperateArticleResponse(
-            this._articleService.updateArticle({ id: this.article.id, content: this.editor.data }),
-            '更新成功',
-        );
+    /**
+     * 需要同时重置此组件的表单及editor组件的状态
+     */
+    private modifyPristineState(isPristine: boolean) {
+        this.isPristine.next(isPristine);
+        this.editor.markAsPristine(isPristine);
     }
 
     private initForm(): void {
@@ -183,7 +216,13 @@ export class ArticleCreationComponent implements OnInit, OnDestroy {
     }
 
     canDeactivate(): DeactivateGuard[] {
-        return [{ canDeactivate: of(false), message: '确定离开此页面吗？', title: '放弃编辑' }];
+        return [
+            {
+                canDeactivate: this.isPristine.asObservable().pipe(take(1)),
+                message: '可能有未保存的内容，确定离开此页面吗？',
+                title: '放弃编辑',
+            },
+        ];
     }
 
     ngOnDestroy() {
