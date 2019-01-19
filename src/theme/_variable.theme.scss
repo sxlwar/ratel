@@ -44,3 +44,17 @@ $link-hover: #e9e9e9;
     height: $length;
     border-radius: $length / 2;
 }
+
+@mixin fileSelectWrapper {
+    position: relative;
+    input {
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        opacity: 0;
+        width: 100%;
+        cursor: pointer;
+    }
+}

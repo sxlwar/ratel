@@ -27,6 +27,27 @@
         <span>原创文章</span>
         <mat-checkbox formControlName="isOriginal">声明原创</mat-checkbox>
     </div>
+
+    <div fxLayout="row" class="form-field">
+        <span>封面图片</span>
+        <mat-radio-group formControlName="isCustomThumbnail">
+            <mat-radio-button [value]="false">使用默认图片</mat-radio-button>
+            <mat-radio-button [value]="true">自定义图片</mat-radio-button>
+        </mat-radio-group>
+
+        <button *ngIf="isCustomThumbnail.value && !form.disabled" mat-raised-button color="primary">
+            选择图片
+            <input type="file" (change)="fileChangeEvent($event)" />
+        </button>
+    </div>
+
+    <div *ngIf="isCustomThumbnail.value && !form.disabled && isBrowser" fxLayout="row" class="thumbnail">
+        <image-cropper [imageChangedEvent]="imageChangedEvent" [maintainAspectRatio]="true" [aspectRatio]="16 / 9"
+            [resizeToWidth]="279" format="png" (imageCropped)="imageCropped($event)" (imageLoaded)="imageLoaded()"
+            (loadImageFailed)="loadImageFailed()"></image-cropper>
+
+        <img [src]="thumbnail.value" />
+    </div>
 </form>
 
 <div fxLayout="row" class="full-model ratel-form-field" [ngClass]="{'full-screen': !showPreview}">
