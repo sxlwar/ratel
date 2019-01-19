@@ -6,6 +6,7 @@ export interface CreateArticleRequest {
     category: string[];
     isOriginal: boolean;
     userId: number;
+    thumbnail: string;
 }
 
 export interface ArticleUpdateRequest {

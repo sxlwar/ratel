@@ -15,6 +15,7 @@ import { ArticleComponent } from './article/article.component';
 import { HotArticleComponent } from './hot-article/hot-article.component';
 import { ArticleService } from './providers/article.service';
 import { ImageAddressPipe } from './pipes/article.pipe';
+import { ImageCropperModule } from 'ngx-image-cropper';
 
 @NgModule({
     imports: [
@@ -30,6 +31,7 @@ import { ImageAddressPipe } from './pipes/article.pipe';
         CodemirrorModule,
         AuthModule,
         RouterModule,
+        ImageCropperModule,
     ],
     declarations: [
         ArticleComponent,

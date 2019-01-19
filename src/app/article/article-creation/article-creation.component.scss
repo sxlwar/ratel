@@ -1,3 +1,4 @@
+@import '../../../theme/_variable.theme.scss';
 @import '../../comment/reply-full/reply-full.component';
 
 $white-space: 2em;
@@ -11,8 +12,23 @@ $white-space: 2em;
             margin-right: 2em;
         }
 
-        mat-checkbox {
+        mat-checkbox,
+        mat-radio-button {
             margin: 0 1em;
+        }
+        button {
+            transform: translateY(-25%);
+            @include fileSelectWrapper();
+        }
+    }
+    .thumbnail {
+        width: 50%;
+        height: 150px;
+        image-cropper {
+            text-align: left !important;
+        }
+        img {
+            padding: 5px;
         }
     }
 }
@@ -46,4 +62,8 @@ $white-space: 2em;
 
 :host::ng-deep markdown img {
     max-width: 100%;
+}
+
+:host::ng-deep image-cropper .cropper {
+    margin-left: 0 !important;
 }

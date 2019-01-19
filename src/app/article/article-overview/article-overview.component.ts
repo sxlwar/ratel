@@ -33,7 +33,7 @@ export class ArticleOverviewComponent implements OnInit {
     ngOnInit() {}
 
     setCoverImage() {
-        const { category } = this.article;
+        const { category, thumbnail } = this.article;
         const imageMap = {
             angular: 'landscape_0.jpeg',
             typescript: 'landscape_1.jpeg',
@@ -42,6 +42,10 @@ export class ArticleOverviewComponent implements OnInit {
             other: 'landscape_4.jpeg',
         };
 
-        this.image = imageMap[category[category.length - 1].toLowerCase()] || 'landscape_5.jpeg';
+        if (thumbnail ) {
+            this.image = thumbnail;
+        } else {
+            this.image = `../../../assets/images/${imageMap[category[category.length - 1].toLowerCase()] || 'landscape_5.jpeg'}`;
+        }
     }
 }
