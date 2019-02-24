@@ -72,7 +72,7 @@ export class CommentService extends BaseService {
             .pipe(catchError(this._error.handleHttpError));
     }
 
-    handleOperateCommentResult<T>(resObs: Observable<T>, message: string, callback?: (T) => any): Subscription {
+    handleOperateCommentResult<T>(resObs: Observable<T>, message: string, callback?: (p: T) => any): Subscription {
         return resObs.subscribe(res => {
             if (message) {
                 this._snack.open(message, '', this.snakeBarConfig);
