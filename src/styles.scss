@@ -11,6 +11,10 @@ body {
     font-size: 16px;
     background: rgba(185, 185, 185, 0.3);
     font-family: consolas, "Microsoft Yahei", monospace, serif;
+    line-height: 1.6;
+    tt, code, kbd, samp {
+        font-family: consolas, Menlo, "Microsoft Yahei", Arial, Helvetica, sans-serif
+    }
 }
 ul {
     list-style: none;
