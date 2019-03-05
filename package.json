@@ -1,6 +1,6 @@
 {
   "name": "ratel",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
@@ -9,7 +9,7 @@
     "lint": "ng lint",
     "e2e": "ng e2e",
     "format": "prettier --write \"src/**/*.ts\"",
-    "build:ssr": "ng build --prod -c=test && ng run ratel:server",
+    "build:ssr": "ng build --prod && ng run ratel:server",
     "bundle-report": "ng build --prod --stats-json && webpack-bundle-analyzer dist/browser/stats.json"
   },
   "private": true,
