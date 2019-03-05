@@ -14,7 +14,11 @@ import { PersonalService, StoreAction } from '../providers/personal.service';
     styleUrls: ['./book-mark.component.scss'],
 })
 export class BookMarkComponent implements OnInit, OnDestroy {
-    displayedColumns: string[] = ['标题', '创建时间', '作者', '操作'];
+
+    /**
+     * 根据Bookmark接口设置的前三个字段，用来给 material table 提供 sort 功能 。
+     */
+    displayedColumns: string[] = ['title', 'createdAt', 'author', 'operate'];
 
     bookmarks: Observable<MatTableDataSource<Bookmark>>;
 

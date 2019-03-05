@@ -1,16 +1,16 @@
 <div class="mat-elevation-z8">
     <table mat-table [dataSource]="articles | async" matSort>
-        <ng-container matColumnDef="标题">
+        <ng-container matColumnDef="title">
             <th mat-header-cell *matHeaderCellDef>标题</th>
-            <td mat-cell *matCellDef="let row">{{ row.title }}</td>
+            <td mat-cell *matCellDef="let row" class="title">{{ row.title }}</td>
         </ng-container>
 
-        <ng-container matColumnDef="创建时间">
+        <ng-container matColumnDef="createdAt">
             <th mat-header-cell *matHeaderCellDef mat-sort-header>创建时间</th>
             <td mat-cell *matCellDef="let row">{{ row.createdAt }}</td>
         </ng-container>
 
-        <ng-container matColumnDef="状态">
+        <ng-container matColumnDef="isPublished">
             <th mat-header-cell *matHeaderCellDef mat-sort-header>状态</th>
             <td mat-cell *matCellDef="let row">
                 <mat-icon
@@ -22,7 +22,7 @@
             </td>
         </ng-container>
 
-        <ng-container matColumnDef="操作">
+        <ng-container matColumnDef="operate">
             <th mat-header-cell *matHeaderCellDef>操作</th>
             <td mat-cell *matCellDef="let row">
                 <mat-icon fontIcon="icon-edit" color="primary" [routerLink]="['/create', { id: row.id }]"></mat-icon>

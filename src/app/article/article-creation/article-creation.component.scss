@@ -40,25 +40,6 @@ $white-space: 2em;
         margin-left: 2em;
     }
 }
-.full-screen {
-    justify-content: center !important;
-    .editor {
-        max-width: 80% !important;
-        animation: grow 0.5s linear;
-    }
-}
-
-@keyframes grow {
-    0% {
-        max-width: 50%;
-    }
-    50% {
-        max-width: 65%;
-    }
-    100% {
-        max-width: 80%;
-    }
-}
 
 :host::ng-deep markdown img {
     max-width: 100%;

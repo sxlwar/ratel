@@ -16,7 +16,6 @@ const appRoutes: Routes = [
     { path: 'home/:id/reply', component: ReplyFullComponent },
     { path: 'create', component: ArticleCreationComponent, canDeactivate: [ArticleCreateGuard] },
     { path: 'personal', loadChildren: './personal/personal.module#PersonalModule' },
-    { path: ':id', redirectTo: 'home/:id', pathMatch: 'full' },
     { path: '', redirectTo: '/home', pathMatch: 'full' },
     { path: '**', component: FourZeroFourComponent },
 ];

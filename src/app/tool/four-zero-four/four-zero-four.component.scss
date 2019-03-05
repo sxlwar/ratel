@@ -1,0 +1,47 @@
+#main-404-content {
+    #zodiac {
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 100% !important;
+        width: 100% !important;
+        z-index: -99;
+    }
+
+    .col-twelve {
+        position: absolute;
+        top: 50%;
+        left: 200px;
+        transform: translateY(-50%);
+    }
+
+    h1 {
+        position: relative;
+        font-family: sans-serif;
+        text-transform: uppercase;
+        letter-spacing: -0.2rem;
+        line-height: 1;
+        margin-bottom: 1.2rem;
+        padding-top: 2.4rem;
+        color: #000;
+        font-size: 92px;
+
+        &::before {
+            content: '';
+            display: block;
+            background: #000;
+            width: 120px;
+            height: 3px;
+            position: absolute;
+            top: 0;
+            left: 9px;
+        }
+    }
+
+    p {
+        color: #000;
+        font-size: 1.8rem;
+        max-width: 380px;
+        text-shadow: 0 1px 5px rgba(0, 0, 0, 0.5);
+    }
+}

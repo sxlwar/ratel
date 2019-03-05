@@ -50,13 +50,13 @@
     </div>
 </form>
 
-<div fxLayout="row" class="full-model ratel-form-field" [ngClass]="{'full-screen': !showPreview}">
-    <div fxFlex="48%" class="editor">
+<div fxLayout="row" class="full-model ratel-form-field">
+    <div fxFlex="48%" class="editor" [@toggleFull]="showPreview ? 'half' : 'full'">
         <ratel-editor (preview)="showPreview = !showPreview" (isPristine)="isPristine.next($event)" [tip]="'文章内容长度最少300个字符'"></ratel-editor>
     </div>
 
 
-    <div *ngIf="showPreview" fxFlex="48%" fxFlexOffset="4%" class="preview">
+    <div *ngIf="showPreview" fxFlex="48%" fxFlexOffset="4%" @togglePreview class="preview">
         <markdown [data]="editor.data"></markdown>
     </div>
 </div>

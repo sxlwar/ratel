@@ -15,7 +15,7 @@ import { uniqBy } from 'lodash';
     styleUrls: ['./article-manage.component.scss'],
 })
 export class ArticleManageComponent implements OnInit, OnDestroy {
-    displayedColumns: string[] = ['标题', '创建时间', '状态', '操作'];
+    displayedColumns: string[] = ['title', 'createdAt', 'isPublished', 'operate'];
 
     articles: Observable<MatTableDataSource<ArticleOverview>>;
 

@@ -15,11 +15,20 @@ import { ArticleService } from '../providers/article.service';
 import { ImageCroppedEvent } from 'ngx-image-cropper';
 import { UploadService, UploadResult } from 'src/app/providers/upload.service';
 import { isPlatformBrowser } from '@angular/common';
+import { trigger, transition, animate, state, style } from '@angular/animations';
 
 @Component({
     selector: 'ratel-article-creation',
     templateUrl: './article-creation.component.html',
     styleUrls: ['./article-creation.component.scss'],
+    animations: [
+        trigger('toggleFull', [
+            state('half', style({ 'min-width': '50%' })),
+            state('full', style({ 'min-width': '100%' })),
+            transition('half <=> full', [animate('500ms ease-out')]),
+        ]),
+        trigger('togglePreview', [transition('void <=> *', [animate('500ms ease-out')])]),
+    ],
 })
 export class ArticleCreationComponent implements OnInit, OnDestroy {
     form: FormGroup;
@@ -62,7 +71,7 @@ export class ArticleCreationComponent implements OnInit, OnDestroy {
         private _authService: AuthService,
         private _route: ActivatedRoute,
         private _upload: UploadService,
-         @Inject(PLATFORM_ID) private _platformId: Object
+        @Inject(PLATFORM_ID) private _platformId: Object,
     ) {
         this.initForm();
     }
