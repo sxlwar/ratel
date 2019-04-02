@@ -16,16 +16,22 @@ th {
     &:last-child {
         width: 10%;
     }
+    color: rgba($color: #fff, $alpha: 0.8);
+}
+
+th:last-child {
+    text-align: center;
 }
 
 tr {
     cursor: pointer;
     &:hover {
-        // background: #fff;
-        // CANCEL SET HOVER STYLE
         td {
-            color: #000;
+            color: #fff;
         }
+    }
+    td:not(.title) {
+        text-align: center;
     }
 }
 
@@ -34,4 +40,8 @@ mat-icon {
     &:hover {
         transform: scale(1.2);
     }
+}
+
+::ng-deep .mat-sort-header-container {
+    justify-content: center;
 }

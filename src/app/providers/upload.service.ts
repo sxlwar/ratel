@@ -25,7 +25,7 @@ export class UploadService extends BaseService {
 
     uploadTotal = 0;
 
-    private readonly urlPrefix = 'http://pghicsch6.bkt.clouddn.com/';
+    readonly urlPrefix = 'http://assets.hijavascript.com/';
 
     result$: Subject<UploadResult[]> = new Subject();
 
@@ -144,5 +144,23 @@ export class UploadService extends BaseService {
         this.uploadedCount = 0;
 
         this.uploadTotal = 0;
+    }
+
+    base64ToFile(dataUrl: string, fileName: string): File {
+        if (!dataUrl) {
+            return null;
+        }
+
+        const arr = dataUrl.split(',');
+        const mime = arr[0].match(/:(.*?);/)[1];
+        const bstr = atob(arr[1]);
+        let n = bstr.length;
+        const u8Arr = new Uint8Array(n);
+
+        while (n--) {
+            u8Arr[n] = bstr.charCodeAt(n);
+        }
+
+        return new File([u8Arr], fileName, { type: mime });
     }
 }

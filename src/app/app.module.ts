@@ -14,6 +14,9 @@ import { UploadService } from './providers/upload.service';
 import { SharedModule } from './shared/shared.module';
 
 import { TransferComponent } from './transfer/transfer.component';
+import { MarkdownModule, MarkedOptions } from 'ngx-markdown';
+import { EmojiService } from './providers/emoji.service';
+import { markedOptionsFactory } from './constant/markdown';
 
 @NgModule({
     declarations: [AppComponent, TransferComponent],
@@ -26,6 +29,13 @@ import { TransferComponent } from './transfer/transfer.component';
         HomeModule,
         HttpClientModule,
         SharedModule,
+        MarkdownModule.forRoot({
+            markedOptions: {
+                provide: MarkedOptions,
+                useFactory: markedOptionsFactory,
+                deps: [EmojiService]
+            }
+        })
     ],
     bootstrap: [AppComponent],
     providers: [UploadService, ErrorService, ArticleCreateGuard, AuthService],

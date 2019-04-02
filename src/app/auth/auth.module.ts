@@ -1,14 +1,12 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 
-import { LoginComponent } from './login/login.component';
 import { SharedModule } from '../shared/shared.module';
-import { BookMarkComponent } from './book-mark/book-mark.component';
-import { RouterModule } from '@angular/router';
+import { LoginComponent } from './login/login.component';
 
 @NgModule({
-    imports: [CommonModule, SharedModule, RouterModule],
-    declarations: [LoginComponent, BookMarkComponent],
+    imports: [CommonModule, SharedModule],
+    declarations: [LoginComponent],
     entryComponents: [LoginComponent],
     exports: [LoginComponent],
 })

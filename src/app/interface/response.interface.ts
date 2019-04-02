@@ -12,13 +12,14 @@ export interface ArticleOverview {
     summary: string;
     selected?: boolean; // 前端添加字段，用来实现某些效果；
     avatar: string;
+    isPublished: boolean;
+    thumbnail: string;
 }
 
 export interface Article extends ArticleOverview {
     updatedAt: string;
     subtitle: string;
     content: string;
-    isPublished?: boolean;
     isOriginal: boolean;
     statistics: ArticleStatistics;
     userId: number;

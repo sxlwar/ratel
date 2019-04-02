@@ -1,6 +1,6 @@
 <div fxLayout="row" (click)="view.next(article.id)" class="overview">
     <ul fxFlex=70%>
-        <li fxLayout="row" class="create">
+        <li fxLayout="row" class="owner">
             <img [src]="article.avatar" class="avatar">
             <div fxLayout="column" fxLayoutAlign="center start" class="author">
                 <h4>{{article.author}}</h4>
@@ -30,6 +30,6 @@
         </li>
     </ul>
     <div fxFlex="30%" fxFlexOffset="14px" fxLayoutAlign="start center">
-        <img mat-card-image [src]="'../../../assets/images/' + image">
+        <img mat-card-image [src]="image">
     </div>
 </div>

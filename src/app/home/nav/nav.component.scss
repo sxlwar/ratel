@@ -14,6 +14,14 @@ nav {
         }
     }
 
+    .video {
+        color: white;
+        margin-left: 4em;
+        cursor: pointer;
+        transform: translateY(4px);
+        font-size: 18px;
+    }
+
     .action {
         height: $header-height;
         color: $inactive-color;

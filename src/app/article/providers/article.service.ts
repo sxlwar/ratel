@@ -1,30 +1,32 @@
-import { HttpClient } from '@angular/common/http';
 import { isPlatformServer } from '@angular/common';
-import { Injectable, Inject, PLATFORM_ID } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Inject, Injectable, PLATFORM_ID } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { TransferState, makeStateKey } from '@angular/platform-browser';
+import { makeStateKey, TransferState } from '@angular/platform-browser';
 
-import { Observable, Subscription, of } from 'rxjs';
-import { catchError, mergeMap, switchMap, tap, filter } from 'rxjs/operators';
+import { empty, Observable, of, Subscription } from 'rxjs';
+import { catchError, filter, mergeMap, switchMap, tap } from 'rxjs/operators';
 
 import { CRUDVar } from '../../constant/constant';
 import {
     ArticleSearchRequest,
-    CreateArticleRequest,
     ArticleStatisticsUpdateRequest,
-    SeriesOverviewRequest,
     ArticleUpdateRequest,
+    CreateArticleRequest,
+    SeriesOverviewRequest,
 } from '../../interface/request.interface';
 import {
-    ArticleOverview,
-    CreateArticleResponse,
     Article,
+    ArticleDeleteResponse,
+    ArticleOverview,
     ArticleStatistics,
-    SeriesOverviewResponse,
     ArticleUpdateResponse,
+    SeriesOverviewResponse,
 } from '../../interface/response.interface';
 import { BaseService } from '../../providers/base.service';
 import { ErrorService } from '../../providers/error.service';
+import { ConfirmComponent } from '../../tool/confirm/confirm.component';
 
 @Injectable()
 export class ArticleService extends BaseService {
@@ -42,6 +44,7 @@ export class ArticleService extends BaseService {
         private readonly _error: ErrorService,
         private readonly transferState: TransferState,
         @Inject(PLATFORM_ID) private _platformId: Object,
+        private dialog: MatDialog,
     ) {
         super();
     }
@@ -104,9 +107,12 @@ export class ArticleService extends BaseService {
         return this._http.put(this.completeApiUrl(this.statisticsPath, CRUDVar.UPDATE), data);
     }
 
-    createArticle(data: CreateArticleRequest): Observable<CreateArticleResponse> {
+    /**
+     * TODO: 后台响应返回错了，暂时就用number，就是文章的id; 实际返回的响应应该是 CreateArticleResponse;
+     */
+    createArticle(data: CreateArticleRequest): Observable<number> {
         return this._http
-            .post<CreateArticleResponse>(this.completeApiUrl(this.articlePath, CRUDVar.CREATE), data)
+            .post<number>(this.completeApiUrl(this.articlePath, CRUDVar.CREATE), data)
             .pipe(catchError(this._error.handleHttpError));
     }
 
@@ -116,7 +122,7 @@ export class ArticleService extends BaseService {
             .pipe(catchError(this._error.handleHttpError));
     }
 
-    handleCreateArticleResponse<T>(response: Observable<T>, message = '创建成功'): Subscription {
+    handleOperateArticleResponse<T>(response: Observable<T>, message = '创建成功'): Subscription {
         return response.subscribe(_res => {
             this._snake.open(message, '', this.snakeBarConfig);
         });
@@ -139,5 +145,16 @@ export class ArticleService extends BaseService {
 
             return result;
         }
+    }
+
+    deleteArticle(id: number): Observable<ArticleDeleteResponse> {
+        const request = this._http
+            .request('DELETE', this.completeApiUrl(this.articlePath, CRUDVar.DELETE), { body: { id } })
+            .pipe(catchError(this._error.handleHttpError));
+
+        return this.dialog
+            .open(ConfirmComponent, { data: { title: '', message: '确认后此文章将无法找回，确定要删除这篇文章吗？' } })
+            .afterClosed()
+            .pipe(switchMap(confirmed => (confirmed ? request : empty())));
     }
 }

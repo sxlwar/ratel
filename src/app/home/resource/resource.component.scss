@@ -1,12 +1,10 @@
 @import '../../../theme/_variable.theme';
 
 #resource {
-    // background: #000;
     padding: 1em 0;
 
     h2 {
         text-align: center;
-        // color: #fff;
     }
 
     ul {
@@ -17,7 +15,8 @@
                 color: $active-bcg-primary;
                 margin: 0 0 0 1em;
                 text-decoration: none;
-                &:hover, &:active {
+                &:hover,
+                &:active {
                     color: $active-primary;
                     text-decoration: underline;
                 }
@@ -26,5 +25,14 @@
     }
     img {
         width: 32px;
+        &:hover {
+            cursor: pointer;
+        }
+    }
+}
+
+@media (max-width: 768px) {
+    a {
+        display: none;
     }
 }

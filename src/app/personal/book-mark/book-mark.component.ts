@@ -5,7 +5,8 @@ import { Observable, Subject, combineLatest } from 'rxjs';
 import { filter, map, startWith, takeWhile, take } from 'rxjs/operators';
 
 import { Bookmark } from '../../interface/response.interface';
-import { AuthService, StoreAction } from '../../providers/auth.service';
+import { AuthService } from '../../providers/auth.service';
+import { PersonalService, StoreAction } from '../providers/personal.service';
 
 @Component({
     selector: 'ratel-book-mark',
@@ -13,7 +14,11 @@ import { AuthService, StoreAction } from '../../providers/auth.service';
     styleUrls: ['./book-mark.component.scss'],
 })
 export class BookMarkComponent implements OnInit, OnDestroy {
-    displayedColumns: string[] = ['标题', '创建时间', '作者', '操作'];
+
+    /**
+     * 根据Bookmark接口设置的前三个字段，用来给 material table 提供 sort 功能 。
+     */
+    displayedColumns: string[] = ['title', 'createdAt', 'author', 'operate'];
 
     bookmarks: Observable<MatTableDataSource<Bookmark>>;
 
@@ -29,7 +34,7 @@ export class BookMarkComponent implements OnInit, OnDestroy {
 
     isAlive = true;
 
-    constructor(private _authService: AuthService) {}
+    constructor(private _authService: AuthService, private _personalService: PersonalService) {}
 
     ngOnInit() {
         this.initialModel();
@@ -41,7 +46,7 @@ export class BookMarkComponent implements OnInit, OnDestroy {
             map(user => user.id),
         );
         const response = combineLatest(
-            this._authService.getBookmarks(id).pipe(take(1)),
+            this._personalService.getBookmarks(id).pipe(take(1)),
             this.spy$.asObservable().pipe(startWith(null)),
         ).pipe(
             map(([res, spy]) => {
@@ -77,7 +82,7 @@ export class BookMarkComponent implements OnInit, OnDestroy {
             take(1),
         );
 
-        this._authService.storeArticle(request, this.spy(target));
+        this._personalService.storeArticle(request, this.spy(target));
     }
 
     private spy = (target: Bookmark): (() => void) => {

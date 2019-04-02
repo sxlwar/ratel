@@ -1,0 +1,9 @@
+<mat-sidenav-container>
+    <mat-sidenav mode="side" opened fixedTopGap fixedBottomGap>
+        <mat-nav-list>
+            <a mat-list-item [routerLink]="['bookmark']" routerLinkActive="active" fxLayoutAlign="center center">收藏夹</a>
+            <a mat-list-item [routerLink]="['stored']"  routerLinkActive="active" fxLayoutAlign="center center">我的文章</a>
+        </mat-nav-list>
+    </mat-sidenav>
+    <mat-sidenav-content> <router-outlet></router-outlet> </mat-sidenav-content>
+</mat-sidenav-container>

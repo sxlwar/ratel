@@ -32,11 +32,7 @@ export class CommentComponent implements OnInit, OnDestroy {
 
     private updateEnjoy$: Subject<EnjoyUpdateInfo> = new Subject();
 
-    constructor(
-        private _router: Router,
-        private _route: ActivatedRoute,
-        private _commentService: CommentService,
-    ) {}
+    constructor(private _router: Router, private _route: ActivatedRoute, private _commentService: CommentService) {}
 
     ngOnInit() {
         const refreshWhenRouterParamChanged = this._router.events.pipe(filter(event => event instanceof NavigationEnd));

@@ -8,7 +8,6 @@ import { FourZeroFourComponent } from './tool/four-zero-four/four-zero-four.comp
 import { ReplyFullComponent } from './comment/reply-full/reply-full.component';
 import { ArticleCreationComponent } from './article/article-creation/article-creation.component';
 import { ArticleCreateGuard } from './providers/guard.service';
-import { BookMarkComponent } from './auth/book-mark/book-mark.component';
 
 const appRoutes: Routes = [
     { path: 'home', component: HomeComponent },
@@ -16,8 +15,8 @@ const appRoutes: Routes = [
     { path: 'topic', loadChildren: './topic/topic.module#TopicModule' },
     { path: 'home/:id/reply', component: ReplyFullComponent },
     { path: 'create', component: ArticleCreationComponent, canDeactivate: [ArticleCreateGuard] },
-    { path: 'bookmark', component: BookMarkComponent },
-    { path: ':id', redirectTo: 'home/:id', pathMatch: 'full' },
+    { path: 'personal', loadChildren: './personal/personal.module#PersonalModule' },
+    { path: ':id', redirectTo: 'home/:id', pathMatch: 'full' }, // for search functionality
     { path: '', redirectTo: '/home', pathMatch: 'full' },
     { path: '**', component: FourZeroFourComponent },
 ];

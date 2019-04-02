@@ -1,27 +1,19 @@
 # Ratel
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 6.0.8.
+这个项目是[Angular完全开发手册](http://www.hijavascript.com) 的官网代码
 
 ## Development server
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
-
-## Code scaffolding
-
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+运行 `ng serve` 启动开发服务器，然后在浏览器中输入 `http://localhost:4200`。
 
 ## Build
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+运行 `npm run build:ssr` 会启动项目的构建过程，运行完成将会在 dist 目录下生成以下结构：
 
-## Running unit tests
+```js
+----|
+    ----browser|
+    ----server|
+```
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+browser文件夹下为打包后的源代码。server文件夹下为服务端渲染所需要的代码。

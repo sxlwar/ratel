@@ -8,9 +8,16 @@
 body {
     margin: 0;
     padding: 0;
-    font-size: 14px;
+    font-size: 16px;
     background: rgba(185, 185, 185, 0.3);
-    font-family: monospace, serif;
+    font-family: consolas, 'Microsoft Yahei', monospace, serif;
+    line-height: 1.6;
+    tt,
+    code,
+    kbd,
+    samp {
+        font-family: consolas, Menlo, 'Microsoft Yahei', Arial, Helvetica, sans-serif;
+    }
 }
 ul {
     list-style: none;
@@ -41,7 +48,8 @@ ul {
     color: #000;
 }
 
-.ratel-form-field .mat-checkbox-frame {
+.ratel-form-field .mat-checkbox-frame,
+.ratel-form-field .mat-radio-outer-circle {
     border-color: rgba($active-bcg-primary, 0.7);
 }
 
@@ -82,4 +90,46 @@ ul {
 .ratel-form-field .mat-input-element:disabled,
 .mat-form-field-appearance-outline.mat-form-field-disabled .mat-form-field-label {
     color: rgba($active-bcg-primary, 0.5);
+}
+
+// 没找到单选按钮禁用状态不显示的原因，所以直接把material theme文件里的代码复制过来了。
+.ratel-form-field .mat-radio-disabled {
+    &.mat-radio-checked .mat-radio-outer-circle,
+    .mat-radio-outer-circle {
+        border-color: #686868;
+    }
+
+    .mat-radio-ripple .mat-ripple-element,
+    .mat-radio-inner-circle {
+        background-color: #686868;
+    }
+
+    .mat-radio-label-content {
+        color: #686868;
+    }
+}
+
+// for markdown
+.blockquote {
+    border-left: 0.25em solid #dfe2e5;
+    color: #6a737d;
+    padding: 0 1em;
+}
+
+markdown table {
+    border-collapse: collapse;
+    border-spacing: 0;
+    tr {
+        background-color: #fff;
+        border-top: 1px solid #c6cbd1;
+        &:nth-child(2n) {
+            background-color: #f6f8fa;
+        }
+    }
+
+    th,
+    td {
+        border: 1px solid #dfe2e5;
+        padding: 6px 13px;
+    }
 }

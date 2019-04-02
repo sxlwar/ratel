@@ -1,45 +1,50 @@
+@import '../../../theme/_variable.theme.scss';
 @import '../../comment/reply-full/reply-full.component';
+
+$white-space: 2em;
 
 .ratel-form-field {
     background: #fff;
-    padding: 2em;
+    padding: $white-space;
     .form-field {
         margin: 1em 0;
         & > span {
             margin-right: 2em;
         }
 
-        mat-checkbox {
+        mat-checkbox,
+        mat-radio-button {
             margin: 0 1em;
+        }
+        button {
+            transform: translateY(-25%);
+            @include fileSelectWrapper();
+        }
+    }
+    .thumbnail {
+        width: 50%;
+        height: 150px;
+        image-cropper {
+            text-align: left !important;
+        }
+        img {
+            padding: 5px;
         }
     }
 }
 
 .submit {
+    padding: 0 $white-space 1em;
+    background: #fff;
     button:last-child {
         margin-left: 2em;
-    }
-}
-.full-screen {
-    justify-content: center !important;
-    .editor {
-        max-width: 80% !important;
-        animation: grow .5s linear;
-    }
-}
-
-@keyframes grow {
-    0% {
-        max-width: 50%;
-    }
-    50% {
-        max-width: 65%;
-    }
-    100% {
-        max-width: 80%;
     }
 }
 
 :host::ng-deep markdown img {
     max-width: 100%;
+}
+
+:host::ng-deep image-cropper .cropper {
+    margin-left: 0 !important;
 }

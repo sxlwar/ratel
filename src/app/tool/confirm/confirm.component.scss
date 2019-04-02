@@ -1,3 +1,7 @@
 button {
     margin: 0 1em;
 }
+
+mat-dialog-actions {
+    flex-direction: row-reverse;
+}

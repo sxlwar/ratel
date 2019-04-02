@@ -6,11 +6,13 @@ export interface CreateArticleRequest {
     category: string[];
     isOriginal: boolean;
     userId: number;
+    thumbnail: string;
 }
 
 export interface ArticleUpdateRequest {
     id: number;
-    content: string;
+    content?: string;
+    isPublish?: boolean;
 }
 
 export interface ArticleDeleteRequest {
@@ -25,6 +27,8 @@ export interface ArticleSearchRequest {
     limit: number;
     isOverview: boolean;
     rank: 'enjoy' | 'view' | 'stored';
+    allState: boolean;
+    userId: number;
 }
 
 export interface ArticleStatisticsUpdateRequest {

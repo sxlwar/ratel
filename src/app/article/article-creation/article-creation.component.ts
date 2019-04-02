@@ -1,21 +1,34 @@
-import { Component, OnInit, ViewChild, OnDestroy } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewChild, Inject, PLATFORM_ID } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
 
+import { BehaviorSubject, of, Observable, iif } from 'rxjs';
+import { filter, takeWhile, tap, take, share, map, switchMap, distinctUntilChanged } from 'rxjs/operators';
+import { Article } from 'src/app/interface/response.interface';
+
+import { User } from '../../auth/interface/auth.interface';
 import { EditorComponent } from '../../codemirror/editor/editor.component';
 import { ArticleCategory } from '../../constant/constant';
-import { ArticleService } from '../providers/article.service';
 import { DeactivateGuard } from '../../interface/app.interface';
-import { of } from 'rxjs';
-import { User } from '../../auth/interface/auth.interface';
 import { AuthService } from '../../providers/auth.service';
-import { filter, takeWhile } from 'rxjs/operators';
-import { ActivatedRoute } from '@angular/router';
-import { Article } from 'src/app/interface/response.interface';
+import { ArticleService } from '../providers/article.service';
+import { ImageCroppedEvent } from 'ngx-image-cropper';
+import { UploadService, UploadResult } from 'src/app/providers/upload.service';
+import { isPlatformBrowser } from '@angular/common';
+import { trigger, transition, animate, state, style } from '@angular/animations';
 
 @Component({
     selector: 'ratel-article-creation',
     templateUrl: './article-creation.component.html',
     styleUrls: ['./article-creation.component.scss'],
+    animations: [
+        trigger('toggleFull', [
+            state('half', style({ 'min-width': '50%' })),
+            state('full', style({ 'min-width': '100%' })),
+            transition('half <=> full', [animate('500ms ease-out')]),
+        ]),
+        trigger('togglePreview', [transition('void <=> *', [animate('500ms ease-out')])]),
+    ],
 })
 export class ArticleCreationComponent implements OnInit, OnDestroy {
     form: FormGroup;
@@ -43,11 +56,22 @@ export class ArticleCreationComponent implements OnInit, OnDestroy {
 
     article: Article;
 
+    /**
+     * 给路由守卫提供跳转的依据
+     */
+    isPristine: BehaviorSubject<boolean> = new BehaviorSubject(true);
+
+    imageChangedEvent: Event;
+
+    isBrowser = isPlatformBrowser(this._platformId);
+
     constructor(
         private _fb: FormBuilder,
         private _articleService: ArticleService,
         private _authService: AuthService,
         private _route: ActivatedRoute,
+        private _upload: UploadService,
+        @Inject(PLATFORM_ID) private _platformId: Object,
     ) {
         this.initForm();
     }
@@ -61,6 +85,23 @@ export class ArticleCreationComponent implements OnInit, OnDestroy {
             .subscribe(user => (this.user = user));
 
         this.checkUpdate();
+
+        /**
+         * FIXME: 文章发表完成之后，表单的值又重新被发出了一次，导致isPristine最后发出的值是 false，路由跳转时被否。
+         * 先用distinctUntilChanged将就的处理一下。回头还是需要找出重复发出值的原因。
+         */
+        this.form.valueChanges
+            .pipe(distinctUntilChanged((pre, cur) => JSON.stringify(pre) === JSON.stringify(cur)))
+            .subscribe(_ => this.isPristine.next(false));
+
+        this.isCustomThumbnail.valueChanges.subscribe(needThumbnail => {
+            if (!this.form.disabled) {
+                const validateFn = needThumbnail ? Validators.required : null;
+
+                this.thumbnail.setValidators(validateFn);
+                this.thumbnail.updateValueAndValidity();
+            }
+        });
     }
 
     private checkUpdate(): void {
@@ -70,7 +111,7 @@ export class ArticleCreationComponent implements OnInit, OnDestroy {
             this.isUpdate = true;
 
             this._articleService.getArticle(of(params.id)).subscribe(article => {
-                const { author, title, subtitle, category, isOriginal, content, userId } = article;
+                const { author, title, subtitle, category, isOriginal, content, thumbnail } = article;
 
                 this.article = article;
 
@@ -78,23 +119,75 @@ export class ArticleCreationComponent implements OnInit, OnDestroy {
                 this.subtitleCtrl.patchValue(subtitle);
                 this.authorCtrl.patchValue(author);
                 this.isOriginalCtrl.patchValue(isOriginal);
+                this.isCustomThumbnail.patchValue(!!thumbnail);
                 this.form.disable();
                 this.categories.forEach(item => (item.selected = category.includes(item.category)));
                 this.updateCategories();
                 this.editor.data = content;
+                this.editor.markAsPristine(true);
             });
         }
     }
 
+    /**
+     * 在提交表单之前检查用户是否使用自定义封面图片，确保传给后的 thumbnail 字段是一个url地址而不是图片。
+     */
     publish(isPublished: boolean): void {
-        const response = this._articleService.createArticle({
-            ...this.form.value,
-            isPublished,
-            content: this.getContent(),
-            userId: this.user.id,
-        });
+        const response = this.checkThumbnail().pipe(
+            switchMap(({ url, name }) =>
+                this._articleService.createArticle({
+                    ...this.form.value,
+                    thumbnail: url,
+                    isPublished,
+                    content: this.getContent(),
+                    userId: this.user.id,
+                }),
+            ),
+            share(),
+        );
 
-        this._articleService.handleCreateArticleResponse(response);
+        this._articleService.handleOperateArticleResponse(response);
+
+        /**
+         * 切换到更新状态
+         */
+        response.subscribe(id => {
+            this.modifyPristineState(!!id);
+
+            if (!!id) {
+                this.isUpdate = true;
+                this.article = { ...this.form.value, id } as Article;
+                this.form.disable();
+            }
+        });
+    }
+
+    update(): void {
+        const response = this._articleService
+            .updateArticle({ id: this.article.id, content: this.editor.data })
+            .pipe(tap(({ isUpdated }) => this.modifyPristineState(isUpdated)));
+
+        this._articleService.handleOperateArticleResponse(response, '更新成功');
+    }
+
+    private checkThumbnail(): Observable<UploadResult> {
+        const createFile = (): FileList => {
+            const file = this._upload.base64ToFile(this.thumbnail.value, this.titleCtrl.value);
+
+            return {
+                0: file,
+                length: 1,
+                item() {
+                    return file;
+                },
+            } as FileList;
+        };
+
+        return iif(
+            () => this.isCustomThumbnail.value,
+            this._upload.uploadImage(createFile()).pipe(map(([result]) => result)),
+            of({ url: '', name: '' }),
+        );
     }
 
     private getContent(): string {
@@ -103,11 +196,12 @@ export class ArticleCreationComponent implements OnInit, OnDestroy {
             : this.editor.data;
     }
 
-    update(): void {
-        this._articleService.handleCreateArticleResponse(
-            this._articleService.updateArticle({ id: this.article.id, content: this.editor.data }),
-            '更新成功',
-        );
+    /**
+     * 需要同时重置此组件的表单及editor组件的状态
+     */
+    private modifyPristineState(isPristine: boolean) {
+        this.isPristine.next(isPristine);
+        this.editor.markAsPristine(isPristine);
     }
 
     private initForm(): void {
@@ -117,6 +211,8 @@ export class ArticleCreationComponent implements OnInit, OnDestroy {
             subtitle: '',
             category: ['', Validators.required],
             isOriginal: true,
+            isCustomThumbnail: false,
+            thumbnail: '',
         });
     }
 
@@ -178,13 +274,39 @@ export class ArticleCreationComponent implements OnInit, OnDestroy {
         return this.form.get('isOriginal');
     }
 
+    get isCustomThumbnail(): AbstractControl {
+        return this.form.get('isCustomThumbnail');
+    }
+
+    get thumbnail(): AbstractControl {
+        return this.form.get('thumbnail');
+    }
+
     allowPublish(): boolean {
         return this.form.valid && this.editor.data.length > 300;
     }
 
     canDeactivate(): DeactivateGuard[] {
-        return [{ canDeactivate: of(false), message: '确定离开此页面吗？', title: '放弃编辑' }];
+        return [
+            {
+                canDeactivate: this.isPristine.asObservable().pipe(take(1)),
+                message: '可能有未保存的内容，确定离开此页面吗？',
+                title: '放弃编辑',
+            },
+        ];
     }
+
+    fileChangeEvent(event: Event): void {
+        this.imageChangedEvent = event;
+    }
+
+    imageCropped(event: ImageCroppedEvent) {
+        this.thumbnail.patchValue(event.base64);
+    }
+
+    imageLoaded() {}
+
+    loadImageFailed() {}
 
     ngOnDestroy() {
         this.isAlive = false;

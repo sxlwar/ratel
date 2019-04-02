@@ -2,24 +2,24 @@
 <div class="mat-elevation-z8">
     <table mat-table [dataSource]="bookmarks | async" matSort>
 
-        <ng-container matColumnDef="标题">
+        <ng-container matColumnDef="title">
             <th mat-header-cell *matHeaderCellDef> 标题 </th>
-            <td mat-cell *matCellDef="let row"> {{row.title}} </td>
+            <td mat-cell *matCellDef="let element" class="title"> {{element.title}} </td>
         </ng-container>
 
-        <ng-container matColumnDef="创建时间">
+        <ng-container matColumnDef="createdAt">
             <th mat-header-cell *matHeaderCellDef mat-sort-header> 创建时间 </th>
-            <td mat-cell *matCellDef="let row"> {{row.createdAt}} </td>
+            <td mat-cell *matCellDef="let element"> {{element.createdAt}} </td>
         </ng-container>
 
-        <ng-container matColumnDef="作者">
+        <ng-container matColumnDef="author">
             <th mat-header-cell *matHeaderCellDef mat-sort-header> 作者 </th>
-            <td mat-cell *matCellDef="let row"> {{row.author}} </td>
+            <td mat-cell *matCellDef="let element"> {{element.author}} </td>
         </ng-container>
 
-        <ng-container matColumnDef="操作">
+        <ng-container matColumnDef="operate">
             <th mat-header-cell *matHeaderCellDef> 操作 </th>
-            <td mat-cell *matCellDef="let row"> <mat-icon fontIcon="icon-delete" color="primary" (click)="remove(row);$event.stopPropagation()"></mat-icon> </td>
+            <td mat-cell *matCellDef="let element"> <mat-icon fontIcon="icon-staro" color="primary" (click)="remove(element);$event.stopPropagation()"></mat-icon> </td>
         </ng-container>
 
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>

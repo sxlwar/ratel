@@ -14,19 +14,33 @@ import { ActivatedRoute } from '@angular/router';
     styleUrls: ['./editor.component.scss'],
 })
 export class EditorComponent implements OnInit {
-    @Input() public tip = '';
-    @ViewChild(CodemirrorComponent) private CodeMirror: CodemirrorComponent;
-    @Output() public change: EventEmitter<string> = new EventEmitter();
-    @Output() public preview: EventEmitter<boolean> = new EventEmitter();
+    @Input()
+    public tip = '';
+
+    @ViewChild(CodemirrorComponent)
+    private CodeMirror: CodemirrorComponent;
+
+    /**
+     * 标记数据是否发生了改变，用户提交表单后，父组件可调用此组件的的markAsPristine方法将其重置成 pristine 状态，同时还会保持数据状态
+     */
+    @Output()
+    public isPristine: EventEmitter<boolean> = new EventEmitter();
+
+    @Output()
+    public preview: EventEmitter<boolean> = new EventEmitter();
+
     /** 是否显示 `返回普通编辑器` icon */
     public needShow: boolean;
+
     public data = '';
+
     public uploader = new FileUploader({ url: 'localhost:3000' });
+
     public codeMirrorOptions = {
         theme: 'eclipse',
         mode: 'markdown',
         indentUnit: 4,
-        lineNumber: true,
+        lineWrapping: true,
         styleActiveLine: true,
         autoFocus: true,
         dragDrop: true,
@@ -34,12 +48,7 @@ export class EditorComponent implements OnInit {
     };
     public fileDropOver = false;
 
-
-    public constructor(
-        private _upload: UploadService,
-        private locationServ: Location,
-        public router: ActivatedRoute,
-    ) { }
+    public constructor(private _upload: UploadService, private locationServ: Location, public router: ActivatedRoute) {}
 
     /**
      *@function back to prev route
@@ -48,7 +57,6 @@ export class EditorComponent implements OnInit {
     public back(): void {
         this.locationServ.back();
     }
-
 
     public onFileDropOver(isOver: boolean): void {
         if (this.fileDropOver !== isOver) {
@@ -70,7 +78,12 @@ export class EditorComponent implements OnInit {
             doc.replaceRange('\n' + url + '\n', pos);
         });
     }
+
     public ngOnInit() {
-        this.router.params.subscribe(para => this.needShow = !!para.id);
+        this.router.params.subscribe(para => (this.needShow = !!para.id));
+    }
+
+    public markAsPristine(isPristine: boolean) {
+        this.isPristine.next(isPristine);
     }
 }

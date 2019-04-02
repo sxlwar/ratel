@@ -39,4 +39,8 @@ export class ResourceComponent implements OnInit {
     constructor() {}
 
     ngOnInit() {}
+
+    getResource(resource: EduResource): void {
+        window.open(resource.url);
+    }
 }
