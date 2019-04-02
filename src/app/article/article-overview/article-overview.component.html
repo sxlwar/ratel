@@ -1,15 +1,14 @@
-<div fxLayout="row" (click)="view.next(article.id)" class="overview">
-    <ul fxFlex=70%>
-        <li fxLayout="row" class="owner">
-            <img [src]="article.avatar" class="avatar">
-            <div fxLayout="column" fxLayoutAlign="center start" class="author">
-                <h4>{{article.author}}</h4>
-                <h6>{{article.createdAt}}</h6>
-            </div>
-        </li>
-        <li class="title">
-            <h3>{{article.title}}</h3>
-        </li>
+<div (click)="view.next(article.id)" class="overview">
+    <h3>{{article.title}}</h3>
+
+    <div class="user-info__avatar">
+        <img [src]="article.avatar" class="avatar">
+        <h4>{{article.author}}</h4>
+        <h6>{{article.createdAt}}</h6>
+    </div>
+
+
+    <div>
         <li class="summary">
             <ng-container *ratelShellNoRender>
                 <markdown [data]="article.summary"></markdown>
@@ -28,8 +27,8 @@
                 <span>{{article.statistics?.enjoy}}</span>
             </span>
         </li>
-    </ul>
-    <div fxFlex="30%" fxFlexOffset="14px" fxLayoutAlign="start center">
-        <img mat-card-image [src]="image">
+
     </div>
+
+    <img class="article--image__thumbnail" [src]="image">
 </div>
