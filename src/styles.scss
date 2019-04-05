@@ -116,20 +116,25 @@ ul {
     padding: 0 1em;
 }
 
-markdown table {
-    border-collapse: collapse;
-    border-spacing: 0;
-    tr {
-        background-color: #fff;
-        border-top: 1px solid #c6cbd1;
-        &:nth-child(2n) {
-            background-color: #f6f8fa;
+markdown {
+    table {
+        border-collapse: collapse;
+        border-spacing: 0;
+        tr {
+            background-color: #fff;
+            border-top: 1px solid #c6cbd1;
+            &:nth-child(2n) {
+                background-color: #f6f8fa;
+            }
+        }
+
+        th,
+        td {
+            border: 1px solid #dfe2e5;
+            padding: 6px 13px;
         }
     }
-
-    th,
-    td {
-        border: 1px solid #dfe2e5;
-        padding: 6px 13px;
+    & > p {
+        text-indent: 2em;
     }
 }

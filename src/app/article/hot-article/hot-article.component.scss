@@ -1,5 +1,5 @@
 ul {
-    padding: 1em 0;
+    padding: 1em 1em 1em 0;
     cursor: pointer;
     h3 {
         margin-top: 0;
@@ -9,6 +9,7 @@ ul {
     .author {
         font-size: 12px;
         span {
+            display: block;
             margin-right: 1em;
         }
     }
@@ -16,6 +17,7 @@ ul {
         font-size: 14px;
         line-height: 24px;
         margin-right: 2em;
+        white-space: nowrap;
         mat-icon {
             margin-right: 5px;
         }

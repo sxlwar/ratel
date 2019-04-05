@@ -12,8 +12,8 @@
 
         <div *ngFor="let item of hotArticles | async index as idx" fxLayout="row" [@inOut]="item.selected ? 'active' : 'inactive'"
             (mouseenter)="item.selected = true" (mouseleave)="item.selected = false" class="rank">
-            <span fxFlex="10%" fxFlexAlign="center">{{idx}}</span>
-            <div fxFlex=90%>
+            <span fxFlex="15%" fxFlexAlign="center">{{idx}}</span>
+            <div fxFlex=85%>
                 <ratel-hot-article [article]="item" (view)="showArticle($event)"></ratel-hot-article>
             </div>
         </div>
