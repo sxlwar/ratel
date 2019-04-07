@@ -10,11 +10,13 @@
       border: 1px solid rgba(mat-color($foreground, secondary-text), .03);
       box-shadow: 0 2px 2px rgba(0,0,0,0.24), 0 0 2px rgba(0,0,0,0.12);
       margin: 4px;
+      background: #fff;
     }
 
     .docs-example-viewer-title {
-      color: mat-color($foreground, secondary-text);
-      background: rgba(mat-color($foreground, secondary-text), .03);
+    //   color: mat-color($foreground, secondary-text);
+    //   background: rgba(mat-color($foreground, secondary-text), .03);
+      background: rgba(0, 0, 0, .03);
     }
 
     .docs-example-source-copy {
@@ -30,6 +32,10 @@
     .docs-example-source {
       border-bottom: 1px solid mat-color($foreground, divider);
       overflow-x: scroll;
+    }
+
+    .mat-tab-label-content {
+        color: rgba(0, 0, 0, .8);
     }
   }
 }

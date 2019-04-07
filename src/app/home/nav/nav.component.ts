@@ -77,7 +77,7 @@ export class NavComponent implements OnInit, OnDestroy {
                 this.router.navigateByUrl('/home');
                 break;
             case ArticleCategory.NGX_FORMLY_ZORRO:
-                this.router.navigateByUrl('/ngx-formly-zorro');
+                this.router.navigate(['/', 'zorro']);
                 break;
             default:
                 this.router.navigate(['/', 'topic', topic.topic]);

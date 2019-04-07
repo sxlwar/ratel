@@ -20,12 +20,12 @@
                         "tsConfig": "src/tsconfig.app.json",
                         "assets": ["src/favicon.ico", "src/assets"],
                         "styles": [
+                            "node_modules/ng-zorro-antd/ng-zorro-antd.min.css",
                             "src/theme/ratel.material.theme.scss",
                             "node_modules/prismjs/themes/prism-okaidia.css",
-                            "src/styles.scss",
-                            "src/icon.scss",
                             "node_modules/pace-js/templates/pace-theme-flash.tmpl.css",
-                            "node_modules/ng-zorro-antd/ng-zorro-antd.min.css"
+                            "src/icon.scss",
+                            "src/styles.scss"
                         ],
                         "scripts": [
                             "node_modules/marked/lib/marked.js",

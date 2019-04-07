@@ -13,11 +13,11 @@ const appRoutes: Routes = [
     { path: 'home', component: HomeComponent },
     { path: 'home/:id', component: ArticleComponent, runGuardsAndResolvers: 'paramsChange' },
     { path: 'topic', loadChildren: './topic/topic.module#TopicModule' },
+    { path: 'zorro', loadChildren: './ngx-formly-zorro/demo/src/app/ui/ui-ng-zorro-antd/config.module#ConfigModule' },
     { path: 'home/:id/reply', component: ReplyFullComponent },
     { path: 'create', component: ArticleCreationComponent, canDeactivate: [ArticleCreateGuard] },
     { path: 'personal', loadChildren: './personal/personal.module#PersonalModule' },
     { path: ':id', redirectTo: 'home/:id', pathMatch: 'full' }, // for search functionality
-    // { path: 'ng_formly_zorro', loadChildren: './ngx-formly-zorro/demo/src/app/ui/ui-ng-zorro-antd/config.module#ConfigModule' },
     { path: '', redirectTo: '/home', pathMatch: 'full' },
     { path: '**', component: FourZeroFourComponent },
 ];
