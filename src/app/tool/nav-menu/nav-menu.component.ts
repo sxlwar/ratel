@@ -26,6 +26,7 @@ export class NavMenuComponent implements OnInit {
         { label: 'TypeScript', selected: false, topic: ArticleCategory.typescript },
         { label: 'JavaScript', selected: false, topic: ArticleCategory.javascript },
         { label: 'Other', selected: false, topic: ArticleCategory.other },
+        { label: 'NGX_FORMLY_ZORRO', selected: false, topic: ArticleCategory.NGX_FORMLY_ZORRO },
     ];
 
     @Output()

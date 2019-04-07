@@ -11,6 +11,7 @@ import { User } from '../../auth/interface/auth.interface';
 import { LoginComponent } from '../../auth/login/login.component';
 import { AuthService } from '../../providers/auth.service';
 import { NavItem } from '../../tool/interface/tool.interface';
+import { ArticleCategory } from 'src/app/constant/constant';
 
 @Component({
     selector: 'ratel-nav',
@@ -71,10 +72,15 @@ export class NavComponent implements OnInit, OnDestroy {
     }
 
     onTopicChange(topic: NavItem): void {
-        if (topic.topic === '') {
-            this.router.navigateByUrl('/home');
-        } else {
-            this.router.navigate(['/', 'topic', topic.topic]);
+        switch (topic.topic) {
+            case '':
+                this.router.navigateByUrl('/home');
+                break;
+            case ArticleCategory.NGX_FORMLY_ZORRO:
+                this.router.navigateByUrl('/ngx-formly-zorro');
+                break;
+            default:
+                this.router.navigate(['/', 'topic', topic.topic]);
         }
     }
 

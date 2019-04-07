@@ -12,6 +12,7 @@ export enum ArticleCategory {
     typescript = 'typescript',
     javascript = 'javascript',
     other = 'other',
+    NGX_FORMLY_ZORRO = 'NGX_FORMLY_ZORRO'
 }
 
 export const QiniuErrorCode = {
