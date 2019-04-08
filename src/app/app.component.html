@@ -2,6 +2,21 @@
 
 <div id="content">
     <router-outlet></router-outlet>
+
+    <ng-container *ngIf="inHomePage | async">
+        <div [matMenuTriggerFor]="videoMenu" id="video" matTooltip="视频资料" matTooltipPosition="above"
+            fxLayoutAlign="center center">
+            <mat-icon fontIcon="icon-previewcode"></mat-icon>
+        </div>
+        <mat-menu #videoMenu="matMenu" yPosition="below">
+            <a mat-menu-item
+                href="http://m.study.163.com/provider/400000000664045/index.htm?share=2&shareId=400000000664045"
+                target="__blank">移动端</a>
+            <a mat-menu-item
+                href="https://study.163.com/provider/400000000664045/index.htm?share=2&shareId=400000000664045"
+                target="__blank">网页端</a>
+        </mat-menu>
+    </ng-container>
 </div>
 
 <ratel-article-list [search]="searchObs" [display]="showDrawer" (goTo)="navigate($event)"></ratel-article-list>

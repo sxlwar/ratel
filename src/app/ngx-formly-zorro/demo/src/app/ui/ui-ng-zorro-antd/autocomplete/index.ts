@@ -102,7 +102,7 @@ const AutocompleteExampleConfig: NzDebugConfig = {
         NzDefaultActiveFirstOptionFieldConfig,
         NzOverlayClassNameFieldConfig,
         NzOverlayStyleFieldConfig,
-        // NzWidthFieldConfig, // TODO: unavailable, me by a bug;
+        NzWidthFieldConfig,
       ],
     },
   ],

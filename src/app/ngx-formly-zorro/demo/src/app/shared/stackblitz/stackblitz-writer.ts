@@ -15,34 +15,34 @@ const TEMPLATE_FILES = {
     { file: 'main.ts', filecontent: require('!!raw-loader!../../../assets/stackblitz/main.ts') },
     { file: 'index.html', filecontent: require('!!raw-loader!../../../assets/stackblitz/index.html') },
   ],
-  bootstrap: [
-    { file: 'styles.scss', filecontent: `@import '~bootstrap/scss/bootstrap.scss';` },
-  ],
-  material: [
-    { file: 'styles.scss', filecontent: `@import '~@angular/material/prebuilt-themes/deeppurple-amber.css';` },
-  ],
-  kendo: [
-    { file: 'styles.scss', filecontent: `@import '~@progress/kendo-theme-default/dist/all.css';` },
-  ],
-  primeng: [
-    { file: 'styles.scss', filecontent: `
-      @import '~primeng/resources/primeng.min.css';
-      @import '~primeng/resources/themes/bootstrap/theme.css';
-    ` },
-  ],
-  ionic: [
-    { file: 'styles.scss', filecontent: `
-      @import "~@ionic/angular/css/core.css";
-      @import "~@ionic/angular/css/normalize.css";
-      @import "~@ionic/angular/css/structure.css";
-      @import "~@ionic/angular/css/typography.css";
+//   bootstrap: [
+//     { file: 'styles.scss', filecontent: `@import '~bootstrap/scss/bootstrap.scss';` },
+//   ],
+//   material: [
+//     { file: 'styles.scss', filecontent: `@import '~@angular/material/prebuilt-themes/deeppurple-amber.css';` },
+//   ],
+//   kendo: [
+//     { file: 'styles.scss', filecontent: `@import '~@progress/kendo-theme-default/dist/all.css';` },
+//   ],
+//   primeng: [
+//     { file: 'styles.scss', filecontent: `
+//       @import '~primeng/resources/primeng.min.css';
+//       @import '~primeng/resources/themes/bootstrap/theme.css';
+//     ` },
+//   ],
+//   ionic: [
+//     { file: 'styles.scss', filecontent: `
+//       @import "~@ionic/angular/css/core.css";
+//       @import "~@ionic/angular/css/normalize.css";
+//       @import "~@ionic/angular/css/structure.css";
+//       @import "~@ionic/angular/css/typography.css";
 
-      @import "~@ionic/angular/css/padding.css";
-      @import "~@ionic/angular/css/float-elements.css";
-      @import "~@ionic/angular/css/text-alignment.css";
-      @import "~@ionic/angular/css/flex-utils.css";
-    ` },
-  ],
+//       @import "~@ionic/angular/css/padding.css";
+//       @import "~@ionic/angular/css/float-elements.css";
+//       @import "~@ionic/angular/css/text-alignment.css";
+//       @import "~@ionic/angular/css/flex-utils.css";
+//     ` },
+//   ],
   'ng-zorro-antd': [
     { file: 'styles.scss', filecontent: `@import '~ng-zorro-antd/ng-zorro-antd.css';`},
   ],
@@ -68,47 +68,47 @@ const dependencies = {
 
     '@ngx-formly/core': formlyVersion,
   },
-  bootstrap: {
-    '@ngx-formly/bootstrap': formlyVersion,
-    'bootstrap': '^4.2.1',
-    'popper.js': '^1.14',
-    'jquery': '^3',
-  },
-  material: {
-    '@ngx-formly/material': formlyVersion,
-  },
-  kendo: {
-    '@ngx-formly/kendo': formlyVersion,
-    '@progress/kendo-theme-default': '^3.2.0',
-    '@progress/kendo-angular-dropdowns': '^3.4.2',
-    '@progress/kendo-angular-l10n': '^1.0.0',
-    'rxjs-compat': '^6.4.0',
-  },
-  primeng: {
-    '@ngx-formly/primeng': formlyVersion,
-    'primeng': '^7.0.5',
-  },
-  ionic: {
-    '@ngx-formly/ionic': formlyVersion,
-    '@ionic/angular': '4.0.0-beta.7', // workaround for https://github.com/ionic-team/ionic/issues/16354
-    '@angular-devkit/core': '*',
-    '@angular-devkit/schematics': '*',
-    '@angular/compiler-cli': '*',
-    '@angular/router': '*',
-    'typescript': '*',
-  },
+//   bootstrap: {
+//     '@ngx-formly/bootstrap': formlyVersion,
+//     'bootstrap': '^4.2.1',
+//     'popper.js': '^1.14',
+//     'jquery': '^3',
+//   },
+//   material: {
+//     '@ngx-formly/material': formlyVersion,
+//   },
+//   kendo: {
+//     '@ngx-formly/kendo': formlyVersion,
+//     '@progress/kendo-theme-default': '^3.2.0',
+//     '@progress/kendo-angular-dropdowns': '^3.4.2',
+//     '@progress/kendo-angular-l10n': '^1.0.0',
+//     'rxjs-compat': '^6.4.0',
+//   },
+//   primeng: {
+//     '@ngx-formly/primeng': formlyVersion,
+//     'primeng': '^7.0.5',
+//   },
+//   ionic: {
+//     '@ngx-formly/ionic': formlyVersion,
+//     '@ionic/angular': '4.0.0-beta.7', // workaround for https://github.com/ionic-team/ionic/issues/16354
+//     '@angular-devkit/core': '*',
+//     '@angular-devkit/schematics': '*',
+//     '@angular/compiler-cli': '*',
+//     '@angular/router': '*',
+//     'typescript': '*',
+//   },
   'ng-zorro-antd': {
-    '@ngx-formly/ng-zorro-antd': formlyVersion,
-    'ng-zorro-antd': '^7.0.0',
+    'ngx-formly-zorro': formlyVersion,
+    'ng-zorro-antd': '^7.1.0',
   },
 };
 
 const ngModule = {
-  bootstrap: 'FormlyBootstrapModule',
-  material: 'FormlyMaterialModule',
-  kendo: 'FormlyKendoModule',
-  primeng: 'FormlyPrimeNGModule',
-  ionic: 'FormlyIonicModule',
+//   bootstrap: 'FormlyBootstrapModule',
+//   material: 'FormlyMaterialModule',
+//   kendo: 'FormlyKendoModule',
+//   primeng: 'FormlyPrimeNGModule',
+//   ionic: 'FormlyIonicModule',
   'ng-zorro-antd': 'FormlyNgZorroAntdModule',
 };
 
@@ -145,46 +145,53 @@ export class StackblitzWriter {
     this._appendFormInput(form, 'private', 'true');
     this._appendFormInput(form, 'description', exampleData.title);
 
-    const appModuleContent = exampleData.files.find(f => f.file === 'app.module.ts').filecontent;
+    // const appModuleContent = exampleData.files.find(f => f.file === 'app.module.ts').filecontent;
 
-    const options: any = { type };
+    const options: any = { type: 'ng-zorro-antd', useAnimation: true };
 
-    if (['bootstrap', 'material', 'kendo', 'ionic', 'primeng'].indexOf(options.type) === -1) {
-      if (appModuleContent.indexOf('@ngx-formly/bootstrap') !== -1) {
-        options.type = 'bootstrap';
-      } else if (appModuleContent.indexOf('@ngx-formly/material') !== -1) {
-        options.type = 'material';
-      } else if (appModuleContent.indexOf('@ngx-formly/kendo') !== -1) {
-        options.type = 'kendo';
-      } else if (appModuleContent.indexOf('@ngx-formly/ionic') !== -1) {
-        options.type = 'ionic';
-      } else if (appModuleContent.indexOf('@ngx-formly/primeng') !== -1) {
-        options.type = 'primeng';
-      }
-    }
+    // if (['bootstrap', 'material', 'kendo', 'ionic', 'primeng', 'ngx-form-zorro'].indexOf(options.type) === -1) {
+    //   if (appModuleContent.indexOf('@ngx-formly/bootstrap') !== -1) {
+    //     options.type = 'bootstrap';
+    //   } else if (appModuleContent.indexOf('@ngx-formly/material') !== -1) {
+    //     options.type = 'material';
+    //   } else if (appModuleContent.indexOf('@ngx-formly/kendo') !== -1) {
+    //     options.type = 'kendo';
+    //   } else if (appModuleContent.indexOf('@ngx-formly/ionic') !== -1) {
+    //     options.type = 'ionic';
+    //   } else if (appModuleContent.indexOf('@ngx-formly/primeng') !== -1) {
+    //     options.type = 'primeng';
+    //   } else if (appModuleContent.indexOf('ng-zorro-antd') !== -1) {
+    //     options.type = 'ng-zorro-antd';
+    //   }
+    // }
 
-    if (['primeng', 'material'].indexOf(options.type) !== -1 || appModuleContent.indexOf('@angular/material') !== -1) {
-      options.includeMaterial = true;
-      options.useAnimation = true;
-    }
+    // if (['primeng', 'material'].indexOf(options.type) !== -1 || appModuleContent.indexOf('@angular/material') !== -1) {
+    //   options.includeMaterial = true;
+    //   options.useAnimation = true;
+    // }
 
-    if (!options.useAnimation && exampleData.files.map(f => f.filecontent).some(content => content.indexOf('@angular/animations') !== -1)) {
-      options.useAnimation = true;
-    }
+    // tslint:disable-next-line:max-line-length
+    // if (!options.useAnimation && exampleData.files.map(f => f.filecontent).some(content => content.indexOf('@angular/animations') !== -1)) {
+    //   options.useAnimation = true;
+    // }
 
     const deps = {
       ...dependencies.core,
       ...dependencies[options.type],
+      '@angular/animations': angularVersion,
+      '@angular/cdk': materialVersion,
+      '@angular/material': materialVersion,
+      '@angular/router': angularVersion,
     };
 
-    if (options.useAnimation) {
-      deps['@angular/animations'] = angularVersion;
-    }
+    // if (options.useAnimation) {
+    //   deps['@angular/animations'] = angularVersion;
+    // }
 
-    if (options.includeMaterial) {
-      deps['@angular/cdk'] = materialVersion;
-      deps['@angular/material'] = materialVersion;
-    }
+    // if (options.includeMaterial) {
+    //   deps['@angular/cdk'] = materialVersion;
+    //   deps['@angular/material'] = materialVersion;
+    // }
 
     this._appendFormInput(form, 'dependencies', JSON.stringify(deps));
 
@@ -264,7 +271,13 @@ export class StackblitzWriter {
 
       if (filecontent.indexOf(`@ngx-formly/${options.type}'`) === -1) {
         // tslint:disable-next-line:max-line-length
-        filecontent = filecontent.replace(`'@ngx-formly/core';`, `'@ngx-formly/core';\nimport { ${ngModule[options.type]} } from '@ngx-formly/${options.type}';`);
+
+        // FIXME: Comment next line in official version;
+        // tslint:disable-next-line:max-line-length
+        filecontent = filecontent.replace(`'@ngx-formly/core';`, `'@ngx-formly/core';\nimport { ${ngModule[options.type]} } from 'ngx-formly-zorro';`);
+        // tslint:disable-next-line:max-line-length
+        // filecontent = filecontent.replace(`'@ngx-formly/core';`, `'@ngx-formly/core';\nimport { ${ngModule[options.type]} } from '@ngx-formly/${options.type}';`);
+
         filecontent = filecontent.replace(`FormlyModule.forRoot`, `${ngModule[options.type]},\n    FormlyModule.forRoot`);
       }
 
@@ -285,6 +298,11 @@ export class StackblitzWriter {
       }
     } else if (fileName === 'user.service.ts') {
       filecontent = filecontent.replace(/_json/g, '.json');
+    }
+
+    if (filecontent.includes('NzExampleBaseComponent')) {
+        filecontent = filecontent.replace(`extends NzExampleBaseComponent `, '');
+        filecontent = filecontent.replace(`import { NzExampleBaseComponent } from '../common/base';`, '');
     }
 
     return filecontent;

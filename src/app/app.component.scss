@@ -7,6 +7,34 @@ $space: 10%;
     min-height: calc(100vh - 189px);
 }
 
+@keyframes shadowSpread-video {
+    0% {
+        box-shadow: 0 0 1px 1px rgba($active-primary, 0.3);
+    }
+    50% {
+        box-shadow: 0 0 10px 6px rgba($active-primary, 0.3);
+    }
+    100% {
+        box-shadow: 0 0 1px 1px rgba($active-primary, 0.3);
+    }
+}
+
+#video {
+    position: fixed;
+    top: 33%;
+    right: 50px;
+    font-size: 42px;
+    margin-bottom: 2em;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    border: 1px solid;
+    @include spreadAnimate($active-primary, shadowSpread-video);
+    mat-icon {
+        transform: scale(1.1);
+    }
+}
+
 footer {
     margin-top: 10px;
     padding: 1em $space;

@@ -21,7 +21,7 @@ import { CopierService } from './copier/copier.service';
     MatTabsModule,
     MatIconModule,
     MatButtonModule,
-    // StackblitzButtonModule,
+    StackblitzButtonModule,
     FormlyModule,
   ],
   exports: [

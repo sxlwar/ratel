@@ -9,6 +9,9 @@
     padding-top: 76px;
     background: rgba($active-bcg-primary, 0.3);
     color: $active-color;
+    h2,h3 {
+        color: $active-color;
+    }
     h2 {
         text-align: center;
         position: relative;

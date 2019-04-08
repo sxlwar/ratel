@@ -18,6 +18,15 @@
         ],
         "types": [
             "node"
-        ]
-    }
+        ],
+        "paths": {
+            "ngx-formly-zorro/*": [
+                "./app/ngx-formly-zorro/src/public_api"
+            ],
+        }
+    },
+    "exclude": [
+        "src/app/ngx-formly-zorro/demo/src/assets/stackblitz/**/*.ts",
+        "src/assets/stackblitz/**/*.ts"
+    ]
 }

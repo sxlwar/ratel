@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { MatIconRegistry } from '@angular/material';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
 
 import { Observable, Subject } from 'rxjs';
 
 import { ArticleOverview } from './interface/response.interface';
 import { AuthService } from './providers/auth.service';
+import { map, filter } from 'rxjs/operators';
 
 @Component({
     selector: 'ratel-root',
@@ -20,6 +21,8 @@ export class AppComponent implements OnInit {
     showDrawer$: Subject<boolean> = new Subject();
 
     showDrawer: Observable<boolean>;
+
+    inHomePage: Observable<boolean>;
 
     constructor(
         private _register: MatIconRegistry,
@@ -44,6 +47,11 @@ export class AppComponent implements OnInit {
         this.searchObs = this.search$.asObservable();
 
         this.showDrawer = this.showDrawer$.asObservable();
+
+        this.inHomePage = this._router.events.pipe(
+            filter(event => event instanceof NavigationEnd),
+            map((event: NavigationEnd) => event.url === '/home'),
+        );
     }
 
     navigate(target: ArticleOverview): void {

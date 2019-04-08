@@ -1,9 +1,7 @@
-function useDefaultIfUnset<T>(value: T, defaultValue: T): T {
-  return value !== void 0 ? value : defaultValue;
-}
+function useDefaultIfUnset<T>(...args: T[]): T {
+    const defaultValue = args[args.length - 1];
 
-function useExist<T>(...args: T[]): T | null {
-  return args.find(item => item !== void 0 && item !== null) || null;
-}
+    return args.slice(0, -1).find(item => item !== void 0 && item !== null) || defaultValue;
+  }
 
-export { useExist,  useDefaultIfUnset };
+  export { useDefaultIfUnset };

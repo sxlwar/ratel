@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { FieldType } from '@ngx-formly/core';
 
-import { useDefaultIfUnset, useExist } from '../utils';
+import { useDefaultIfUnset } from '../utils';
 
 @Component({
   selector: 'formly-field-antd-input-number',
@@ -59,10 +59,10 @@ export class FormlyFieldInputNumber extends FieldType {
   }
 
   get nzMax() {
-    return useDefaultIfUnset(useExist(this.to!.nzMax, this.to!.max), Infinity);
+    return useDefaultIfUnset(this.to!.nzMax, this.to!.max, Infinity);
   }
 
   get nzMin() {
-    return useDefaultIfUnset(useExist(this.to!.nzMin, this.to!.min), -Infinity);
+    return useDefaultIfUnset(this.to!.nzMin, this.to!.min, -Infinity);
   }
 }

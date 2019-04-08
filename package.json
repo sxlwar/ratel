@@ -10,7 +10,8 @@
     "e2e": "ng e2e",
     "format": "prettier --write \"src/**/*.ts\"",
     "build:ssr": "ng build --prod && ng run ratel:server",
-    "bundle-report": "ng build --prod --stats-json && webpack-bundle-analyzer dist/browser/stats.json"
+    "bundle-report": "ng build --prod --stats-json && webpack-bundle-analyzer dist/browser/stats.json",
+    "build:ngx-formly-zorro": "ng build ngx-formly-zorro"
   },
   "private": true,
   "dependencies": {
@@ -50,6 +51,7 @@
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "~0.12.2",
+    "@angular-devkit/build-ng-packagr": "^0.13.8",
     "@angular/cli": "^7.2.2",
     "@angular/compiler-cli": "^7.2.1",
     "@angular/language-service": "^7.2.1",
@@ -68,10 +70,12 @@
     "karma-coverage-istanbul-reporter": "~2.0.0",
     "karma-jasmine": "~2.0.1",
     "karma-jasmine-html-reporter": "^1.4.0",
+    "ng-packagr": "^5.0.1",
     "prettier": "^1.15.3",
     "protractor": "~5.4.2",
     "raw-loader": "^1.0.0",
     "ts-node": "~7.0.1",
+    "tsickle": "^0.34.3",
     "tslint": "~5.12.1",
     "typescript": "~3.2.4",
     "webpack-cli": "^3.2.1"

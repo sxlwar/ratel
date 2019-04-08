@@ -1,5 +1,5 @@
 <div fxLayout="row no-wrap" class="bar">
-    <a *ngFor="let topic of topics" (click)="onTopicSelect(topic)" [ngStyle]="{color: topic.selected ? '#fff' : '#c7c2c7'}">
+    <a *ngFor="let topic of topics" [hidden]="hidden" (click)="onTopicSelect(topic)" [ngStyle]="{color: topic.selected ? '#fff' : '#c7c2c7'}">
         {{topic.label}}
         <i [ngClass]="{active: topic.selected}" [@moduleState]="topic.selected ? 'active' : 'inactive'"></i>
     </a>

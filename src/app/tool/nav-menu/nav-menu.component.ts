@@ -1,5 +1,5 @@
 import { animate, state, style, transition, trigger } from '@angular/animations';
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output, Input } from '@angular/core';
 import { Location } from '@angular/common';
 
 import { NavItem } from '../interface/tool.interface';
@@ -31,6 +31,9 @@ export class NavMenuComponent implements OnInit {
 
     @Output()
     topicChange: EventEmitter<NavItem> = new EventEmitter();
+
+    @Input()
+    hidden = false;
 
     constructor(private location: Location) {}
 

@@ -105,13 +105,8 @@
                         "polyfills": "src/polyfills.ts",
                         "tsConfig": "src/tsconfig.spec.json",
                         "karmaConfig": "src/karma.conf.js",
-                        "styles": [
-                            "src/styles.scss",
-                            "node_modules/pace-js/templates/pace-theme-flash.tmpl.css"
-                        ],
-                        "scripts": [
-                            "node_modules/pace-js/pace.min.js"
-                        ],
+                        "styles": ["src/styles.scss", "node_modules/pace-js/templates/pace-theme-flash.tmpl.css"],
+                        "scripts": ["node_modules/pace-js/pace.min.js"],
                         "assets": ["src/favicon.ico", "src/assets"]
                     }
                 },
@@ -119,6 +114,44 @@
                     "builder": "@angular-devkit/build-angular:tslint",
                     "options": {
                         "tsConfig": ["src/tsconfig.app.json", "src/tsconfig.spec.json"],
+                        "exclude": ["**/node_modules/**"]
+                    }
+                }
+            }
+        },
+        "ngx-formly-zorro": {
+            "root": "src/app/ngx-formly-zorro/src",
+            "sourceRoot": "src/app/ngx-formly-zorro/src",
+            "projectType": "library",
+            "prefix": "lib",
+            "architect": {
+                "build": {
+                    "builder": "@angular-devkit/build-ng-packagr:build",
+                    "options": {
+                        "tsConfig": "src/app/ngx-formly-zorro/tsconfig.lib.json",
+                        "project": "src/app/ngx-formly-zorro/ng-package.json"
+                    },
+                    "configurations": {
+                        "production": {
+                            "project": "src/app/ngx-formly-zorro/ng-package.prod.json"
+                        }
+                    }
+                },
+                "test": {
+                    "builder": "@angular-devkit/build-angular:karma",
+                    "options": {
+                        "main": "src/app/ngx-formly-zorro/src/test.ts",
+                        "tsConfig": "src/app/ngx-formly-zorro/tsconfig.spec.json",
+                        "karmaConfig": "src/app/ngx-formly-zorro/karma.conf.js"
+                    }
+                },
+                "lint": {
+                    "builder": "@angular-devkit/build-angular:tslint",
+                    "options": {
+                        "tsConfig": [
+                            "src/app/ngx-formly-zorro/tsconfig.lib.json",
+                            "src/app/ngx-formly-zorro/tsconfig.spec.json"
+                        ],
                         "exclude": ["**/node_modules/**"]
                     }
                 }

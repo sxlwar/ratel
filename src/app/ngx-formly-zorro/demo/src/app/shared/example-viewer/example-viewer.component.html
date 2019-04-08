@@ -4,7 +4,7 @@
     <button *ngIf="exampleData.debug && _debugFields" mat-icon-button type="button" (click)="toggleDebugView()" [matTooltip]="'Debug'">
       <mat-icon>bug_report</mat-icon>
     </button>
-    <!-- <formly-stackblitz-button [type]="type" [example]="exampleData"></formly-stackblitz-button> -->
+    <formly-stackblitz-button [type]="type" [example]="exampleData"></formly-stackblitz-button>
     <button mat-icon-button type="button" (click)="toggleSourceView()" [matTooltip]="'View source'">
       <mat-icon>
         <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 24 24" fit="" preserveAspectRatio="xMidYMid meet"

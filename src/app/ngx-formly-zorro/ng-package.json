@@ -1,9 +1,9 @@
 {
-  "$schema": "../../node_modules/ng-packagr/ng-package.schema.json",
-  "dest": "../../dist/@ngx-formly/ng-zorro-antd",
+  "$schema": "../../../node_modules/ng-packagr/ng-package.schema.json",
+  "dest": "../../../dest/ngx-formly-zorro",
   "deleteDestPath": false,
   "lib": {
-    "entryFile": "src/public_api.ts",
+    "entryFile": "./src/public_api.ts",
     "externals": {
       "@ngx-formly/core": "@ngx-formly/core",
       "ng-zorro-antd": "ng-zorro-antd"
