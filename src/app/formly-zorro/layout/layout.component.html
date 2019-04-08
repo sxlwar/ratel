@@ -1,0 +1,5 @@
+<ratel-side-nav>
+    <mat-nav-list>
+        <a mat-list-item *ngFor="let item of list; index as idx" (click)="scrollToView(idx, item)" fxLayoutAlign="center center">{{item}}</a>
+    </mat-nav-list>
+</ratel-side-nav>

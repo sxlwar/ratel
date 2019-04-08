@@ -1,0 +1,17 @@
+mat-sidenav-container {
+    height: calc(100vh - 189px);
+    background: transparent;
+}
+
+mat-sidenav-content {
+    position: static;
+}
+
+.mat-drawer-container {
+    color: inherit;
+    background: transparent;
+}
+
+.sidenav {
+    width: 200px;
+}

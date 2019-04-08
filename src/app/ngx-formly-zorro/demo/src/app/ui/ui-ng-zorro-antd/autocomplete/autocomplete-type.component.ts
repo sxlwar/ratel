@@ -66,12 +66,6 @@ export class AutocompleteTypeComponent extends FieldType implements OnInit, Afte
   optionGroups = optionGroups;
 
   ngOnInit() {
-    console.log(this.to);
-    // super.ngOnInit();
-    // this.filter = this.formControl.valueChanges.pipe(
-    //   startWith(''),
-    //   switchMap(term => this.to.filter(term)),
-    // );
   }
 
   ngAfterViewInit() {

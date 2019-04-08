@@ -43,5 +43,5 @@
         <tr mat-row *matRowDef="let row; columns: displayedColumns" [routerLink]="['/home', row.id]"></tr>
     </table>
 
-    <mat-paginator [pageSizeOptions]="[10, 20, 50]"></mat-paginator>
+    <mat-paginator [pageSizeOptions]="[10, 20, 50]" class="paginator"></mat-paginator>
 </div>

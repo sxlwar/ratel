@@ -20,6 +20,8 @@ import {
     MatProgressSpinnerModule,
     MatTableModule,
     MatTooltipModule,
+    MatSidenavModule,
+    MatListModule,
 } from '@angular/material';
 
 import { ToolModule } from '../tool/tool.module';
@@ -46,6 +48,8 @@ import { ToolModule } from '../tool/tool.module';
         MatProgressSpinnerModule,
         MatTableModule,
         MatTooltipModule,
+        MatSidenavModule,
+        MatListModule,
         ReactiveFormsModule,
         ToolModule,
     ],
