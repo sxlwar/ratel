@@ -44,7 +44,7 @@ npm install --save @angular/forms @ngx-formly/core ngx-formly-zorro
 
 DEMO的方式也是安全按照 [Ngx Formly](https://github.com/ngx-formly/ngx-formly)的方式进行，由于没来得及申请域名，暂时将它放在这个博客网站下。
 
-你可以跳转到 [这里](hijavascript.com) 查看相关示例及代码，并且你也可以通过每个demo右上方的按钮进行调试或者查看示例代码。
+你可以跳转到 [这里](http://www.hijavascript.com) 查看相关示例及代码，并且你也可以通过每个demo右上方的按钮进行调试或者查看示例代码。
 
 ### CONTRIBUTING
 
