@@ -3,9 +3,19 @@
     "compilerOptions": {
         "outDir": "../out-tsc/app",
         "module": "commonjs",
-        "types": []
+        "types": [
+            "node"
+        ],
+        "typeRoots": [
+            "node_modules/@types"
+        ],
+        "target": "es2015"
     },
-    "exclude": ["src/test.ts", "**/*.spec.ts"],
+    "exclude": [
+        "app/ngx-formly-zorro/demo/src/assets/stackblitz/**/*.ts",
+        "src/test.ts",
+        "**/*.spec.ts"
+    ],
     "angularCompilerOptions": {
         "entryModule": "app/app.server.module#AppServerModule"
     }

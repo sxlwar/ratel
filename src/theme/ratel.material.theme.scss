@@ -12,7 +12,5 @@ $ratel-theme: mat-dark-theme($ratel-primary, $ratel-accent, $ratel-warn);
 
 // ng-formly-zorro style
 @import '../app/ngx-formly-zorro/demo/src/app/shared/example-viewer/example-viewer-theme.scss';
-@import '../app/ngx-formly-zorro/demo/src/app/home/home-theme.scss';
 
 @include example-viewer-theme($ratel-theme);
-@include home-page-theme($ratel-theme);

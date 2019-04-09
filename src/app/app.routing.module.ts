@@ -13,7 +13,6 @@ const appRoutes: Routes = [
     { path: 'home', component: HomeComponent },
     { path: 'home/:id', component: ArticleComponent, runGuardsAndResolvers: 'paramsChange' },
     { path: 'topic', loadChildren: './topic/topic.module#TopicModule' },
-    // { path: 'ngx-formly-zorro', loadChildren: './ngx-formly-zorro/demo/src/app/ui/ui-ng-zorro-antd/config.module#ConfigModule' },
     { path: 'ngx-formly-zorro', loadChildren: './formly-zorro/formly-zorro.module#FormlyZorroModule' },
     { path: 'home/:id/reply', component: ReplyFullComponent },
     { path: 'create', component: ArticleCreationComponent, canDeactivate: [ArticleCreateGuard] },
