@@ -41,7 +41,7 @@ Ng Zorro Antd is the Angular version of Ant Design, if you want to learn more de
 
 目前 Ngx Formly 官方尚未提供对 Ng Zorro Antd 的支持，尽管已经有开发者向官方仓库提交了相关的 pr，但目前为止都没有合入，可能管理人员的工作太忙吧。
 
-Ngx Formly offcially does not provide support for Ng Zorro Antd till now. Even some developers have submitted relative pull requests, but are still not merged, maybe the admins are far too busy due to the 996 :) 
+Ngx Formly offcially does not provide support for Ng Zorro Antd till now. Even some developers have submitted relative pull requests, but are still not merged, maybe the admins are far too busy due to the 996 :)
 
 > 源码位置：src/app/ngx-formly-zorro 完全按照 [Ngx Formly](https://github.com/ngx-formly/ngx-formly) 的方式开发
 
@@ -68,8 +68,13 @@ Demo also totally follows the [Ngx Formly](https://github.com/ngx-formly/ngx-for
 你可以跳转到 [这里](http://www.hijavascript.com) 查看相关示例及代码，并且你也可以通过每个demo右上方的按钮进行调试或者查看示例代码。
 
 You can click [here](http://www.hijavascript.com) to check the examples and codes, besides you can also click the buttons above every demo to debug or check the code.
+
 ### CONTRIBUTING
 
 目前只是封装了 Ng Zorro Antd 中常用的几个基础表单控件，你可以使用 Ng Formly 提供的自定义控件方式继续添加其它表单控件。在提交代码前强烈建议您阅读 [Ngx Formly](https://github.com/ngx-formly/ngx-formly) 封装UI的方式，并按照其扩展UI组件的方式继续实现其它表单控件。
 
 Currently only a few basic form controls commonly used in Ng Zorro Antd are packaged, you can continue to add other form controls using the custom controls provided by Ng Formly. Before you submit your code, we strongly recommend you to read the method to encapsulate the UI from [Ngx Formly](https://github.com/ngx-formly/ngx-formly), and continue to implement other form controls in the same way that they extend UI components.
+
+### CONTRIBUTORS
+
+[<img src="https://avatars2.githubusercontent.com/u/20088392?s=60&v=4" width="100">](https://github.com/sxlwar)[<img src="https://avatars1.githubusercontent.com/u/26297704?s=60&v=4" width="100">](https://github.com/ZQ-jhon)[<img src="https://avatars3.githubusercontent.com/u/30424884?s=60&v=4" width="100">](https://github.com/Lei-Wei)
