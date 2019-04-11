@@ -12,6 +12,11 @@ registerLocaleData(en);
 
 @Injectable()
 export class DateHelper extends DateHelperService {
+
+    constructor(public i18n: NzI18nService) {
+        super(i18n, {});
+    }
+
     getISOWeek(date: Date) {
         return fnsGetISOWeek(date);
     }
