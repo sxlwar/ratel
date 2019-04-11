@@ -6,7 +6,20 @@ import { Component, ElementRef, OnInit } from '@angular/core';
     styleUrls: ['./layout.component.scss'],
 })
 export class LayoutComponent implements OnInit {
-    list = ['autocomplete', 'cascader', 'input', 'textarea', 'input-number', 'checkbox', 'radio', 'select'];
+    list = [
+        'autocomplete',
+        'cascader',
+        'input',
+        'textarea',
+        'input-number',
+        'checkbox',
+        'radio',
+        'select',
+        'datepicker',
+        'yearpicker',
+        'weekpicker',
+        'rangepicker',
+    ];
 
     nodes: HTMLElement[];
 

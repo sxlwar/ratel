@@ -6,6 +6,11 @@ import { RadioAppComponent, RadioAppModule, RadioExampleConfig } from './radio';
 import { SelectAppComponent, SelectAppModule, SelectExampleConfig } from './select';
 import { CascaderExampleConfig, CascaderAppComponent, CascaderAppModule } from './cascader';
 import { AutocompleteAppComponent, AutocompleteAppModule, AutocompleteExampleConfig } from './autocomplete';
+import { DatePickerAppComponent, DatePickerAppModule, DatePickerExampleConfig } from './datepicker';
+import { YearPickerAppComponent, YearPickerExampleConfig, YearPickerAppModule } from './yearpicker';
+import { MonthPickerAppComponent, MonthPickerAppModule, MonthPickerExampleConfig } from './monthpicker';
+import { WeekPickerAppComponent, WeekPickerExampleConfig, WeekPickerAppModule } from './weekpicker';
+import { RangePickerAppComponent, RangesPickerExampleConfig, RangePickerAppModule } from './rangepicker';
 
 export const NG_ZORRO_COMPONENTS = [
   AutocompleteAppComponent,
@@ -16,6 +21,11 @@ export const NG_ZORRO_COMPONENTS = [
   CheckboxAppComponent,
   RadioAppComponent,
   SelectAppComponent,
+  DatePickerAppComponent,
+  YearPickerAppComponent,
+  MonthPickerAppComponent,
+  WeekPickerAppComponent,
+  RangePickerAppComponent,
 ];
 
 export const NG_ZORRO_EXAMPLE_CONFIGS = [
@@ -27,6 +37,11 @@ export const NG_ZORRO_EXAMPLE_CONFIGS = [
   CheckboxExampleConfig,
   RadioExampleConfig,
   SelectExampleConfig,
+  DatePickerExampleConfig,
+  YearPickerExampleConfig,
+  MonthPickerExampleConfig,
+  WeekPickerExampleConfig,
+  RangesPickerExampleConfig,
 ];
 
 export const NG_ZORRO_EXAMPLE_MODULE = [
@@ -38,4 +53,9 @@ export const NG_ZORRO_EXAMPLE_MODULE = [
   CheckboxAppModule,
   RadioAppModule,
   SelectAppModule,
+  DatePickerAppModule,
+  YearPickerAppModule,
+  MonthPickerAppModule,
+  WeekPickerAppModule,
+  RangePickerAppModule,
 ];

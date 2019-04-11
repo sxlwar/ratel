@@ -7,6 +7,11 @@ import {
   FormlyFieldTextArea,
   FormlyFieldInputNumber,
   FormlyFieldCascader,
+  FormlyFieldDatePicker,
+  FormlyFieldYearPicker,
+  FormlyFieldMonthPicker,
+  FormlyFieldWeekPicker,
+  FormlyFieldRangePicker,
 } from './types/types';
 import { FormlyWrapperFormField } from './wrappers/wrappers';
 
@@ -20,6 +25,11 @@ export const FIELD_TYPE_COMPONENTS = [
   FormlyFieldRadio,
   FormlyFieldSelect,
   FormlyFieldTextArea,
+  FormlyFieldDatePicker,
+  FormlyFieldYearPicker,
+  FormlyFieldMonthPicker,
+  FormlyFieldWeekPicker,
+  FormlyFieldRangePicker,
   // wrappers
   FormlyWrapperFormField,
 ];
@@ -74,6 +84,31 @@ export const NG_ZORRO_ANTD_FORMLY_CONFIG: ConfigOption = {
     {
       name: 'textarea',
       component: FormlyFieldTextArea,
+      wrappers: ['form-field'],
+    },
+    {
+      name: 'date-picker',
+      component: FormlyFieldDatePicker,
+      wrappers: ['form-field'],
+    },
+    {
+      name: 'year-picker',
+      component: FormlyFieldYearPicker,
+      wrappers: ['form-field'],
+    },
+    {
+      name: 'month-picker',
+      component: FormlyFieldMonthPicker,
+      wrappers: ['form-field'],
+    },
+    {
+      name: 'week-picker',
+      component: FormlyFieldWeekPicker,
+      wrappers: ['form-field'],
+    },
+    {
+      name: 'range-picker',
+      component: FormlyFieldRangePicker,
       wrappers: ['form-field'],
     },
   ],

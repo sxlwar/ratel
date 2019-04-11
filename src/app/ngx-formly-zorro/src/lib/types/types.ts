@@ -5,3 +5,8 @@ export { FormlyFieldSelect } from './select';
 export { FormlyFieldTextArea } from './textarea';
 export { FormlyFieldInputNumber } from './input-number';
 export { FormlyFieldCascader } from './cascader';
+export { FormlyFieldDatePicker } from './date-picker';
+export { FormlyFieldYearPicker } from './year-picker';
+export { FormlyFieldMonthPicker } from './month-picker';
+export { FormlyFieldWeekPicker } from './week-picker';
+export { FormlyFieldRangePicker } from './range-picker';

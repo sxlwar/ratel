@@ -12,6 +12,8 @@ import {
   NzNotFoundContentFieldConfig,
   NzShowArrowFieldConfig,
   NzShowSearchFieldConfig,
+  NzOpenFieldConfig,
+  NzDropdownClassNameFieldConfig,
 } from '../common';
 
 const select = {
@@ -54,24 +56,6 @@ const NzAutoClearSearchValueFieldConfig: FormlyFieldConfig = {
   className: 'col-md-4',
   templateOptions: {
     label: 'nzAutoClearSearchValue',
-  },
-};
-
-const NzOpenFieldConfig: FormlyFieldConfig = {
-  key: 'nzOpen',
-  type: 'checkbox',
-  className: 'col-md-4',
-  templateOptions: {
-    label: 'nzOpen',
-  },
-};
-
-const NzDropdownClassNameFieldConfig: FormlyFieldConfig = {
-  key: 'nzDropdownClassName',
-  type: 'input',
-  className: 'col-md-4',
-  templateOptions: {
-    label: 'nzDropdownClassName',
   },
 };
 

@@ -1,5 +1,6 @@
 import { FormlyFieldConfig } from '@ngx-formly/core';
 import { debugFields as commonDebugFields } from '../../common';
+import { NzClassNameFieldConfig, NzDateRenderFieldConfig, NzDisabledDateFieldConfig, NzPopupStyleFieldConfig } from './date';
 
 export interface DebugFile {
   file: string;
@@ -162,3 +163,57 @@ export const NzLabelFieldConfig: FormlyFieldConfig = {
     label: 'nzLabel',
   },
 };
+
+export const NzLocaleFieldConfig: FormlyFieldConfig = {
+  key: 'nzLocale',
+  type: 'input',
+  className: 'col-md-4',
+  templateOptions: {
+    label: 'nzLocale',
+  },
+};
+
+export const NzOpenFieldConfig: FormlyFieldConfig = {
+  key: 'nzOpen',
+  type: 'checkbox',
+  className: 'col-md-4',
+  templateOptions: {
+    label: 'nzOpen',
+  },
+};
+
+export const NzDropdownClassNameFieldConfig: FormlyFieldConfig = {
+  key: 'nzDropdownClassName',
+  type: 'input',
+  className: 'col-md-4',
+  templateOptions: {
+    label: 'nzDropdownClassName',
+  },
+};
+
+export const NzStyleFieldConfig: FormlyFieldConfig = {
+    key: 'nzStyle',
+    type: 'input',
+    className: 'col-md-4',
+    templateOptions: {
+        label: 'nzStyle'
+    }
+};
+
+export const dateDebugFields: FormlyFieldConfig[] = [
+    ...debugFields,
+  {key: 'templateOptions', fieldGroupClassName: 'row', fieldGroup: [
+    NzAllowClearFieldConfig,
+    NzAutoFocusFieldConfig,
+    NzClassNameFieldConfig,
+    NzDateRenderFieldConfig,
+    NzDisabledFieldConfig,
+    NzDisabledDateFieldConfig,
+    NzLocaleFieldConfig,
+    NzOpenFieldConfig,
+    NzPopupStyleFieldConfig,
+    NzDropdownClassNameFieldConfig,
+    NzSizeFieldConfig,
+    NzStyleFieldConfig,
+  ]}
+];
