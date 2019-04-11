@@ -184,6 +184,10 @@ export class StackblitzWriter {
       '@angular/router': angularVersion,
     };
 
+    if (['DatePicker', 'YearPicker', 'MonthPicker', 'WeekPicker', 'RangePicker'].includes(exampleData.title.split(' ')[0])) {
+        deps['date-fns'] = '^1.30.1';
+    }
+
     // if (options.useAnimation) {
     //   deps['@angular/animations'] = angularVersion;
     // }
@@ -303,6 +307,15 @@ export class StackblitzWriter {
     if (filecontent.includes('NzExampleBaseComponent')) {
         filecontent = filecontent.replace(`extends NzExampleBaseComponent `, '');
         filecontent = filecontent.replace(`import { NzExampleBaseComponent } from '../common/base';`, '');
+    }
+
+    if (fileName === 'app.component.ts' && filecontent.includes('* as')) {
+        const reg = /import\s+\*\s+as/g;
+        let matchRes = null;
+
+        while (matchRes = reg.exec(filecontent)) {
+            filecontent = filecontent.replace(reg, 'import');
+        }
     }
 
     return filecontent;

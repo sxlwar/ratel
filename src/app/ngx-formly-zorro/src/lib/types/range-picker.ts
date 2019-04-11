@@ -70,6 +70,10 @@ export class FormlyFieldRangePicker extends FieldType {
         return this.to!.nzPopupStyle;
     }
 
+    get nzDisabledTime() {
+        return useDefaultIfUnset(this.to!.nzDisabledTime, () => {});
+    }
+
     get nzDropdownClassName() {
         return this.to!.nzDropdownClassName;
     }
