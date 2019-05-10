@@ -1,14 +1,30 @@
-mat-dialog-content {
+.mat-dialog-title {
+    color: #fff;
+}
+
+.mat-dialog-title,
+.mat-dialog-content {
+    margin: 0 0 24px 0;
+}
+
+.mat-dialog-content {
     text-align: center;
+}
+
+.mat-dialog-actions {
+    flex-direction: row-reverse;
+    margin-bottom: 0;
+}
+
+.mat-raised-button {
+    margin: 0 1em;
 }
 
 .login-btn {
     width: 75%;
-    // height: 3rem;
-    // Not Need Set Height
     line-height: 3rem;
 }
 
-mat-icon {
+.mat-icon {
     margin-right: 1rem;
 }

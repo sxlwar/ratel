@@ -112,15 +112,14 @@ export class AuthService extends BaseService {
 
     /**
      * 获取 github 身份验证所需要的配置项，主要是 clientId;
-     * 重定向地址使用 location.href， 这样用户登录后还会访问到原来的页面。
      */
-    getGithubAddress(redirect: string): Observable<string> {
+    getGithubAddress(redirectPath: string): Observable<string> {
         return this._http.get<GithubAuthConfig>(this.completeApiUrl(this.path, this.githubConfigPath)).pipe(
             map(
                 config =>
                     `${this.githubAuthURI}?client_id=${
                         config.clientId
-                    }&redirect_uri=${environment.githubAuthRedirectAddress + redirect}&scope=user&state=${
+                    }&redirect_uri=${environment.githubAuthRedirectAddress + redirectPath}&scope=user&state=${
                         config.state
                     }`,
             ),
