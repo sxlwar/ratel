@@ -75,7 +75,7 @@ export class CommentService extends BaseService {
     handleOperateCommentResult<T>(resObs: Observable<T>, message: string, callback?: (p: T) => any): Subscription {
         return resObs.subscribe(res => {
             if (message) {
-                this._snack.open(message, '', this.snakeBarConfig);
+                this._snack.open(message, '', this.getSnackbarConfig('success'));
             }
 
             if (callback) {

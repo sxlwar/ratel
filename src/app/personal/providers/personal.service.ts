@@ -54,7 +54,7 @@ export class PersonalService extends BaseService {
                 ),
             )
             .subscribe(message => {
-                this._snake.open(message, '', this.snakeBarConfig);
+                this._snake.open(message, '', this.getSnackbarConfig('success'));
 
                 this.updateUserInfo(request);
 

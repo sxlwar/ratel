@@ -12,10 +12,10 @@ export enum ArticleCategory {
     typescript = 'typescript',
     javascript = 'javascript',
     other = 'other',
-    NGX_FORMLY_ZORRO = 'NGX_FORMLY_ZORRO'
+    NGX_FORMLY_ZORRO = 'NGX_FORMLY_ZORRO',
 }
 
-export const QiniuErrorCode = {
+export const QiniuErrorCode: { [key: number]: string } = {
     200: '操作执行成功。',
     298: '部分操作执行成功。',
     400: '请求报文格式错误。包括上传时，上传表单格式错误；URL 触发图片处理时，处理参数错误；[资源管理][rsHref] 或 持久化数据处理 (pfop) 操作请求格式错误。',

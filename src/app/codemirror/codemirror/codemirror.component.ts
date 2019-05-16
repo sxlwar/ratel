@@ -16,8 +16,7 @@ import {
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
-import { Editor, EditorChangeLinkedList, EditorFromTextArea, ScrollInfo } from 'codemirror';
-import { fromTextArea } from 'codemirror';
+import { Editor, EditorChangeLinkedList, EditorFromTextArea, ScrollInfo, fromTextArea } from 'codemirror';
 
 function normalizeLineEndings(str: string) {
     if (!str) {

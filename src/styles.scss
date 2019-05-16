@@ -28,10 +28,25 @@ ul {
     margin: 0;
 }
 
-.global-snack {
-    background-color: $active-primary;
+.snack {
     color: $active-color;
     opacity: 0.8;
+}
+
+.info-snack {
+    background-color: $active-accent;
+}
+
+.success-snack {
+    background-color: $active-deep-green;
+}
+
+.warn-snack {
+    background-color: $active-warn;
+}
+
+.error-snack {
+    background-color: $active-primary;
 }
 
 .ratel-form-field .mat-form-field-appearance-outline .mat-form-field-outline {

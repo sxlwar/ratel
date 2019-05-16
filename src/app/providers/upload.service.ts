@@ -4,7 +4,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 
 import * as qiniu from 'qiniu-js';
 import { from, Observable, of, Subject } from 'rxjs';
-import { catchError, delay, filter, map, mergeMap, mergeMapTo, take, takeUntil, timeout } from 'rxjs/operators';
+import { catchError, delay, filter, map, mergeMap, take, takeUntil, timeout, switchMapTo } from 'rxjs/operators';
 
 import { ALLOW_UPLOAD_FILE_TYPES, CRUDVar, QiniuErrorCode } from '../constant/constant';
 import { GetQiniuTokenResponse } from '../interface/response.interface';
@@ -13,6 +13,10 @@ import { BaseService } from './base.service';
 export interface UploadResult {
     name: string;
     url: string;
+    error?: {
+        index: number;
+        reason: string;
+    };
 }
 
 @Injectable()
@@ -24,6 +28,8 @@ export class UploadService extends BaseService {
     uploadedCount = 0;
 
     uploadTotal = 0;
+
+    private uploadResults: UploadResult[] = [];
 
     readonly urlPrefix = 'https://assets.hijavascript.com/';
 
@@ -71,7 +77,7 @@ export class UploadService extends BaseService {
             }),
             timeout(1000),
             map(engine => engine.obs.subscribe(this.createUploadObserver(engine.index))),
-            mergeMapTo(this.result$.asObservable()),
+            switchMapTo(this.result$.asObservable()),
             takeUntil(
                 this.uploading$.pipe(
                     filter(uploading => !uploading),
@@ -100,39 +106,46 @@ export class UploadService extends BaseService {
     private tokenError(err: any): void {
         this.reset();
 
-        this._snack.open(`上传失败或请求超时！错误原因：${err.message}`, '', this.snakeBarConfig);
+        this._snack.open(`上传失败或请求超时！错误原因：${err.message}`, '', this.getSnackbarConfig('error'));
     }
 
     /**
      * Get upload image observer;
      */
     private createUploadObserver(index: number): Qiniu.Observer {
-        let results: UploadResult[] = [];
+        const spy = () => {
+            this.uploadedCount += 1;
 
-        const clear = () => {
-            this.reset();
-            results = [];
+            if (this.uploadedCount === this.uploadTotal) {
+                this.result$.next([...this.uploadResults]);
+                this.reset();
+            }
         };
 
         return {
             next: _ => {},
             error: ({ code }: Qiniu.Error) => {
+                this.uploadResults.push({ url: '', name: '', error: { index, reason: QiniuErrorCode[code] } });
+
+                spy();
+
                 this._snack.open(
                     `第${index + 1}张图片上传失败，失败原因：` + QiniuErrorCode[code],
                     '',
-                    this.snakeBarConfig,
+                    this.getSnackbarConfig('error'),
                 );
-                clear();
             },
             complete: obj => {
-                results = [...results, { url: this.urlPrefix + obj.key, name: obj.key }];
+                this.uploadResults.push({ url: this.urlPrefix + obj.key, name: obj.key });
 
-                this.uploadedCount += 1;
+                spy();
 
                 if (this.uploadedCount === this.uploadTotal) {
-                    this.result$.next([...results]);
-                    clear();
-                    this._snack.open('图片上传成功', '', this.snakeBarConfig);
+                    if (this.uploadResults.some(item => !!item.error)) {
+                        this._snack.open('部分图片未上传成功！', '', this.getSnackbarConfig('warn'));
+                    } else {
+                        this._snack.open('图片上传成功', '', this.getSnackbarConfig('success'));
+                    }
                 }
             },
         };
@@ -144,6 +157,8 @@ export class UploadService extends BaseService {
         this.uploadedCount = 0;
 
         this.uploadTotal = 0;
+
+        this.uploadResults = [];
     }
 
     base64ToFile(dataUrl: string, fileName: string): File {

@@ -21,7 +21,7 @@ export class ErrorService extends BaseService {
             if (exception instanceof ErrorEvent) {
                 console.error(exception.message);
             } else {
-                this._snack.open(exception.message, '', this.snakeBarConfig);
+                this._snack.open(exception.message, '', this.getSnackbarConfig('error'));
             }
         }
 

@@ -124,7 +124,7 @@ export class ArticleService extends BaseService {
 
     handleOperateArticleResponse<T>(response: Observable<T>, message = '创建成功'): Subscription {
         return response.subscribe(_res => {
-            this._snake.open(message, '', this.snakeBarConfig);
+            this._snake.open(message, '', this.getSnackbarConfig('success'));
         });
     }
 

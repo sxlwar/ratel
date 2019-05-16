@@ -37,12 +37,13 @@ $white-space: 2em;
     padding: 0 $white-space 1em;
     background: #fff;
     button:last-child {
-        margin-left: 2em;
+        margin-left: $white-space;
     }
 }
 
 :host::ng-deep markdown img {
     max-width: 100%;
+    margin-left: -$white-space;
 }
 
 :host::ng-deep image-cropper .cropper {

@@ -104,7 +104,7 @@ export class ReplyComponent extends ReplyBaseComponent implements OnInit, OnDest
             .subscribe(([pre, cur]) => {
                 const duration = cur.timestamp - pre.timestamp;
                 if (duration < 2 * 60 * 100) {
-                    this._snack.open('提交频率太高了，请稍候再试!', '', this.commentService.snakeBarConfig);
+                    this._snack.open('提交频率太高了，请稍候再试!', '', this.commentService.getSnackbarConfig('warn'));
                 }
             });
     }

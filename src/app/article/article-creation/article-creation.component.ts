@@ -23,7 +23,7 @@ import { trigger, transition, animate, state, style } from '@angular/animations'
     styleUrls: ['./article-creation.component.scss'],
     animations: [
         trigger('toggleFull', [
-            state('half', style({ 'min-width': '50%' })),
+            state('half', style({ 'min-width': '48%' })),
             state('full', style({ 'min-width': '100%' })),
             transition('half <=> full', [animate('500ms ease-out')]),
         ]),
