@@ -38,7 +38,7 @@ export class ExampleViewerComponent implements OnInit, OnDestroy {
     _debugFields: any;
     _prevModel: any;
 
-    @ViewChild('demo', { read: ViewContainerRef, static: false }) demoRef: ViewContainerRef;
+    @ViewChild('demo', { read: ViewContainerRef, static: true }) demoRef: ViewContainerRef;
     @ViewChild('modelPreview', { static: false }) modelPreviewRef: ElementRef;
     demoComponentRef: ComponentRef<any>;
 
