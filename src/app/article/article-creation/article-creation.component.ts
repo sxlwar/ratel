@@ -162,9 +162,10 @@ export class ArticleCreationComponent implements OnInit, OnDestroy {
         });
     }
 
-    update(): void {
+    update(isPublish?: boolean): void {
+        const params = { id: this.article.id, content: this.editor.data };
         const response = this._articleService
-            .updateArticle({ id: this.article.id, content: this.editor.data })
+            .updateArticle(isPublish ? { ...params, isPublish } : params)
             .pipe(tap(({ isUpdated }) => this.modifyPristineState(isUpdated)));
 
         this._articleService.handleOperateArticleResponse(response, '更新成功');

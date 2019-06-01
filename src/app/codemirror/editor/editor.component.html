@@ -2,7 +2,7 @@
     <li fxLayoutAlign="center center">
         <button mat-icon-button matTooltip="插入图片" matTooltipPosition="above">
             <mat-icon fontIcon="icon-picture"></mat-icon>
-            <input type="file" ng2FileSelect [uploader]="uploader" (onFileSelected)="fileSelected($event)" />
+            <input type="file" ng2FileSelect multiple [uploader]="uploader" (onFileSelected)="fileSelected($event)" />
         </button>
     </li>
     <li fxLayoutAlign="center center">
