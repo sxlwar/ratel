@@ -43,7 +43,7 @@ export class ArticleCreationComponent implements OnInit, OnDestroy {
 
     showPreview = true;
 
-    @ViewChild(EditorComponent)
+    @ViewChild(EditorComponent, { static: false })
     editor: EditorComponent;
 
     categoryTouched = false;

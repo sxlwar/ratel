@@ -23,7 +23,7 @@ interface RouterParams {
 export class ReplyFullComponent extends ReplyBaseComponent implements OnInit {
     showPreview = false;
 
-    @ViewChild(EditorComponent)
+    @ViewChild(EditorComponent, { static: false })
     editor: EditorComponent;
 
     private params: RouterParams;

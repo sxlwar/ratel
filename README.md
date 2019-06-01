@@ -14,7 +14,7 @@ run `ng serve` to start the server, then type `http://localhost:4200` in your br
 
 run `npm run build:ssr` to start the building process of the project. After that, the following structure will be generated in the `dist` folder.
 
-> 注意： 由于 ng-zorro-antd 目前不支持ssr，在打包生产环境代码时需要将 src/formly-zorro/formly-zorro-routing.module.ts 中的子路由注释掉
+> 注意： 由于 ng-zorro-antd 目前不支持ssr，在打包服务端渲染代码时需要将 src/formly-zorro/formly-zorro-routing.module.ts 中的子路由注释掉
 
 > Note: Currently ng-zorro-antd does not support ssr, you need to comment the sub routing config in src/formly-zorro/formly-zorro-routing.module.ts before production build.
 

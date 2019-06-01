@@ -23,6 +23,9 @@
             "ngx-formly-zorro/*": [
                 "src/app/ngx-formly-zorro/src/public_api"
             ],
+            "core-js/es7/reflect": [
+                "node_modules/core-js/proposals/reflect-metadata"
+            ]
         }
     },
     "exclude": [
@@ -30,5 +33,9 @@
         "src/assets/stackblitz/**/*.ts",
         "src/test.ts",
         "**/*.spec.ts"
+    ],
+    "files": [
+        "src/main.ts",
+        "src/polyfills.ts"
     ]
 }

@@ -55,13 +55,13 @@ export class ReplyComponent extends ReplyBaseComponent implements OnInit, OnDest
     @Output()
     switchTo: EventEmitter<boolean> = new EventEmitter();
 
-    @ViewChild('autosize')
+    @ViewChild('autosize', { static: false })
     autosize: CdkTextareaAutosize;
 
-    @ViewChild('area')
+    @ViewChild('area', { static: false })
     textarea: ElementRef;
 
-    @ViewChild('trigger')
+    @ViewChild('trigger', { static: false })
     trigger: ElementRef;
 
     content: string;

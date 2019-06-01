@@ -17,7 +17,7 @@ export class EditorComponent implements OnInit {
     @Input()
     public tip = '';
 
-    @ViewChild(CodemirrorComponent)
+    @ViewChild(CodemirrorComponent, { static: false })
     private CodeMirror: CodemirrorComponent;
 
     /**

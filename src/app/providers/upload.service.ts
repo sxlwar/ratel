@@ -69,8 +69,8 @@ export class UploadService extends BaseService {
                             file,
                             name,
                             token,
-                            { useCdnDomain: true },
                             { mimeType: ALLOW_UPLOAD_FILE_TYPES },
+                            { useCdnDomain: true },
                         ),
                     })),
                 );
@@ -112,7 +112,7 @@ export class UploadService extends BaseService {
     /**
      * Get upload image observer;
      */
-    private createUploadObserver(index: number): Qiniu.Observer {
+    private createUploadObserver(index: number): qiniu.Observer {
         const spy = () => {
             this.uploadedCount += 1;
 
@@ -124,7 +124,7 @@ export class UploadService extends BaseService {
 
         return {
             next: _ => {},
-            error: ({ code }: Qiniu.Error) => {
+            error: ({ code }: qiniu.Error) => {
                 this.uploadResults.push({ url: '', name: '', error: { index, reason: QiniuErrorCode[code] } });
 
                 spy();

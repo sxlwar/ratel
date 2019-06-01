@@ -21,10 +21,10 @@ export class ArticleManageComponent implements OnInit, OnDestroy {
 
     count: Observable<number>;
 
-    @ViewChild(MatPaginator)
+    @ViewChild(MatPaginator, { static: false })
     paginator: MatPaginator;
 
-    @ViewChild(MatSort)
+    @ViewChild(MatSort, { static: false })
     sort: MatSort;
 
     isAlive = true;

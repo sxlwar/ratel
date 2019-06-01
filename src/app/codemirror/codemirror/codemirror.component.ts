@@ -79,7 +79,7 @@ export class CodemirrorComponent implements AfterViewInit, OnDestroy, ControlVal
     @Output()
     scroll = new EventEmitter<ScrollInfo>();
 
-    @ViewChild('ref')
+    @ViewChild('ref', { static: false })
     ref: ElementRef;
 
     value = '';

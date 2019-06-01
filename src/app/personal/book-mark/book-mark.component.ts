@@ -24,10 +24,10 @@ export class BookMarkComponent implements OnInit, OnDestroy {
 
     count: Observable<number>;
 
-    @ViewChild(MatPaginator)
+    @ViewChild(MatPaginator, { static: false })
     paginator: MatPaginator;
 
-    @ViewChild(MatSort)
+    @ViewChild(MatSort, { static: false })
     sort: MatSort;
 
     spy$: Subject<Bookmark> = new Subject();

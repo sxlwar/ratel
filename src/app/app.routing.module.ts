@@ -12,11 +12,11 @@ import { ArticleCreateGuard } from './providers/guard.service';
 const appRoutes: Routes = [
     { path: 'home', component: HomeComponent },
     { path: 'home/:id', component: ArticleComponent, runGuardsAndResolvers: 'paramsChange' },
-    { path: 'topic', loadChildren: './topic/topic.module#TopicModule' },
-    { path: 'ngx-formly-zorro', loadChildren: './formly-zorro/formly-zorro.module#FormlyZorroModule' },
+    { path: 'topic', loadChildren: () => import('./topic/topic.module').then(mod => mod.TopicModule) },
+    { path: 'ngx-formly-zorro', loadChildren: () => import('./formly-zorro/formly-zorro.module').then(mod => mod.FormlyZorroModule) },
     { path: 'home/:id/reply', component: ReplyFullComponent },
     { path: 'create', component: ArticleCreationComponent, canDeactivate: [ArticleCreateGuard] },
-    { path: 'personal', loadChildren: './personal/personal.module#PersonalModule' },
+    { path: 'personal', loadChildren: () => import('./personal/personal.module').then(mod => mod.PersonalModule) },
     { path: ':id', redirectTo: 'home/:id', pathMatch: 'full' }, // for search functionality
     { path: '', redirectTo: '/home', pathMatch: 'full' },
     { path: '**', component: FourZeroFourComponent },
