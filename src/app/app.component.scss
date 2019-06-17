@@ -40,7 +40,7 @@ footer {
     padding: 1em $space;
     background: $active-bcg-primary;
     color: $inactive-color;
-    height: $footer-height;
+    min-height: $footer-height;
     h4 {
         margin: 0 2em 0 0;
         color: $inactive-color;

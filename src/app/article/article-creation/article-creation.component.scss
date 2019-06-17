@@ -41,6 +41,10 @@ $white-space: 2em;
     }
 }
 
+:host::ng-deep .mat-checkbox-disabled .mat-checkbox-label {
+    color: inherit;
+}
+
 :host::ng-deep markdown img {
     max-width: 100%;
     margin-left: -$white-space;
