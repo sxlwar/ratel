@@ -38,7 +38,9 @@ export class BaseGuard extends BaseService implements CanDeactivate<CanDeactivat
     }
 }
 
-@Injectable()
+@Injectable({
+    providedIn: 'root'
+})
 export class ArticleCreateGuard extends BaseGuard {
     constructor(public dialog: MatDialog) {
         super(dialog);

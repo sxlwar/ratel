@@ -7,6 +7,7 @@ import { Observable, Subject } from 'rxjs';
 import { ArticleOverview } from './interface/response.interface';
 import { AuthService } from './providers/auth.service';
 import { map, filter } from 'rxjs/operators';
+import { SubscribeService } from './providers/subscribe.service';
 
 @Component({
     selector: 'ratel-root',
@@ -29,6 +30,7 @@ export class AppComponent implements OnInit {
         private _router: Router,
         private _route: ActivatedRoute,
         private _authService: AuthService,
+        private _subscribe: SubscribeService,
     ) {
         this._register.registerFontClassAlias('icomoon');
     }
@@ -56,5 +58,9 @@ export class AppComponent implements OnInit {
 
     navigate(target: ArticleOverview): void {
         this._router.navigate([target.id], { relativeTo: this._route });
+    }
+
+    onSubscribe(email: string): void {
+        this._subscribe.subscribe(email);
     }
 }

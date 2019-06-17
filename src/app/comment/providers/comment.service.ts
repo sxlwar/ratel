@@ -23,7 +23,9 @@ import {
 import { BaseService } from '../../providers/base.service';
 import { ErrorService } from '../../providers/error.service';
 
-@Injectable()
+@Injectable({
+    providedIn: 'root'
+})
 export class CommentService extends BaseService {
     private path = 'comment';
 

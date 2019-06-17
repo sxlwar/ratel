@@ -43,8 +43,9 @@ footer {
     height: $footer-height;
     h4 {
         margin: 0 2em 0 0;
+        color: $inactive-color;
     }
-    ol {
+    ul {
         list-style: none;
     }
     li {

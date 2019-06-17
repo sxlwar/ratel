@@ -13,7 +13,6 @@ import { ArticleListComponent } from './article-list/article-list.component';
 import { ArticleOverviewComponent } from './article-overview/article-overview.component';
 import { ArticleComponent } from './article/article.component';
 import { HotArticleComponent } from './hot-article/hot-article.component';
-import { ArticleService } from './providers/article.service';
 import { ImageAddressPipe } from './pipes/article.pipe';
 import { ImageCropperModule } from 'ngx-image-cropper';
 
@@ -43,6 +42,5 @@ import { ImageCropperModule } from 'ngx-image-cropper';
         ArticleCreationComponent,
         ArticleListComponent,
     ],
-    providers: [ArticleService],
 })
 export class ArticleModule {}

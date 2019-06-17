@@ -19,7 +19,9 @@ export interface UploadResult {
     };
 }
 
-@Injectable()
+@Injectable({
+    providedIn: 'root'
+})
 export class UploadService extends BaseService {
     private readonly path = 'upload';
 

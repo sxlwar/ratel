@@ -1,0 +1,5 @@
+<mat-form-field>
+    <input [(ngModel)]="email" matInput email placeholder="请输入订阅邮箱" #value="ngModel" />
+</mat-form-field>
+
+<button mat-raised-button (click)="onSubmit()" color="primary" [disabled]="value.invalid">订阅</button>

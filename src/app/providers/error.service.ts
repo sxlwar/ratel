@@ -6,7 +6,9 @@ import { Observable, throwError } from 'rxjs';
 
 import { BaseService } from './base.service';
 
-@Injectable()
+@Injectable({
+    providedIn: 'root'
+})
 export class ErrorService extends BaseService {
     private isBrowser = isPlatformBrowser(this.platformId);
 

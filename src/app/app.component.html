@@ -21,16 +21,19 @@
 
 <ratel-article-list [search]="searchObs" [display]="showDrawer" (goTo)="navigate($event)"></ratel-article-list>
 
-<footer fxLayoutAlign="start center">
-    <h4>联系我们</h4>
-    <ul>
-        <li>
-            <mat-icon fontIcon="icon-wechat"></mat-icon>
-            添加微信好友：angular-handbook
-        </li>
-        <li>
-            <mat-icon fontIcon="icon-mail"></mat-icon>
-            发送email到：hijavascript@163.com
-        </li>
-    </ul>
+<footer fxLayoutAlign="space-between center">
+    <div fxLayoutAlign="start center">
+        <h4>联系我们</h4>
+        <ul>
+            <li>
+                <mat-icon fontIcon="icon-wechat"></mat-icon>
+                添加微信好友：angular-handbook
+            </li>
+            <li>
+                <mat-icon fontIcon="icon-mail"></mat-icon>
+                发送email到：hijavascript@163.com
+            </li>
+        </ul>
+    </div>
+    <ratel-subscribe (subscribe)="onSubscribe($event)"></ratel-subscribe>
 </footer>

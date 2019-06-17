@@ -88,3 +88,7 @@ export interface StoreRequest {
 export interface BookmarkRequest {
     id: number;
 }
+
+export interface SubscribeRequest {
+    email: string;
+}

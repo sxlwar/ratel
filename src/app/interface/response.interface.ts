@@ -112,3 +112,7 @@ export interface BookmarkResponse {
     articles: Bookmark[];
     count: number;
 }
+
+export interface SubscribeResponse {
+    id: number;
+}

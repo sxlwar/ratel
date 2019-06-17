@@ -12,7 +12,9 @@ import { LogoutResponse } from '../interface/response.interface';
 import { BaseService } from './base.service';
 import { ErrorService } from './error.service';
 
-@Injectable()
+@Injectable({
+    providedIn: 'root'
+})
 export class AuthService extends BaseService {
     public readonly path = 'auth';
 
