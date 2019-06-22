@@ -1,6 +1,6 @@
 import { isPlatformServer } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
-import { Inject, Injectable, PLATFORM_ID, RootRenderer } from '@angular/core';
+import { Inject, Injectable, PLATFORM_ID } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { makeStateKey, TransferState } from '@angular/platform-browser';
