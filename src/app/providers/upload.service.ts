@@ -1,14 +1,14 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
-
 import * as qiniu from 'qiniu-js';
 import { from, Observable, of, Subject } from 'rxjs';
-import { catchError, delay, filter, map, mergeMap, take, takeUntil, timeout, switchMapTo } from 'rxjs/operators';
-
+import { catchError, delay, filter, map, mergeMap, switchMapTo, take, takeUntil, timeout } from 'rxjs/operators';
 import { ALLOW_UPLOAD_FILE_TYPES, CRUDVar, QiniuErrorCode } from '../constant/constant';
 import { GetQiniuTokenResponse } from '../interface/response.interface';
 import { BaseService } from './base.service';
+
+
 
 export interface UploadResult {
     name: string;
@@ -20,7 +20,7 @@ export interface UploadResult {
 }
 
 @Injectable({
-    providedIn: 'root'
+    providedIn: 'root',
 })
 export class UploadService extends BaseService {
     private readonly path = 'upload';
@@ -33,7 +33,7 @@ export class UploadService extends BaseService {
 
     private uploadResults: UploadResult[] = [];
 
-    readonly urlPrefix = 'https://assets.hijavascript.com/';
+    readonly urlPrefix = 'https://assets.hijavascript.com/'; // FIXME: replace it after domain filing
 
     result$: Subject<UploadResult[]> = new Subject();
 
@@ -49,10 +49,10 @@ export class UploadService extends BaseService {
 
     /**
      * Upload file to qiniu server;
-     * 1、获取token
-     * 2、上传图片
-     * 3、图片全部上传完成时发出上传结果
-     * 4、发生错误或完成时终止数据流
+     * 1、request token
+     * 2、upload image
+     * 3、emit upload result after finished
+     * 4、terminate data flow as error occurs or finished
      */
     uploadImage(files: FileList): Observable<UploadResult[]> {
         this.uploading$.next(true);

@@ -9,7 +9,7 @@
             <li [hidden]="!data.updatedAt">更新时间：{{data.updatedAt}}</li>
             <li [hidden]="!data.isOriginal">
                 <ratel-tag content="原创"></ratel-tag>
-                转载请注明出处：www.hijavascript.com
+                转载请注明出处：blog.chtoma.com
             </li>
             <li *ngIf="(user | async)?.id === data.userId">
                 <button mat-raised-button [routerLink]="['/create', {id: data.id}]" color="primary">更新</button>

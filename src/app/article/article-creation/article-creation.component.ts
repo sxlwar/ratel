@@ -1,21 +1,21 @@
-import { Component, OnDestroy, OnInit, ViewChild, Inject, PLATFORM_ID } from '@angular/core';
+import { animate, state, style, transition, trigger } from '@angular/animations';
+import { isPlatformBrowser } from '@angular/common';
+import { Component, Inject, OnDestroy, OnInit, PLATFORM_ID, ViewChild } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
-
-import { BehaviorSubject, of, Observable, iif } from 'rxjs';
-import { filter, takeWhile, tap, take, share, map, switchMap, distinctUntilChanged } from 'rxjs/operators';
+import { ImageCroppedEvent } from 'ngx-image-cropper';
+import { BehaviorSubject, iif, Observable, of } from 'rxjs';
+import { distinctUntilChanged, filter, map, share, switchMap, take, takeWhile, tap } from 'rxjs/operators';
 import { Article } from 'src/app/interface/response.interface';
-
+import { UploadResult, UploadService } from 'src/app/providers/upload.service';
 import { User } from '../../auth/interface/auth.interface';
 import { EditorComponent } from '../../codemirror/editor/editor.component';
 import { ArticleCategory } from '../../constant/constant';
 import { DeactivateGuard } from '../../interface/app.interface';
 import { AuthService } from '../../providers/auth.service';
 import { ArticleService } from '../providers/article.service';
-import { ImageCroppedEvent } from 'ngx-image-cropper';
-import { UploadService, UploadResult } from 'src/app/providers/upload.service';
-import { isPlatformBrowser } from '@angular/common';
-import { trigger, transition, animate, state, style } from '@angular/animations';
+
+
 
 @Component({
     selector: 'ratel-article-creation',
@@ -193,7 +193,7 @@ export class ArticleCreationComponent implements OnInit, OnDestroy {
 
     private getContent(): string {
         return !!this.isOriginalCtrl.value
-            ? this.editor.data + '\n\r' + '转载请注明出处：www.hijavascript.com'
+            ? this.editor.data + '\n\r' + '转载请注明出处：blog.chtoma.com'
             : this.editor.data;
     }
 
